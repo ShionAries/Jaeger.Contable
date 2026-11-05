@@ -1,0 +1,532 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9A1055F3-5602-4F32-8929-345767684848}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Jaeger.Contable</RootNamespace>
+    <AssemblyName>Jaeger.Contable</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.9.0.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
+      <HintPath>packages\Portable.BouncyCastle.1.9.0\lib\net40\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Protobuf, Version=3.21.9.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
+      <HintPath>packages\Google.Protobuf.3.21.9\lib\net45\Google.Protobuf.dll</HintPath>
+    </Reference>
+    <Reference Include="K4os.Compression.LZ4, Version=1.2.6.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d, processorArchitecture=MSIL">
+      <HintPath>packages\K4os.Compression.LZ4.1.2.6\lib\net46\K4os.Compression.LZ4.dll</HintPath>
+    </Reference>
+    <Reference Include="K4os.Compression.LZ4.Streams, Version=1.2.6.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d, processorArchitecture=MSIL">
+      <HintPath>packages\K4os.Compression.LZ4.Streams.1.2.6\lib\net46\K4os.Compression.LZ4.Streams.dll</HintPath>
+    </Reference>
+    <Reference Include="K4os.Hash.xxHash, Version=1.0.6.0, Culture=neutral, PublicKeyToken=32cd54395057cec3, processorArchitecture=MSIL">
+      <HintPath>packages\K4os.Hash.xxHash.1.0.6\lib\net46\K4os.Hash.xxHash.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=8.0.32.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>packages\MySql.Data.8.0.32.1\lib\net452\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="SqlSugar, Version=5.0.3.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\SqlSugar.5.0.3.3\lib\SqlSugar.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Buffers.4.5.1\lib\netstandard1.1\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Memory.4.5.4\lib\netstandard1.1\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Application\Contracts\IBalanzaComprobacionService.cs" />
+    <Compile Include="Application\Contracts\IContableApplication.cs" />
+    <Compile Include="Application\Contracts\IParametroEmpresaService.cs" />
+    <Compile Include="Application\Services\BalanzaComprobacionService.cs" />
+    <Compile Include="Application\Services\ParametroEmpresaService.cs" />
+    <Compile Include="DataAccess\DependencyInjection\ContableApplication.cs" />
+    <Compile Include="DataAccess\Mappers\ActivoFijoMapper.cs" />
+    <Compile Include="DataAccess\Mappers\ConceptoMapper.cs" />
+    <Compile Include="DataAccess\Mappers\MonedaMapper.cs" />
+    <Compile Include="DataAccess\Mappers\PolizaMapper.cs" />
+    <Compile Include="DataAccess\Mappers\TipoActivoMapper.cs" />
+    <Compile Include="DataAccess\Mappers\TipoPolizaMapper.cs" />
+    <Compile Include="DataAccess\Repositories\BalanzaComprobacionRepository.cs" />
+    <Compile Include="Domain\Models\BalanzaComprobacion.cs" />
+    <Compile Include="Domain\Models\BalanzaComprobacionItem.cs" />
+    <Compile Include="Domain\Models\BalanzaComprobacionRequest.cs" />
+    <Compile Include="Domain\Models\FilaAuditoria.cs" />
+    <Compile Include="Domain\Interfaces\Repositories\IBalanzaComprobacionRepository.cs" />
+    <Compile Include="Domain\Models\SaldoCuentaEjercicio.cs" />
+    <Compile Include="WinForms\Context\GridViewExtensions.cs" />
+    <Compile Include="WinForms\Context\IPolizaCapturaMovimientoContext.cs" />
+    <Compile Include="WinForms\Forms\ActivoFijoCatalogoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\Forms\ActivoFijoCatalogoForm.Designer.cs">
+      <DependentUpon>ActivoFijoCatalogoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForms\Forms\ActivoFijoHistoricoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\Forms\ActivoFijoHistoricoForm.Designer.cs">
+      <DependentUpon>ActivoFijoHistoricoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForms\Forms\AuditoriaCtarubForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\Forms\AuditoriaCtarubForm.Designer.cs">
+      <DependentUpon>AuditoriaCtarubForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForms\Forms\AuditoriaCuentasForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\Forms\AuditoriaCuentasForm.Designer.cs">
+      <DependentUpon>AuditoriaCuentasForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForms\Forms\BalanzaComprobacionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\Forms\PartidaSelectorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\Forms\PartidaSelectorForm.Designer.cs">
+      <DependentUpon>PartidaSelectorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForms\Context\PolizaCapturaMovimientoContext.cs" />
+    <Compile Include="Application\Services\ActivoFijoHistoricoService.cs" />
+    <Compile Include="Application\Services\ActivoFijoService.cs" />
+    <Compile Include="Application\Services\AcumulacionCuentaService.cs" />
+    <Compile Include="Application\Services\AuditoriaCtarubService.cs" />
+    <Compile Include="Application\Services\AuditoriaCuentasService.cs" />
+    <Compile Include="Application\Services\CatalogosPartidaService.cs" />
+    <Compile Include="Application\Services\ConceptoService.cs" />
+    <Compile Include="Application\Services\ContabilizacionContableService.cs" />
+    <Compile Include="Application\Services\ConciliacionCuentaService.cs" />
+    <Compile Include="Application\Services\ConfiguracionCuentaService.cs" />
+    <Compile Include="Application\Services\CuentaService.cs" />
+    <Compile Include="Application\Services\DepreciacionActivoService.cs" />
+    <Compile Include="Application\Services\FolioContableService.cs" />
+    <Compile Include="Application\Contracts\IActivoFijoHistoricoService.cs" />
+    <Compile Include="Application\Contracts\IActivoFijoService.cs" />
+    <Compile Include="Application\Contracts\IAcumulacionCuentaService.cs" />
+    <Compile Include="Application\Contracts\IAuditoriaCtarubService.cs" />
+    <Compile Include="Application\Contracts\IAuditoriaCuentasService.cs" />
+    <Compile Include="Application\Contracts\ICatalogosPartidaService.cs" />
+    <Compile Include="Application\Contracts\IContabilizacionContableService.cs" />
+    <Compile Include="Application\Contracts\IConceptoService.cs" />
+    <Compile Include="Application\Contracts\IConciliacionCuentaService.cs" />
+    <Compile Include="Application\Contracts\IConfiguracionCuentaService.cs" />
+    <Compile Include="Application\Contracts\ICuentaService.cs" />
+    <Compile Include="Application\Contracts\IDepreciacionActivoService.cs" />
+    <Compile Include="Application\Contracts\IFolioContableService.cs" />
+    <Compile Include="Application\Contracts\IMonedaService.cs" />
+    <Compile Include="Application\Contracts\IMotorContableService.cs" />
+    <Compile Include="Application\Contracts\IMotorMovimientoContableService.cs" />
+    <Compile Include="Application\Contracts\IPeriodoContableService.cs" />
+    <Compile Include="Application\Contracts\IPolizaConsultaService.cs" />
+    <Compile Include="Application\Contracts\IPolizaContableService.cs" />
+    <Compile Include="Application\Contracts\IPolizaContableValidator.cs" />
+    <Compile Include="Application\Contracts\IRangoService.cs" />
+    <Compile Include="Application\Contracts\IReversionPolizaService.cs" />
+    <Compile Include="Application\Contracts\ITipoActivoService.cs" />
+    <Compile Include="Application\Contracts\ITipoPolizaService.cs" />
+    <Compile Include="Application\Contracts\IValidadorJerarquiaCuenta.cs" />
+    <Compile Include="Application\Services\MonedaService.cs" />
+    <Compile Include="Application\Services\MotorContableService.cs" />
+    <Compile Include="Application\Services\MotorMovimientoContableService.cs" />
+    <Compile Include="Application\Services\PeriodoContableService.cs" />
+    <Compile Include="Application\Services\PolizaConsultaService.cs" />
+    <Compile Include="Application\Services\PolizaContableService.cs" />
+    <Compile Include="Application\Services\PolizaContableValidator.cs" />
+    <Compile Include="Application\Services\RangoService.cs" />
+    <Compile Include="Application\Services\ReversionPolizaService.cs" />
+    <Compile Include="Application\Services\TipoActivoService.cs" />
+    <Compile Include="Application\Services\TipoPolizaService.cs" />
+    <Compile Include="Application\Services\ValidadorJerarquiaCuenta.cs" />
+    <Compile Include="DataAccess\Configuration\AppConfigConnectionStringProvider.cs" />
+    <Compile Include="DataAccess\Configuration\IConnectionStringProvider.cs" />
+    <Compile Include="DataAccess\Context\MariaDbContext.cs" />
+    <Compile Include="DataAccess\DataAccessException.cs" />
+    <Compile Include="DataAccess\Entities\ActivoFijoEntity.cs" />
+    <Compile Include="DataAccess\Entities\AdmperEntity.cs" />
+    <Compile Include="DataAccess\Entities\Auxiliar25Entity.cs" />
+    <Compile Include="DataAccess\Entities\CcostosEntity.cs" />
+    <Compile Include="DataAccess\Entities\CgruposEntity.cs" />
+    <Compile Include="DataAccess\Entities\ConceptoEntity.cs" />
+    <Compile Include="DataAccess\Entities\CuentaRubroContableEntity.cs" />
+    <Compile Include="DataAccess\Entities\CuentaContableEntity.cs" />
+    <Compile Include="DataAccess\Entities\DepatamentoEntity.cs" />
+    <Compile Include="DataAccess\Entities\FoliosEntity.cs" />
+    <Compile Include="DataAccess\Entities\MonedaHistorialEntity.cs" />
+    <Compile Include="DataAccess\Entities\MonedaEntity.cs" />
+    <Compile Include="DataAccess\Entities\ParamempEntity.cs" />
+    <Compile Include="DataAccess\Entities\PolizaEntity.cs" />
+    <Compile Include="DataAccess\Entities\RubroContableEntity.cs" />
+    <Compile Include="DataAccess\Entities\SaldosEntity.cs" />
+    <Compile Include="DataAccess\Entities\SaldosDp25Entity.cs" />
+    <Compile Include="DataAccess\Entities\TipActivoEntity.cs" />
+    <Compile Include="DataAccess\Entities\TiposPolizaEntity.cs" />
+    <Compile Include="DataAccess\Mappers\CuentaMapper.cs" />
+    <Compile Include="DataAccess\Repositories\ActivoFijoHistoricoRepository.cs" />
+    <Compile Include="DataAccess\Repositories\ActivoFijoRepository.cs" />
+    <Compile Include="DataAccess\Repositories\DepreciacionActivoRepository.cs" />
+    <Compile Include="DataAccess\Resolvers\EjercicioContableTableResolver.cs" />
+    <Compile Include="DataAccess\Repositories\AcumulacionCuentaRepository.cs" />
+    <Compile Include="DataAccess\Repositories\CatalogosPartidaRepository.cs" />
+    <Compile Include="DataAccess\Repositories\ConceptoRepository.cs" />
+    <Compile Include="DataAccess\Repositories\ConciliacionCuentaRepository.cs" />
+    <Compile Include="DataAccess\Repositories\ContabilizacionContableRepository.cs" />
+    <Compile Include="DataAccess\Repositories\ConfiguracionCuentaRepository.cs" />
+    <Compile Include="DataAccess\Repositories\CuentaRubroRepository.cs" />
+    <Compile Include="DataAccess\Repositories\CuentaRepository.cs" />
+    <Compile Include="DataAccess\Repositories\EstadoContableCuentaRepository.cs" />
+    <Compile Include="DataAccess\Repositories\FolioContableRepository.cs" />
+    <Compile Include="DataAccess\Repositories\HistorialCuentaRepository.cs" />
+    <Compile Include="DataAccess\Repositories\MonedaRepository.cs" />
+    <Compile Include="DataAccess\Repositories\MovimientoContableRepository.cs" />
+    <Compile Include="DataAccess\Repositories\ParametroEmpresaRepository.cs" />
+    <Compile Include="DataAccess\Repositories\PeriodoContableRepository.cs" />
+    <Compile Include="DataAccess\Repositories\PolizaConsultaRepository.cs" />
+    <Compile Include="DataAccess\Repositories\PolizaContableRepository.cs" />
+    <Compile Include="DataAccess\Repositories\RubroContableRepository.cs" />
+    <Compile Include="DataAccess\Repositories\ReversionPolizaRepository.cs" />
+    <Compile Include="DataAccess\Repositories\TipoActivoRepository.cs" />
+    <Compile Include="DataAccess\Repositories\TipoPolizaRepository.cs" />
+    <Compile Include="Domain\Interfaces\Repositories\IActivoFijoHistoricoRepository.cs" />
+    <Compile Include="Domain\Interfaces\Repositories\IActivoFijoRepository.cs" />
+    <Compile Include="Domain\Interfaces\Repositories\IDepreciacionActivoRepository.cs" />
+    <Compile Include="Domain\Models\ResultadoProcesoDepreciacion.cs" />
+    <Compile Include="Domain\Models\DepreciacionMovimiento.cs" />
+    <Compile Include="Domain\Interfaces\Repositories\IEjercicioContableTableResolver.cs" />
+    <Compile Include="Domain\Interfaces\Repositories\IAcumulacionCuentaRepository.cs" />
+    <Compile Include="Domain\Interfaces\Repositories\ICatalogosPartidaRepository.cs" />
+    <Compile Include="Domain\Interfaces\Repositories\IContabilizacionContableRepository.cs" />
+    <Compile Include="Domain\Interfaces\Repositories\IConceptoRepository.cs" />
+    <Compile Include="Domain\Interfaces\Repositories\IConciliacionCuentaRepository.cs" />
+    <Compile Include="Domain\Interfaces\Repositories\ICuentaRubroRepository.cs" />
+    <Compile Include="Domain\Interfaces\Repositories\ICuentaRepository.cs" />
+    <Compile Include="Domain\Interfaces\Repositories\IEstadoContableCuentaRepository.cs" />
+    <Compile Include="Domain\Interfaces\Repositories\IFolioContableRepository.cs" />
+    <Compile Include="Domain\Interfaces\Repositories\IHistorialCuentaRepository.cs" />
+    <Compile Include="Domain\Interfaces\Repositories\IMonedaRepository.cs" />
+    <Compile Include="Domain\Interfaces\Repositories\IMovimientoContableRepository.cs" />
+    <Compile Include="Domain\Interfaces\Repositories\IParametroEmpresaRepository.cs" />
+    <Compile Include="Domain\Interfaces\Repositories\IPeriodoContableRepository.cs" />
+    <Compile Include="Domain\Interfaces\Repositories\IPolizaConsultaRepository.cs" />
+    <Compile Include="Domain\Interfaces\Repositories\IPolizaContableRepository.cs" />
+    <Compile Include="Domain\Interfaces\Repositories\IRangoRepository.cs" />
+    <Compile Include="Domain\Interfaces\Repositories\IReversionPolizaRepository.cs" />
+    <Compile Include="Domain\Interfaces\Repositories\ITipoActivoRepository.cs" />
+    <Compile Include="Domain\Interfaces\Repositories\ITipoPolizaRepository.cs" />
+    <Compile Include="Domain\Models\ActivoFijo.cs" />
+    <Compile Include="Domain\Models\AcumuladoCuenta.cs" />
+    <Compile Include="Domain\Models\BasePropertyChangeImplementation.cs" />
+    <Compile Include="Domain\Models\CentroCosto.cs" />
+    <Compile Include="Domain\Models\Concepto.cs" />
+    <Compile Include="Domain\Models\ConciliacionCuenta.cs" />
+    <Compile Include="Domain\Models\ConfiguracionNiveles.cs" />
+    <Compile Include="Domain\Models\CuentaRubro.cs" />
+    <Compile Include="Domain\Models\CuentaContable.cs" />
+    <Compile Include="Domain\Models\Departamento.cs" />
+    <Compile Include="Domain\Models\EstadoContableCuenta.cs" />
+    <Compile Include="Domain\Models\EstructuraCuenta.cs" />
+    <Compile Include="Domain\Models\FolioContable.cs" />
+    <Compile Include="Domain\Models\GeneradorNumeroCuenta.cs" />
+    <Compile Include="Domain\Models\GrupoContable.cs" />
+    <Compile Include="Domain\Models\ImporteContable.cs" />
+    <Compile Include="Domain\Interfaces\IConfiguracionCuentaRepository.cs" />
+    <Compile Include="Domain\Models\Moneda.cs" />
+    <Compile Include="Domain\Models\MovimientoContableRequest.cs" />
+    <Compile Include="Domain\Models\MovimientoCuenta.cs" />
+    <Compile Include="Domain\Models\ParametroEmpresa.cs" />
+    <Compile Include="Domain\Models\PeriodoContable.cs" />
+    <Compile Include="Domain\Models\PolizaContableConsulta.cs" />
+    <Compile Include="Domain\Models\PolizaContableRequest.cs" />
+    <Compile Include="Domain\Models\ResultadoContabilizacionPeriodo.cs" />
+    <Compile Include="Domain\Enums\ContabilizacionModoEnum.cs" />
+    <Compile Include="Domain\Models\PolizaContableResumen.cs" />
+    <Compile Include="Domain\Models\PolizaReversionRequest.cs" />
+    <Compile Include="Domain\Models\RangoConCuentasDto.cs" />
+    <Compile Include="Domain\Models\RangoCuentaModel.cs" />
+    <Compile Include="Domain\Models\RubroContableModel.cs" />
+    <Compile Include="Domain\Models\ResultadoAuditoriaCtarub.cs" />
+    <Compile Include="Domain\Models\ResultadoAuditoriaCtarubItem.cs" />
+    <Compile Include="Domain\Models\ResultadoAuditoriaCuenta.cs" />
+    <Compile Include="Domain\Models\ResultadoAuditoriaCuentas.cs" />
+    <Compile Include="Domain\Models\ResultadoAuditoriaIntegralCuenta.cs" />
+    <Compile Include="Domain\Models\ResultadoRegistroPoliza.cs" />
+    <Compile Include="Domain\Models\ResultadoReversionPoliza.cs" />
+    <Compile Include="Domain\Models\ResultadoValidacionCuenta.cs" />
+    <Compile Include="Domain\Models\ResultadoValidacionDepreciacion.cs" />
+    <Compile Include="Domain\Models\ResultadoValidacionMovimiento.cs" />
+    <Compile Include="Domain\Models\TipoActivo.cs" />
+    <Compile Include="Domain\Models\TipoPoliza.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WinForms\Forms\ConceptoPolizaCatalogoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\Forms\ConceptoPolizaCatalogoForm.Designer.cs">
+      <DependentUpon>ConceptoPolizaCatalogoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForms\Forms\CuentaContableCatalogoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\Forms\CuentaContableCatalogoForm.Designer.cs">
+      <DependentUpon>CuentaContableCatalogoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForms\Forms\CuentaContableForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\Forms\CuentaContableForm.Designer.cs">
+      <DependentUpon>CuentaContableForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForms\Forms\CuentaMovimientoSelectorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\Forms\CuentaMovimientoSelectorForm.Designer.cs">
+      <DependentUpon>CuentaMovimientoSelectorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForms\Forms\DatoFiscalTerceroForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\Forms\DatoFiscalTerceroForm.Designer.cs">
+      <DependentUpon>DatoFiscalTerceroForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForms\Forms\DepartamentoSelectorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\Forms\DepartamentoSelectorForm.Designer.cs">
+      <DependentUpon>DepartamentoSelectorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForms\Forms\DepreciacionActivosForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\Forms\MonedaCatalogoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\Forms\MonedaCatalogoForm.Designer.cs">
+      <DependentUpon>MonedaCatalogoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForms\Forms\PartidaCatalogoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\Forms\PartidaCatalogoForm.Designer.cs">
+      <DependentUpon>PartidaCatalogoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForms\Forms\PeriodoContabilizacionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\Forms\PeriodoContabilizacionForm.Designer.cs">
+      <DependentUpon>PeriodoContabilizacionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForms\Forms\PeriodoContableMantenimientoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\Forms\PolizaCapturaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\Forms\PolizaCapturaForm.Designer.cs">
+      <DependentUpon>PolizaCapturaForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForms\Forms\PolizaConsultaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\Forms\PolizaConsultaForm.Designer.cs">
+      <DependentUpon>PolizaConsultaForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForms\Forms\RangoCatalogoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\Forms\RangoCatalogoForm.Designer.cs">
+      <DependentUpon>RangoCatalogoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForms\Forms\RangoSeleccionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\Forms\RangoSeleccionForm.Designer.cs">
+      <DependentUpon>RangoSeleccionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForms\Forms\ConceptoSelectorPolizaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\Forms\ConceptoSelectorPolizaForm.Designer.cs">
+      <DependentUpon>ConceptoSelectorPolizaForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForms\Forms\TipoActivoCatalogoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\Forms\TipoActivoCatalogoForm.Designer.cs">
+      <DependentUpon>TipoActivoCatalogoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForms\Forms\TipoPolizaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\Forms\TipoPolizaForm.Designer.cs">
+      <DependentUpon>TipoPolizaForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForms\Forms\TipoPolizaCatalogoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\Forms\TipoPolizaCatalogoForm.Designer.cs">
+      <DependentUpon>TipoPolizaCatalogoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForms\Forms\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\Forms\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForms\Forms\PolizaCapturaMovimientoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\Forms\PolizaCapturaMovimientoForm.Designer.cs">
+      <DependentUpon>PolizaCapturaMovimientoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForms\Forms\ReversionPolizaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="WinForms\Forms\ActivoFijoHistoricoForm.resx">
+      <DependentUpon>ActivoFijoHistoricoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\Forms\AuditoriaCtarubForm.resx">
+      <DependentUpon>AuditoriaCtarubForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\Forms\AuditoriaCuentasForm.resx">
+      <DependentUpon>AuditoriaCuentasForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\Forms\PartidaSelectorForm.resx">
+      <DependentUpon>PartidaSelectorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\Forms\ActivoFijoCatalogoForm.resx">
+      <DependentUpon>ActivoFijoCatalogoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\Forms\ConceptoPolizaCatalogoForm.resx">
+      <DependentUpon>ConceptoPolizaCatalogoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\Forms\CuentaContableCatalogoForm.resx">
+      <DependentUpon>CuentaContableCatalogoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\Forms\CuentaContableForm.resx">
+      <DependentUpon>CuentaContableForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\Forms\CuentaMovimientoSelectorForm.resx">
+      <DependentUpon>CuentaMovimientoSelectorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\Forms\DatoFiscalTerceroForm.resx">
+      <DependentUpon>DatoFiscalTerceroForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\Forms\DepartamentoSelectorForm.resx">
+      <DependentUpon>DepartamentoSelectorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\Forms\MonedaCatalogoForm.resx">
+      <DependentUpon>MonedaCatalogoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\Forms\PartidaCatalogoForm.resx">
+      <DependentUpon>PartidaCatalogoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\Forms\PeriodoContabilizacionForm.resx">
+      <DependentUpon>PeriodoContabilizacionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\Forms\PolizaCapturaForm.resx">
+      <DependentUpon>PolizaCapturaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\Forms\PolizaConsultaForm.resx">
+      <DependentUpon>PolizaConsultaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\Forms\RangoCatalogoForm.resx">
+      <DependentUpon>RangoCatalogoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\Forms\RangoSeleccionForm.resx">
+      <DependentUpon>RangoSeleccionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\Forms\ConceptoSelectorPolizaForm.resx">
+      <DependentUpon>ConceptoSelectorPolizaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\Forms\TipoActivoCatalogoForm.resx">
+      <DependentUpon>TipoActivoCatalogoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\Forms\TipoPolizaForm.resx">
+      <DependentUpon>TipoPolizaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\Forms\TipoPolizaCatalogoForm.resx">
+      <DependentUpon>TipoPolizaCatalogoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\Forms\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\Forms\PolizaCapturaMovimientoForm.resx">
+      <DependentUpon>PolizaCapturaMovimientoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Catalogos\Bancos.txt" />
+    <Content Include="Catalogos\FormasPagoSat.txt" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
