@@ -24,12 +24,12 @@
         /// </summary>
         private void InitializeComponent() {
             this.gridData = new System.Windows.Forms.DataGridView();
-            this._txtBuscar = new System.Windows.Forms.TextBox();
+            this.txtBuscar = new System.Windows.Forms.TextBox();
             this.lblBuscar = new System.Windows.Forms.Label();
-            this._btnCerrar = new System.Windows.Forms.Button();
-            this._btnEliminar = new System.Windows.Forms.Button();
-            this._btnGuardar = new System.Windows.Forms.Button();
-            this._btnNuevo = new System.Windows.Forms.Button();
+            this.btnCerrar = new System.Windows.Forms.Button();
+            this.btnEliminar = new System.Windows.Forms.Button();
+            this.btnGuardar = new System.Windows.Forms.Button();
+            this.btnNuevo = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageGeneral = new System.Windows.Forms.TabPage();
             this.lblTipoCambio = new System.Windows.Forms.Label();
@@ -42,26 +42,28 @@
             this.lblTipoDeActivo = new System.Windows.Forms.Label();
             this.lblValorMercado = new System.Windows.Forms.Label();
             this.lblBandInm = new System.Windows.Forms.Label();
+            this.lblMarca = new System.Windows.Forms.Label();
             this.lblDescripcion = new System.Windows.Forms.Label();
             this.lblObservaciones = new System.Windows.Forms.Label();
             this.lblMontoOriginal = new System.Windows.Forms.Label();
             this.lblSerie = new System.Windows.Forms.Label();
-            this._numTipoCambio = new System.Windows.Forms.NumericUpDown();
-            this._numVida = new System.Windows.Forms.NumericUpDown();
+            this.numTipoCambio = new System.Windows.Forms.NumericUpDown();
+            this.numVida = new System.Windows.Forms.NumericUpDown();
             this.lblPrefijo = new System.Windows.Forms.Label();
-            this._dtFechaAdq = new System.Windows.Forms.DateTimePicker();
-            this._numMontoOrigEx = new System.Windows.Forms.NumericUpDown();
-            this._txtStatus = new System.Windows.Forms.TextBox();
-            this._numDepto = new System.Windows.Forms.NumericUpDown();
-            this._numValMer = new System.Windows.Forms.NumericUpDown();
-            this._txtLocaliz = new System.Windows.Forms.TextBox();
-            this._txtObserv = new System.Windows.Forms.TextBox();
-            this._txtBand = new System.Windows.Forms.TextBox();
-            this._numMontoOrig = new System.Windows.Forms.NumericUpDown();
-            this._cmbTipo = new System.Windows.Forms.ComboBox();
-            this._txtSerie = new System.Windows.Forms.TextBox();
-            this._txtDescripcion = new System.Windows.Forms.TextBox();
-            this._txtClave = new System.Windows.Forms.TextBox();
+            this.dtFechaAdq = new System.Windows.Forms.DateTimePicker();
+            this.numMontoOrigEx = new System.Windows.Forms.NumericUpDown();
+            this.txtStatus = new System.Windows.Forms.TextBox();
+            this.numDepto = new System.Windows.Forms.ComboBox();
+            this.numValMer = new System.Windows.Forms.NumericUpDown();
+            this.txtLocaliz = new System.Windows.Forms.TextBox();
+            this.txtObserv = new System.Windows.Forms.TextBox();
+            this.txtBand = new System.Windows.Forms.TextBox();
+            this.numMontoOrig = new System.Windows.Forms.NumericUpDown();
+            this.cmbTipo = new System.Windows.Forms.ComboBox();
+            this.txtSerie = new System.Windows.Forms.TextBox();
+            this.txtMarca = new System.Windows.Forms.TextBox();
+            this.txtDescripcion = new System.Windows.Forms.TextBox();
+            this.txtClave = new System.Windows.Forms.TextBox();
             this.tabPageDepresiacion = new System.Windows.Forms.TabPage();
             this.lblAcumuladaFiscal = new System.Windows.Forms.Label();
             this.lblDepresiacionAcumulada = new System.Windows.Forms.Label();
@@ -72,15 +74,15 @@
             this.lblTasaDepFiscal = new System.Windows.Forms.Label();
             this.lblInicioDep = new System.Windows.Forms.Label();
             this.lblMetodo = new System.Windows.Forms.Label();
-            this._numDepFis = new System.Windows.Forms.NumericUpDown();
-            this._numDepAcu = new System.Windows.Forms.NumericUpDown();
-            this._dtIniDepFis = new System.Windows.Forms.DateTimePicker();
-            this._numMaxDed = new System.Windows.Forms.NumericUpDown();
-            this._dtFechaEliminacion = new System.Windows.Forms.DateTimePicker();
-            this._numTasDep = new System.Windows.Forms.NumericUpDown();
-            this._dtIniDep = new System.Windows.Forms.DateTimePicker();
-            this._numTasDepFis = new System.Windows.Forms.NumericUpDown();
-            this._txtMetDep = new System.Windows.Forms.TextBox();
+            this.numDepFis = new System.Windows.Forms.NumericUpDown();
+            this.numDepAcu = new System.Windows.Forms.NumericUpDown();
+            this.dtIniDepFis = new System.Windows.Forms.DateTimePicker();
+            this.numMaxDed = new System.Windows.Forms.NumericUpDown();
+            this.dtFechaEliminacion = new System.Windows.Forms.DateTimePicker();
+            this.numTasDep = new System.Windows.Forms.NumericUpDown();
+            this.dtIniDep = new System.Windows.Forms.DateTimePicker();
+            this.numTasDepFis = new System.Windows.Forms.NumericUpDown();
+            this.txtMetDep = new System.Windows.Forms.TextBox();
             this.tabPageSeguro = new System.Windows.Forms.TabPage();
             this.lblTelefono = new System.Windows.Forms.Label();
             this.lblCostoMantenimiento = new System.Windows.Forms.Label();
@@ -95,44 +97,41 @@
             this.lblAgente = new System.Windows.Forms.Label();
             this.lblProximoMantenimiento = new System.Windows.Forms.Label();
             this.lblCobertura = new System.Windows.Forms.Label();
-            this._numCostoMan = new System.Windows.Forms.NumericUpDown();
+            this.numCostoMan = new System.Windows.Forms.NumericUpDown();
             this.lblPolizaSeguro = new System.Windows.Forms.Label();
-            this._dtUltMan = new System.Windows.Forms.DateTimePicker();
-            this._numDeducible = new System.Windows.Forms.NumericUpDown();
-            this._txtResponsable = new System.Windows.Forms.TextBox();
-            this._numMontoAseg = new System.Windows.Forms.NumericUpDown();
-            this._dtVigencia = new System.Windows.Forms.DateTimePicker();
-            this._numPeriodoMan = new System.Windows.Forms.NumericUpDown();
-            this._txtTel = new System.Windows.Forms.TextBox();
-            this._numPrima = new System.Windows.Forms.NumericUpDown();
+            this.dtUltMan = new System.Windows.Forms.DateTimePicker();
+            this.numDeducible = new System.Windows.Forms.NumericUpDown();
+            this.txtResponsable = new System.Windows.Forms.TextBox();
+            this.numMontoAseg = new System.Windows.Forms.NumericUpDown();
+            this.dtVigencia = new System.Windows.Forms.DateTimePicker();
+            this.numPeriodoMan = new System.Windows.Forms.NumericUpDown();
+            this.txtTelefono = new System.Windows.Forms.TextBox();
+            this.numPrima = new System.Windows.Forms.NumericUpDown();
             this._dtProxMan = new System.Windows.Forms.DateTimePicker();
-            this._txtCompAseg = new System.Windows.Forms.TextBox();
-            this._txtCobertura = new System.Windows.Forms.TextBox();
-            this._txtAgente = new System.Windows.Forms.TextBox();
-            this._txtPolizaSeg = new System.Windows.Forms.TextBox();
-            this.txtMarca = new System.Windows.Forms.TextBox();
-            this.lblMarca = new System.Windows.Forms.Label();
+            this.txtCompAseg = new System.Windows.Forms.TextBox();
+            this.txtCobertura = new System.Windows.Forms.TextBox();
+            this.txtAgente = new System.Windows.Forms.TextBox();
+            this.txtPolizaSeg = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.gridData)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPageGeneral.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this._numTipoCambio)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this._numVida)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this._numMontoOrigEx)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this._numDepto)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this._numValMer)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this._numMontoOrig)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numTipoCambio)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numVida)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numMontoOrigEx)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numValMer)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numMontoOrig)).BeginInit();
             this.tabPageDepresiacion.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this._numDepFis)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this._numDepAcu)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this._numMaxDed)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this._numTasDep)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this._numTasDepFis)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numDepFis)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numDepAcu)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numMaxDed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numTasDep)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numTasDepFis)).BeginInit();
             this.tabPageSeguro.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this._numCostoMan)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this._numDeducible)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this._numMontoAseg)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this._numPeriodoMan)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this._numPrima)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCostoMan)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numDeducible)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numMontoAseg)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numPeriodoMan)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numPrima)).BeginInit();
             this.SuspendLayout();
             // 
             // gridData
@@ -147,12 +146,12 @@
             this.gridData.Size = new System.Drawing.Size(774, 170);
             this.gridData.TabIndex = 24;
             // 
-            // _txtBuscar
+            // txtBuscar
             // 
-            this._txtBuscar.Location = new System.Drawing.Point(60, 12);
-            this._txtBuscar.Name = "_txtBuscar";
-            this._txtBuscar.Size = new System.Drawing.Size(397, 20);
-            this._txtBuscar.TabIndex = 23;
+            this.txtBuscar.Location = new System.Drawing.Point(60, 12);
+            this.txtBuscar.Name = "txtBuscar";
+            this.txtBuscar.Size = new System.Drawing.Size(397, 20);
+            this.txtBuscar.TabIndex = 23;
             // 
             // lblBuscar
             // 
@@ -163,45 +162,45 @@
             this.lblBuscar.TabIndex = 22;
             this.lblBuscar.Text = "Buscar";
             // 
-            // _btnCerrar
+            // btnCerrar
             // 
-            this._btnCerrar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this._btnCerrar.Location = new System.Drawing.Point(713, 495);
-            this._btnCerrar.Name = "_btnCerrar";
-            this._btnCerrar.Size = new System.Drawing.Size(75, 23);
-            this._btnCerrar.TabIndex = 34;
-            this._btnCerrar.Text = "Cerrar";
-            this._btnCerrar.UseVisualStyleBackColor = true;
+            this.btnCerrar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCerrar.Location = new System.Drawing.Point(713, 495);
+            this.btnCerrar.Name = "btnCerrar";
+            this.btnCerrar.Size = new System.Drawing.Size(75, 23);
+            this.btnCerrar.TabIndex = 34;
+            this.btnCerrar.Text = "Cerrar";
+            this.btnCerrar.UseVisualStyleBackColor = true;
             // 
-            // _btnEliminar
+            // btnEliminar
             // 
-            this._btnEliminar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this._btnEliminar.Location = new System.Drawing.Point(176, 495);
-            this._btnEliminar.Name = "_btnEliminar";
-            this._btnEliminar.Size = new System.Drawing.Size(75, 23);
-            this._btnEliminar.TabIndex = 33;
-            this._btnEliminar.Text = "Eliminar";
-            this._btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnEliminar.Location = new System.Drawing.Point(176, 495);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(75, 23);
+            this.btnEliminar.TabIndex = 33;
+            this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.UseVisualStyleBackColor = true;
             // 
-            // _btnGuardar
+            // btnGuardar
             // 
-            this._btnGuardar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this._btnGuardar.Location = new System.Drawing.Point(95, 495);
-            this._btnGuardar.Name = "_btnGuardar";
-            this._btnGuardar.Size = new System.Drawing.Size(75, 23);
-            this._btnGuardar.TabIndex = 32;
-            this._btnGuardar.Text = "Guardar";
-            this._btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnGuardar.Location = new System.Drawing.Point(95, 495);
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(75, 23);
+            this.btnGuardar.TabIndex = 32;
+            this.btnGuardar.Text = "Guardar";
+            this.btnGuardar.UseVisualStyleBackColor = true;
             // 
-            // _btnNuevo
+            // btnNuevo
             // 
-            this._btnNuevo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this._btnNuevo.Location = new System.Drawing.Point(14, 495);
-            this._btnNuevo.Name = "_btnNuevo";
-            this._btnNuevo.Size = new System.Drawing.Size(75, 23);
-            this._btnNuevo.TabIndex = 31;
-            this._btnNuevo.Text = "Nuevo";
-            this._btnNuevo.UseVisualStyleBackColor = true;
+            this.btnNuevo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnNuevo.Location = new System.Drawing.Point(14, 495);
+            this.btnNuevo.Name = "btnNuevo";
+            this.btnNuevo.Size = new System.Drawing.Size(75, 23);
+            this.btnNuevo.TabIndex = 31;
+            this.btnNuevo.Text = "Nuevo";
+            this.btnNuevo.UseVisualStyleBackColor = true;
             // 
             // tabControl1
             // 
@@ -233,23 +232,23 @@
             this.tabPageGeneral.Controls.Add(this.lblObservaciones);
             this.tabPageGeneral.Controls.Add(this.lblMontoOriginal);
             this.tabPageGeneral.Controls.Add(this.lblSerie);
-            this.tabPageGeneral.Controls.Add(this._numTipoCambio);
-            this.tabPageGeneral.Controls.Add(this._numVida);
+            this.tabPageGeneral.Controls.Add(this.numTipoCambio);
+            this.tabPageGeneral.Controls.Add(this.numVida);
             this.tabPageGeneral.Controls.Add(this.lblPrefijo);
-            this.tabPageGeneral.Controls.Add(this._dtFechaAdq);
-            this.tabPageGeneral.Controls.Add(this._numMontoOrigEx);
-            this.tabPageGeneral.Controls.Add(this._txtStatus);
-            this.tabPageGeneral.Controls.Add(this._numDepto);
-            this.tabPageGeneral.Controls.Add(this._numValMer);
-            this.tabPageGeneral.Controls.Add(this._txtLocaliz);
-            this.tabPageGeneral.Controls.Add(this._txtObserv);
-            this.tabPageGeneral.Controls.Add(this._txtBand);
-            this.tabPageGeneral.Controls.Add(this._numMontoOrig);
-            this.tabPageGeneral.Controls.Add(this._cmbTipo);
-            this.tabPageGeneral.Controls.Add(this._txtSerie);
+            this.tabPageGeneral.Controls.Add(this.dtFechaAdq);
+            this.tabPageGeneral.Controls.Add(this.numMontoOrigEx);
+            this.tabPageGeneral.Controls.Add(this.txtStatus);
+            this.tabPageGeneral.Controls.Add(this.numDepto);
+            this.tabPageGeneral.Controls.Add(this.numValMer);
+            this.tabPageGeneral.Controls.Add(this.txtLocaliz);
+            this.tabPageGeneral.Controls.Add(this.txtObserv);
+            this.tabPageGeneral.Controls.Add(this.txtBand);
+            this.tabPageGeneral.Controls.Add(this.numMontoOrig);
+            this.tabPageGeneral.Controls.Add(this.cmbTipo);
+            this.tabPageGeneral.Controls.Add(this.txtSerie);
             this.tabPageGeneral.Controls.Add(this.txtMarca);
-            this.tabPageGeneral.Controls.Add(this._txtDescripcion);
-            this.tabPageGeneral.Controls.Add(this._txtClave);
+            this.tabPageGeneral.Controls.Add(this.txtDescripcion);
+            this.tabPageGeneral.Controls.Add(this.txtClave);
             this.tabPageGeneral.Location = new System.Drawing.Point(4, 22);
             this.tabPageGeneral.Name = "tabPageGeneral";
             this.tabPageGeneral.Padding = new System.Windows.Forms.Padding(3);
@@ -348,6 +347,15 @@
             this.lblBandInm.TabIndex = 21;
             this.lblBandInm.Text = "Band inm.:";
             // 
+            // lblMarca
+            // 
+            this.lblMarca.AutoSize = true;
+            this.lblMarca.Location = new System.Drawing.Point(522, 17);
+            this.lblMarca.Name = "lblMarca";
+            this.lblMarca.Size = new System.Drawing.Size(40, 13);
+            this.lblMarca.TabIndex = 21;
+            this.lblMarca.Text = "Marca:";
+            // 
             // lblDescripcion
             // 
             this.lblDescripcion.AutoSize = true;
@@ -384,19 +392,19 @@
             this.lblSerie.TabIndex = 21;
             this.lblSerie.Text = "Serie:";
             // 
-            // _numTipoCambio
+            // numTipoCambio
             // 
-            this._numTipoCambio.Location = new System.Drawing.Point(167, 136);
-            this._numTipoCambio.Name = "_numTipoCambio";
-            this._numTipoCambio.Size = new System.Drawing.Size(109, 20);
-            this._numTipoCambio.TabIndex = 22;
+            this.numTipoCambio.Location = new System.Drawing.Point(167, 136);
+            this.numTipoCambio.Name = "numTipoCambio";
+            this.numTipoCambio.Size = new System.Drawing.Size(109, 20);
+            this.numTipoCambio.TabIndex = 22;
             // 
-            // _numVida
+            // numVida
             // 
-            this._numVida.Location = new System.Drawing.Point(687, 136);
-            this._numVida.Name = "_numVida";
-            this._numVida.Size = new System.Drawing.Size(61, 20);
-            this._numVida.TabIndex = 22;
+            this.numVida.Location = new System.Drawing.Point(687, 136);
+            this.numVida.Name = "numVida";
+            this.numVida.Size = new System.Drawing.Size(61, 20);
+            this.numVida.TabIndex = 22;
             // 
             // lblPrefijo
             // 
@@ -407,97 +415,106 @@
             this.lblPrefijo.TabIndex = 21;
             this.lblPrefijo.Text = "Clave:";
             // 
-            // _dtFechaAdq
+            // dtFechaAdq
             // 
-            this._dtFechaAdq.Location = new System.Drawing.Point(16, 136);
-            this._dtFechaAdq.Name = "_dtFechaAdq";
-            this._dtFechaAdq.Size = new System.Drawing.Size(141, 20);
-            this._dtFechaAdq.TabIndex = 22;
+            this.dtFechaAdq.Location = new System.Drawing.Point(16, 136);
+            this.dtFechaAdq.Name = "dtFechaAdq";
+            this.dtFechaAdq.Size = new System.Drawing.Size(141, 20);
+            this.dtFechaAdq.TabIndex = 22;
             // 
-            // _numMontoOrigEx
+            // numMontoOrigEx
             // 
-            this._numMontoOrigEx.Location = new System.Drawing.Point(417, 136);
-            this._numMontoOrigEx.Name = "_numMontoOrigEx";
-            this._numMontoOrigEx.Size = new System.Drawing.Size(129, 20);
-            this._numMontoOrigEx.TabIndex = 22;
+            this.numMontoOrigEx.Location = new System.Drawing.Point(417, 136);
+            this.numMontoOrigEx.Name = "numMontoOrigEx";
+            this.numMontoOrigEx.Size = new System.Drawing.Size(129, 20);
+            this.numMontoOrigEx.TabIndex = 22;
             // 
-            // _txtStatus
+            // txtStatus
             // 
-            this._txtStatus.Location = new System.Drawing.Point(563, 82);
-            this._txtStatus.Name = "_txtStatus";
-            this._txtStatus.Size = new System.Drawing.Size(109, 20);
-            this._txtStatus.TabIndex = 22;
+            this.txtStatus.Location = new System.Drawing.Point(563, 82);
+            this.txtStatus.Name = "txtStatus";
+            this.txtStatus.Size = new System.Drawing.Size(109, 20);
+            this.txtStatus.TabIndex = 22;
             // 
-            // _numDepto
+            // numDepto
             // 
-            this._numDepto.Location = new System.Drawing.Point(163, 83);
-            this._numDepto.Name = "_numDepto";
-            this._numDepto.Size = new System.Drawing.Size(176, 20);
-            this._numDepto.TabIndex = 22;
+            this.numDepto.Location = new System.Drawing.Point(163, 83);
+            this.numDepto.Name = "numDepto";
+            this.numDepto.Size = new System.Drawing.Size(176, 21);
+            this.numDepto.TabIndex = 22;
             // 
-            // _numValMer
+            // numValMer
             // 
-            this._numValMer.Location = new System.Drawing.Point(552, 136);
-            this._numValMer.Name = "_numValMer";
-            this._numValMer.Size = new System.Drawing.Size(129, 20);
-            this._numValMer.TabIndex = 22;
+            this.numValMer.Location = new System.Drawing.Point(552, 136);
+            this.numValMer.Name = "numValMer";
+            this.numValMer.Size = new System.Drawing.Size(129, 20);
+            this.numValMer.TabIndex = 22;
             // 
-            // _txtLocaliz
+            // txtLocaliz
             // 
-            this._txtLocaliz.Location = new System.Drawing.Point(345, 83);
-            this._txtLocaliz.Name = "_txtLocaliz";
-            this._txtLocaliz.Size = new System.Drawing.Size(212, 20);
-            this._txtLocaliz.TabIndex = 22;
+            this.txtLocaliz.Location = new System.Drawing.Point(345, 83);
+            this.txtLocaliz.Name = "txtLocaliz";
+            this.txtLocaliz.Size = new System.Drawing.Size(212, 20);
+            this.txtLocaliz.TabIndex = 22;
             // 
-            // _txtObserv
+            // txtObserv
             // 
-            this._txtObserv.Location = new System.Drawing.Point(16, 186);
-            this._txtObserv.Multiline = true;
-            this._txtObserv.Name = "_txtObserv";
-            this._txtObserv.Size = new System.Drawing.Size(732, 40);
-            this._txtObserv.TabIndex = 22;
+            this.txtObserv.Location = new System.Drawing.Point(16, 186);
+            this.txtObserv.Multiline = true;
+            this.txtObserv.Name = "txtObserv";
+            this.txtObserv.Size = new System.Drawing.Size(732, 40);
+            this.txtObserv.TabIndex = 22;
             // 
-            // _txtBand
+            // txtBand
             // 
-            this._txtBand.Location = new System.Drawing.Point(678, 83);
-            this._txtBand.Name = "_txtBand";
-            this._txtBand.Size = new System.Drawing.Size(70, 20);
-            this._txtBand.TabIndex = 22;
+            this.txtBand.Location = new System.Drawing.Point(678, 83);
+            this.txtBand.Name = "txtBand";
+            this.txtBand.Size = new System.Drawing.Size(70, 20);
+            this.txtBand.TabIndex = 22;
             // 
-            // _numMontoOrig
+            // numMontoOrig
             // 
-            this._numMontoOrig.Location = new System.Drawing.Point(282, 136);
-            this._numMontoOrig.Name = "_numMontoOrig";
-            this._numMontoOrig.Size = new System.Drawing.Size(129, 20);
-            this._numMontoOrig.TabIndex = 22;
+            this.numMontoOrig.Location = new System.Drawing.Point(282, 136);
+            this.numMontoOrig.Name = "numMontoOrig";
+            this.numMontoOrig.Size = new System.Drawing.Size(129, 20);
+            this.numMontoOrig.TabIndex = 22;
             // 
-            // _cmbTipo
+            // cmbTipo
             // 
-            this._cmbTipo.Location = new System.Drawing.Point(163, 33);
-            this._cmbTipo.Name = "_cmbTipo";
-            this._cmbTipo.Size = new System.Drawing.Size(176, 21);
-            this._cmbTipo.TabIndex = 22;
+            this.cmbTipo.Location = new System.Drawing.Point(163, 33);
+            this.cmbTipo.Name = "cmbTipo";
+            this.cmbTipo.Size = new System.Drawing.Size(176, 21);
+            this.cmbTipo.TabIndex = 22;
             // 
-            // _txtSerie
+            // txtSerie
             // 
-            this._txtSerie.Location = new System.Drawing.Point(16, 83);
-            this._txtSerie.Name = "_txtSerie";
-            this._txtSerie.Size = new System.Drawing.Size(141, 20);
-            this._txtSerie.TabIndex = 22;
+            this.txtSerie.Location = new System.Drawing.Point(16, 83);
+            this.txtSerie.Name = "txtSerie";
+            this.txtSerie.Size = new System.Drawing.Size(141, 20);
+            this.txtSerie.TabIndex = 22;
+            // 
+            // txtMarca
+            // 
+            this.txtMarca.Location = new System.Drawing.Point(522, 33);
+            this.txtMarca.Name = "txtMarca";
+            this.txtMarca.Size = new System.Drawing.Size(226, 20);
+            this.txtMarca.TabIndex = 22;
             // 
             // _txtDescripcion
             // 
-            this._txtDescripcion.Location = new System.Drawing.Point(345, 33);
-            this._txtDescripcion.Name = "_txtDescripcion";
-            this._txtDescripcion.Size = new System.Drawing.Size(171, 20);
-            this._txtDescripcion.TabIndex = 22;
+            this.txtDescripcion.Location = new System.Drawing.Point(345, 33);
+            this.txtDescripcion.Name = "_txtDescripcion";
+            this.txtDescripcion.Size = new System.Drawing.Size(171, 20);
+            this.txtDescripcion.TabIndex = 22;
             // 
-            // _txtClave
+            // txtClave
             // 
-            this._txtClave.Location = new System.Drawing.Point(16, 33);
-            this._txtClave.Name = "_txtClave";
-            this._txtClave.Size = new System.Drawing.Size(141, 20);
-            this._txtClave.TabIndex = 22;
+            this.txtClave.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtClave.Location = new System.Drawing.Point(16, 33);
+            this.txtClave.MaxLength = 16;
+            this.txtClave.Name = "txtClave";
+            this.txtClave.Size = new System.Drawing.Size(141, 20);
+            this.txtClave.TabIndex = 22;
             // 
             // tabPageDepresiacion
             // 
@@ -510,15 +527,15 @@
             this.tabPageDepresiacion.Controls.Add(this.lblTasaDepFiscal);
             this.tabPageDepresiacion.Controls.Add(this.lblInicioDep);
             this.tabPageDepresiacion.Controls.Add(this.lblMetodo);
-            this.tabPageDepresiacion.Controls.Add(this._numDepFis);
-            this.tabPageDepresiacion.Controls.Add(this._numDepAcu);
-            this.tabPageDepresiacion.Controls.Add(this._dtIniDepFis);
-            this.tabPageDepresiacion.Controls.Add(this._numMaxDed);
-            this.tabPageDepresiacion.Controls.Add(this._dtFechaEliminacion);
-            this.tabPageDepresiacion.Controls.Add(this._numTasDep);
-            this.tabPageDepresiacion.Controls.Add(this._dtIniDep);
-            this.tabPageDepresiacion.Controls.Add(this._numTasDepFis);
-            this.tabPageDepresiacion.Controls.Add(this._txtMetDep);
+            this.tabPageDepresiacion.Controls.Add(this.numDepFis);
+            this.tabPageDepresiacion.Controls.Add(this.numDepAcu);
+            this.tabPageDepresiacion.Controls.Add(this.dtIniDepFis);
+            this.tabPageDepresiacion.Controls.Add(this.numMaxDed);
+            this.tabPageDepresiacion.Controls.Add(this.dtFechaEliminacion);
+            this.tabPageDepresiacion.Controls.Add(this.numTasDep);
+            this.tabPageDepresiacion.Controls.Add(this.dtIniDep);
+            this.tabPageDepresiacion.Controls.Add(this.numTasDepFis);
+            this.tabPageDepresiacion.Controls.Add(this.txtMetDep);
             this.tabPageDepresiacion.Location = new System.Drawing.Point(4, 22);
             this.tabPageDepresiacion.Name = "tabPageDepresiacion";
             this.tabPageDepresiacion.Padding = new System.Windows.Forms.Padding(3);
@@ -557,7 +574,7 @@
             // lblInicioDepFiscal
             // 
             this.lblInicioDepFiscal.AutoSize = true;
-            this.lblInicioDepFiscal.Location = new System.Drawing.Point(133, 54);
+            this.lblInicioDepFiscal.Location = new System.Drawing.Point(133, 58);
             this.lblInicioDepFiscal.Name = "lblInicioDepFiscal";
             this.lblInicioDepFiscal.Size = new System.Drawing.Size(86, 13);
             this.lblInicioDepFiscal.TabIndex = 25;
@@ -575,7 +592,7 @@
             // lblFechaEliminacion
             // 
             this.lblFechaEliminacion.AutoSize = true;
-            this.lblFechaEliminacion.Location = new System.Drawing.Point(249, 54);
+            this.lblFechaEliminacion.Location = new System.Drawing.Point(249, 58);
             this.lblFechaEliminacion.Name = "lblFechaEliminacion";
             this.lblFechaEliminacion.Size = new System.Drawing.Size(95, 13);
             this.lblFechaEliminacion.TabIndex = 26;
@@ -593,7 +610,7 @@
             // lblInicioDep
             // 
             this.lblInicioDep.AutoSize = true;
-            this.lblInicioDep.Location = new System.Drawing.Point(17, 54);
+            this.lblInicioDep.Location = new System.Drawing.Point(17, 58);
             this.lblInicioDep.Name = "lblInicioDep";
             this.lblInicioDep.Size = new System.Drawing.Size(59, 13);
             this.lblInicioDep.TabIndex = 27;
@@ -608,68 +625,68 @@
             this.lblMetodo.TabIndex = 27;
             this.lblMetodo.Text = "Método:";
             // 
-            // _numDepFis
+            // numDepFis
             // 
-            this._numDepFis.Location = new System.Drawing.Point(597, 28);
-            this._numDepFis.Name = "_numDepFis";
-            this._numDepFis.Size = new System.Drawing.Size(110, 20);
-            this._numDepFis.TabIndex = 28;
+            this.numDepFis.Location = new System.Drawing.Point(597, 28);
+            this.numDepFis.Name = "numDepFis";
+            this.numDepFis.Size = new System.Drawing.Size(110, 20);
+            this.numDepFis.TabIndex = 28;
             // 
-            // _numDepAcu
+            // numDepAcu
             // 
-            this._numDepAcu.Location = new System.Drawing.Point(481, 28);
-            this._numDepAcu.Name = "_numDepAcu";
-            this._numDepAcu.Size = new System.Drawing.Size(110, 20);
-            this._numDepAcu.TabIndex = 28;
+            this.numDepAcu.Location = new System.Drawing.Point(481, 28);
+            this.numDepAcu.Name = "numDepAcu";
+            this.numDepAcu.Size = new System.Drawing.Size(110, 20);
+            this.numDepAcu.TabIndex = 28;
             // 
-            // _dtIniDepFis
+            // dtIniDepFis
             // 
-            this._dtIniDepFis.Location = new System.Drawing.Point(133, 70);
-            this._dtIniDepFis.Name = "_dtIniDepFis";
-            this._dtIniDepFis.Size = new System.Drawing.Size(110, 20);
-            this._dtIniDepFis.TabIndex = 30;
+            this.dtIniDepFis.Location = new System.Drawing.Point(133, 74);
+            this.dtIniDepFis.Name = "dtIniDepFis";
+            this.dtIniDepFis.Size = new System.Drawing.Size(110, 20);
+            this.dtIniDepFis.TabIndex = 30;
             // 
-            // _numMaxDed
+            // numMaxDed
             // 
-            this._numMaxDed.Location = new System.Drawing.Point(365, 28);
-            this._numMaxDed.Name = "_numMaxDed";
-            this._numMaxDed.Size = new System.Drawing.Size(110, 20);
-            this._numMaxDed.TabIndex = 29;
+            this.numMaxDed.Location = new System.Drawing.Point(365, 28);
+            this.numMaxDed.Name = "numMaxDed";
+            this.numMaxDed.Size = new System.Drawing.Size(110, 20);
+            this.numMaxDed.TabIndex = 29;
             // 
-            // _dtFechaEliminacion
+            // dtFechaEliminacion
             // 
-            this._dtFechaEliminacion.Location = new System.Drawing.Point(249, 70);
-            this._dtFechaEliminacion.Name = "_dtFechaEliminacion";
-            this._dtFechaEliminacion.Size = new System.Drawing.Size(110, 20);
-            this._dtFechaEliminacion.TabIndex = 31;
+            this.dtFechaEliminacion.Location = new System.Drawing.Point(249, 74);
+            this.dtFechaEliminacion.Name = "dtFechaEliminacion";
+            this.dtFechaEliminacion.Size = new System.Drawing.Size(110, 20);
+            this.dtFechaEliminacion.TabIndex = 31;
             // 
-            // _numTasDep
+            // numTasDep
             // 
-            this._numTasDep.Location = new System.Drawing.Point(133, 28);
-            this._numTasDep.Name = "_numTasDep";
-            this._numTasDep.Size = new System.Drawing.Size(110, 20);
-            this._numTasDep.TabIndex = 30;
+            this.numTasDep.Location = new System.Drawing.Point(133, 28);
+            this.numTasDep.Name = "numTasDep";
+            this.numTasDep.Size = new System.Drawing.Size(110, 20);
+            this.numTasDep.TabIndex = 30;
             // 
-            // _dtIniDep
+            // dtIniDep
             // 
-            this._dtIniDep.Location = new System.Drawing.Point(17, 70);
-            this._dtIniDep.Name = "_dtIniDep";
-            this._dtIniDep.Size = new System.Drawing.Size(110, 20);
-            this._dtIniDep.TabIndex = 32;
+            this.dtIniDep.Location = new System.Drawing.Point(17, 74);
+            this.dtIniDep.Name = "dtIniDep";
+            this.dtIniDep.Size = new System.Drawing.Size(110, 20);
+            this.dtIniDep.TabIndex = 32;
             // 
-            // _numTasDepFis
+            // numTasDepFis
             // 
-            this._numTasDepFis.Location = new System.Drawing.Point(249, 28);
-            this._numTasDepFis.Name = "_numTasDepFis";
-            this._numTasDepFis.Size = new System.Drawing.Size(110, 20);
-            this._numTasDepFis.TabIndex = 31;
+            this.numTasDepFis.Location = new System.Drawing.Point(249, 28);
+            this.numTasDepFis.Name = "numTasDepFis";
+            this.numTasDepFis.Size = new System.Drawing.Size(110, 20);
+            this.numTasDepFis.TabIndex = 31;
             // 
-            // _txtMetDep
+            // txtMetDep
             // 
-            this._txtMetDep.Location = new System.Drawing.Point(17, 28);
-            this._txtMetDep.Name = "_txtMetDep";
-            this._txtMetDep.Size = new System.Drawing.Size(110, 20);
-            this._txtMetDep.TabIndex = 32;
+            this.txtMetDep.Location = new System.Drawing.Point(17, 28);
+            this.txtMetDep.Name = "txtMetDep";
+            this.txtMetDep.Size = new System.Drawing.Size(110, 20);
+            this.txtMetDep.TabIndex = 32;
             // 
             // tabPageSeguro
             // 
@@ -686,21 +703,21 @@
             this.tabPageSeguro.Controls.Add(this.lblAgente);
             this.tabPageSeguro.Controls.Add(this.lblProximoMantenimiento);
             this.tabPageSeguro.Controls.Add(this.lblCobertura);
-            this.tabPageSeguro.Controls.Add(this._numCostoMan);
+            this.tabPageSeguro.Controls.Add(this.numCostoMan);
             this.tabPageSeguro.Controls.Add(this.lblPolizaSeguro);
-            this.tabPageSeguro.Controls.Add(this._dtUltMan);
-            this.tabPageSeguro.Controls.Add(this._numDeducible);
-            this.tabPageSeguro.Controls.Add(this._txtResponsable);
-            this.tabPageSeguro.Controls.Add(this._numMontoAseg);
-            this.tabPageSeguro.Controls.Add(this._dtVigencia);
-            this.tabPageSeguro.Controls.Add(this._numPeriodoMan);
-            this.tabPageSeguro.Controls.Add(this._txtTel);
-            this.tabPageSeguro.Controls.Add(this._numPrima);
+            this.tabPageSeguro.Controls.Add(this.dtUltMan);
+            this.tabPageSeguro.Controls.Add(this.numDeducible);
+            this.tabPageSeguro.Controls.Add(this.txtResponsable);
+            this.tabPageSeguro.Controls.Add(this.numMontoAseg);
+            this.tabPageSeguro.Controls.Add(this.dtVigencia);
+            this.tabPageSeguro.Controls.Add(this.numPeriodoMan);
+            this.tabPageSeguro.Controls.Add(this.txtTelefono);
+            this.tabPageSeguro.Controls.Add(this.numPrima);
             this.tabPageSeguro.Controls.Add(this._dtProxMan);
-            this.tabPageSeguro.Controls.Add(this._txtCompAseg);
-            this.tabPageSeguro.Controls.Add(this._txtCobertura);
-            this.tabPageSeguro.Controls.Add(this._txtAgente);
-            this.tabPageSeguro.Controls.Add(this._txtPolizaSeg);
+            this.tabPageSeguro.Controls.Add(this.txtCompAseg);
+            this.tabPageSeguro.Controls.Add(this.txtCobertura);
+            this.tabPageSeguro.Controls.Add(this.txtAgente);
+            this.tabPageSeguro.Controls.Add(this.txtPolizaSeg);
             this.tabPageSeguro.Location = new System.Drawing.Point(4, 22);
             this.tabPageSeguro.Name = "tabPageSeguro";
             this.tabPageSeguro.Padding = new System.Windows.Forms.Padding(3);
@@ -712,7 +729,7 @@
             // lblTelefono
             // 
             this.lblTelefono.AutoSize = true;
-            this.lblTelefono.Location = new System.Drawing.Point(477, 14);
+            this.lblTelefono.Location = new System.Drawing.Point(610, 14);
             this.lblTelefono.Name = "lblTelefono";
             this.lblTelefono.Size = new System.Drawing.Size(52, 13);
             this.lblTelefono.TabIndex = 33;
@@ -721,7 +738,7 @@
             // lblCostoMantenimiento
             // 
             this.lblCostoMantenimiento.AutoSize = true;
-            this.lblCostoMantenimiento.Location = new System.Drawing.Point(361, 102);
+            this.lblCostoMantenimiento.Location = new System.Drawing.Point(402, 103);
             this.lblCostoMantenimiento.Name = "lblCostoMantenimiento";
             this.lblCostoMantenimiento.Size = new System.Drawing.Size(108, 13);
             this.lblCostoMantenimiento.TabIndex = 34;
@@ -730,7 +747,7 @@
             // lblDeducible
             // 
             this.lblDeducible.AutoSize = true;
-            this.lblDeducible.Location = new System.Drawing.Point(361, 56);
+            this.lblDeducible.Location = new System.Drawing.Point(402, 56);
             this.lblDeducible.Name = "lblDeducible";
             this.lblDeducible.Size = new System.Drawing.Size(58, 13);
             this.lblDeducible.TabIndex = 34;
@@ -739,7 +756,7 @@
             // lblUltimoMantenimiento
             // 
             this.lblUltimoMantenimiento.AutoSize = true;
-            this.lblUltimoMantenimiento.Location = new System.Drawing.Point(126, 102);
+            this.lblUltimoMantenimiento.Location = new System.Drawing.Point(167, 103);
             this.lblUltimoMantenimiento.Name = "lblUltimoMantenimiento";
             this.lblUltimoMantenimiento.Size = new System.Drawing.Size(110, 13);
             this.lblUltimoMantenimiento.TabIndex = 34;
@@ -748,7 +765,7 @@
             // lblMontoAsegurado
             // 
             this.lblMontoAsegurado.AutoSize = true;
-            this.lblMontoAsegurado.Location = new System.Drawing.Point(126, 56);
+            this.lblMontoAsegurado.Location = new System.Drawing.Point(167, 56);
             this.lblMontoAsegurado.Name = "lblMontoAsegurado";
             this.lblMontoAsegurado.Size = new System.Drawing.Size(93, 13);
             this.lblMontoAsegurado.TabIndex = 34;
@@ -757,7 +774,7 @@
             // lblCompania
             // 
             this.lblCompania.AutoSize = true;
-            this.lblCompania.Location = new System.Drawing.Point(126, 14);
+            this.lblCompania.Location = new System.Drawing.Point(167, 14);
             this.lblCompania.Name = "lblCompania";
             this.lblCompania.Size = new System.Drawing.Size(57, 13);
             this.lblCompania.TabIndex = 35;
@@ -766,7 +783,7 @@
             // lblResponsable
             // 
             this.lblResponsable.AutoSize = true;
-            this.lblResponsable.Location = new System.Drawing.Point(477, 102);
+            this.lblResponsable.Location = new System.Drawing.Point(518, 102);
             this.lblResponsable.Name = "lblResponsable";
             this.lblResponsable.Size = new System.Drawing.Size(72, 13);
             this.lblResponsable.TabIndex = 36;
@@ -775,7 +792,7 @@
             // lblVigencia
             // 
             this.lblVigencia.AutoSize = true;
-            this.lblVigencia.Location = new System.Drawing.Point(477, 56);
+            this.lblVigencia.Location = new System.Drawing.Point(518, 56);
             this.lblVigencia.Name = "lblVigencia";
             this.lblVigencia.Size = new System.Drawing.Size(51, 13);
             this.lblVigencia.TabIndex = 36;
@@ -784,7 +801,7 @@
             // lblPeriodoMantenimiento
             // 
             this.lblPeriodoMantenimiento.AutoSize = true;
-            this.lblPeriodoMantenimiento.Location = new System.Drawing.Point(242, 102);
+            this.lblPeriodoMantenimiento.Location = new System.Drawing.Point(283, 103);
             this.lblPeriodoMantenimiento.Name = "lblPeriodoMantenimiento";
             this.lblPeriodoMantenimiento.Size = new System.Drawing.Size(117, 13);
             this.lblPeriodoMantenimiento.TabIndex = 36;
@@ -793,7 +810,7 @@
             // lblPrimaTotal
             // 
             this.lblPrimaTotal.AutoSize = true;
-            this.lblPrimaTotal.Location = new System.Drawing.Point(242, 56);
+            this.lblPrimaTotal.Location = new System.Drawing.Point(283, 56);
             this.lblPrimaTotal.Name = "lblPrimaTotal";
             this.lblPrimaTotal.Size = new System.Drawing.Size(59, 13);
             this.lblPrimaTotal.TabIndex = 36;
@@ -802,7 +819,7 @@
             // lblAgente
             // 
             this.lblAgente.AutoSize = true;
-            this.lblAgente.Location = new System.Drawing.Point(242, 14);
+            this.lblAgente.Location = new System.Drawing.Point(375, 14);
             this.lblAgente.Name = "lblAgente";
             this.lblAgente.Size = new System.Drawing.Size(44, 13);
             this.lblAgente.TabIndex = 37;
@@ -826,12 +843,12 @@
             this.lblCobertura.TabIndex = 38;
             this.lblCobertura.Text = "Cobertura:";
             // 
-            // _numCostoMan
+            // numCostoMan
             // 
-            this._numCostoMan.Location = new System.Drawing.Point(361, 118);
-            this._numCostoMan.Name = "_numCostoMan";
-            this._numCostoMan.Size = new System.Drawing.Size(110, 20);
-            this._numCostoMan.TabIndex = 41;
+            this.numCostoMan.Location = new System.Drawing.Point(402, 119);
+            this.numCostoMan.Name = "numCostoMan";
+            this.numCostoMan.Size = new System.Drawing.Size(110, 20);
+            this.numCostoMan.TabIndex = 41;
             // 
             // lblPolizaSeguro
             // 
@@ -844,110 +861,94 @@
             // 
             // _dtUltMan
             // 
-            this._dtUltMan.Location = new System.Drawing.Point(126, 118);
-            this._dtUltMan.Name = "_dtUltMan";
-            this._dtUltMan.Size = new System.Drawing.Size(110, 20);
-            this._dtUltMan.TabIndex = 41;
+            this.dtUltMan.Location = new System.Drawing.Point(167, 119);
+            this.dtUltMan.Name = "_dtUltMan";
+            this.dtUltMan.Size = new System.Drawing.Size(110, 20);
+            this.dtUltMan.TabIndex = 41;
             // 
             // _numDeducible
             // 
-            this._numDeducible.Location = new System.Drawing.Point(361, 72);
-            this._numDeducible.Name = "_numDeducible";
-            this._numDeducible.Size = new System.Drawing.Size(110, 20);
-            this._numDeducible.TabIndex = 41;
+            this.numDeducible.Location = new System.Drawing.Point(402, 72);
+            this.numDeducible.Name = "numDeducible";
+            this.numDeducible.Size = new System.Drawing.Size(110, 20);
+            this.numDeducible.TabIndex = 41;
             // 
-            // _txtResponsable
+            // txtResponsable
             // 
-            this._txtResponsable.Location = new System.Drawing.Point(477, 118);
-            this._txtResponsable.Name = "_txtResponsable";
-            this._txtResponsable.Size = new System.Drawing.Size(110, 20);
-            this._txtResponsable.TabIndex = 43;
+            this.txtResponsable.Location = new System.Drawing.Point(518, 118);
+            this.txtResponsable.Name = "txtResponsable";
+            this.txtResponsable.Size = new System.Drawing.Size(232, 20);
+            this.txtResponsable.TabIndex = 43;
             // 
             // _numMontoAseg
             // 
-            this._numMontoAseg.Location = new System.Drawing.Point(126, 72);
-            this._numMontoAseg.Name = "_numMontoAseg";
-            this._numMontoAseg.Size = new System.Drawing.Size(110, 20);
-            this._numMontoAseg.TabIndex = 41;
+            this.numMontoAseg.Location = new System.Drawing.Point(167, 72);
+            this.numMontoAseg.Name = "_numMontoAseg";
+            this.numMontoAseg.Size = new System.Drawing.Size(110, 20);
+            this.numMontoAseg.TabIndex = 41;
             // 
             // _dtVigencia
             // 
-            this._dtVigencia.Location = new System.Drawing.Point(477, 72);
-            this._dtVigencia.Name = "_dtVigencia";
-            this._dtVigencia.Size = new System.Drawing.Size(110, 20);
-            this._dtVigencia.TabIndex = 43;
+            this.dtVigencia.Location = new System.Drawing.Point(518, 72);
+            this.dtVigencia.Name = "dtVigencia";
+            this.dtVigencia.Size = new System.Drawing.Size(232, 20);
+            this.dtVigencia.TabIndex = 43;
             // 
             // _numPeriodoMan
             // 
-            this._numPeriodoMan.Location = new System.Drawing.Point(242, 118);
-            this._numPeriodoMan.Name = "_numPeriodoMan";
-            this._numPeriodoMan.Size = new System.Drawing.Size(110, 20);
-            this._numPeriodoMan.TabIndex = 43;
+            this.numPeriodoMan.Location = new System.Drawing.Point(283, 119);
+            this.numPeriodoMan.Name = "numPeriodoMan";
+            this.numPeriodoMan.Size = new System.Drawing.Size(110, 20);
+            this.numPeriodoMan.TabIndex = 43;
             // 
-            // _txtTel
+            // txtTelefono
             // 
-            this._txtTel.Location = new System.Drawing.Point(477, 30);
-            this._txtTel.Name = "_txtTel";
-            this._txtTel.Size = new System.Drawing.Size(110, 20);
-            this._txtTel.TabIndex = 40;
+            this.txtTelefono.Location = new System.Drawing.Point(610, 30);
+            this.txtTelefono.Name = "txtTelefono";
+            this.txtTelefono.Size = new System.Drawing.Size(140, 20);
+            this.txtTelefono.TabIndex = 40;
             // 
-            // _numPrima
+            // numPrima
             // 
-            this._numPrima.Location = new System.Drawing.Point(242, 72);
-            this._numPrima.Name = "_numPrima";
-            this._numPrima.Size = new System.Drawing.Size(110, 20);
-            this._numPrima.TabIndex = 43;
+            this.numPrima.Location = new System.Drawing.Point(283, 72);
+            this.numPrima.Name = "numPrima";
+            this.numPrima.Size = new System.Drawing.Size(110, 20);
+            this.numPrima.TabIndex = 43;
             // 
-            // _dtProxMan
+            // dtProxMan
             // 
             this._dtProxMan.Location = new System.Drawing.Point(10, 118);
-            this._dtProxMan.Name = "_dtProxMan";
-            this._dtProxMan.Size = new System.Drawing.Size(110, 20);
+            this._dtProxMan.Name = "dtProxMan";
+            this._dtProxMan.Size = new System.Drawing.Size(151, 20);
             this._dtProxMan.TabIndex = 45;
             // 
-            // _txtCompAseg
+            // txtCompAseg
             // 
-            this._txtCompAseg.Location = new System.Drawing.Point(126, 30);
-            this._txtCompAseg.Name = "_txtCompAseg";
-            this._txtCompAseg.Size = new System.Drawing.Size(110, 20);
-            this._txtCompAseg.TabIndex = 42;
+            this.txtCompAseg.Location = new System.Drawing.Point(167, 30);
+            this.txtCompAseg.Name = "txtCompAseg";
+            this.txtCompAseg.Size = new System.Drawing.Size(202, 20);
+            this.txtCompAseg.TabIndex = 42;
             // 
-            // _txtCobertura
+            // txtCobertura
             // 
-            this._txtCobertura.Location = new System.Drawing.Point(10, 72);
-            this._txtCobertura.Name = "_txtCobertura";
-            this._txtCobertura.Size = new System.Drawing.Size(110, 20);
-            this._txtCobertura.TabIndex = 45;
+            this.txtCobertura.Location = new System.Drawing.Point(10, 72);
+            this.txtCobertura.Name = "txtCobertura";
+            this.txtCobertura.Size = new System.Drawing.Size(151, 20);
+            this.txtCobertura.TabIndex = 45;
             // 
-            // _txtAgente
+            // txtAgente
             // 
-            this._txtAgente.Location = new System.Drawing.Point(242, 30);
-            this._txtAgente.Name = "_txtAgente";
-            this._txtAgente.Size = new System.Drawing.Size(229, 20);
-            this._txtAgente.TabIndex = 44;
+            this.txtAgente.Location = new System.Drawing.Point(375, 30);
+            this.txtAgente.Name = "txtAgente";
+            this.txtAgente.Size = new System.Drawing.Size(229, 20);
+            this.txtAgente.TabIndex = 44;
             // 
-            // _txtPolizaSeg
+            // txtPolizaSeg
             // 
-            this._txtPolizaSeg.Location = new System.Drawing.Point(10, 30);
-            this._txtPolizaSeg.Name = "_txtPolizaSeg";
-            this._txtPolizaSeg.Size = new System.Drawing.Size(110, 20);
-            this._txtPolizaSeg.TabIndex = 46;
-            // 
-            // txtMarca
-            // 
-            this.txtMarca.Location = new System.Drawing.Point(522, 33);
-            this.txtMarca.Name = "txtMarca";
-            this.txtMarca.Size = new System.Drawing.Size(226, 20);
-            this.txtMarca.TabIndex = 22;
-            // 
-            // lblMarca
-            // 
-            this.lblMarca.AutoSize = true;
-            this.lblMarca.Location = new System.Drawing.Point(522, 17);
-            this.lblMarca.Name = "lblMarca";
-            this.lblMarca.Size = new System.Drawing.Size(40, 13);
-            this.lblMarca.TabIndex = 21;
-            this.lblMarca.Text = "Marca:";
+            this.txtPolizaSeg.Location = new System.Drawing.Point(10, 30);
+            this.txtPolizaSeg.Name = "txtPolizaSeg";
+            this.txtPolizaSeg.Size = new System.Drawing.Size(151, 20);
+            this.txtPolizaSeg.TabIndex = 46;
             // 
             // ActivoFijoCatalogoForm
             // 
@@ -955,12 +956,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 530);
             this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this._btnCerrar);
-            this.Controls.Add(this._btnEliminar);
-            this.Controls.Add(this._btnGuardar);
-            this.Controls.Add(this._btnNuevo);
+            this.Controls.Add(this.btnCerrar);
+            this.Controls.Add(this.btnEliminar);
+            this.Controls.Add(this.btnGuardar);
+            this.Controls.Add(this.btnNuevo);
             this.Controls.Add(this.gridData);
-            this.Controls.Add(this._txtBuscar);
+            this.Controls.Add(this.txtBuscar);
             this.Controls.Add(this.lblBuscar);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -971,26 +972,25 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPageGeneral.ResumeLayout(false);
             this.tabPageGeneral.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this._numTipoCambio)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this._numVida)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this._numMontoOrigEx)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this._numDepto)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this._numValMer)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this._numMontoOrig)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numTipoCambio)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numVida)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numMontoOrigEx)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numValMer)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numMontoOrig)).EndInit();
             this.tabPageDepresiacion.ResumeLayout(false);
             this.tabPageDepresiacion.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this._numDepFis)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this._numDepAcu)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this._numMaxDed)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this._numTasDep)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this._numTasDepFis)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numDepFis)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numDepAcu)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numMaxDed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numTasDep)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numTasDepFis)).EndInit();
             this.tabPageSeguro.ResumeLayout(false);
             this.tabPageSeguro.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this._numCostoMan)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this._numDeducible)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this._numMontoAseg)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this._numPeriodoMan)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this._numPrima)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCostoMan)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numDeducible)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numMontoAseg)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numPeriodoMan)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numPrima)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -999,12 +999,12 @@
         #endregion
 
         private System.Windows.Forms.DataGridView gridData;
-        private System.Windows.Forms.TextBox _txtBuscar;
+        private System.Windows.Forms.TextBox txtBuscar;
         private System.Windows.Forms.Label lblBuscar;
-        private System.Windows.Forms.Button _btnCerrar;
-        private System.Windows.Forms.Button _btnEliminar;
-        private System.Windows.Forms.Button _btnGuardar;
-        private System.Windows.Forms.Button _btnNuevo;
+        private System.Windows.Forms.Button btnCerrar;
+        private System.Windows.Forms.Button btnEliminar;
+        private System.Windows.Forms.Button btnGuardar;
+        private System.Windows.Forms.Button btnNuevo;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPageGeneral;
         private System.Windows.Forms.TabPage tabPageDepresiacion;
@@ -1023,22 +1023,22 @@
         private System.Windows.Forms.Label lblObservaciones;
         private System.Windows.Forms.Label lblMontoOriginal;
         private System.Windows.Forms.Label lblSerie;
-        private System.Windows.Forms.NumericUpDown _numTipoCambio;
-        private System.Windows.Forms.NumericUpDown _numVida;
+        private System.Windows.Forms.NumericUpDown numTipoCambio;
+        private System.Windows.Forms.NumericUpDown numVida;
         private System.Windows.Forms.Label lblPrefijo;
-        private System.Windows.Forms.DateTimePicker _dtFechaAdq;
-        private System.Windows.Forms.NumericUpDown _numMontoOrigEx;
-        private System.Windows.Forms.TextBox _txtStatus;
-        private System.Windows.Forms.NumericUpDown _numDepto;
-        private System.Windows.Forms.NumericUpDown _numValMer;
-        private System.Windows.Forms.TextBox _txtLocaliz;
-        private System.Windows.Forms.TextBox _txtObserv;
-        private System.Windows.Forms.TextBox _txtBand;
-        private System.Windows.Forms.NumericUpDown _numMontoOrig;
-        private System.Windows.Forms.ComboBox _cmbTipo;
-        private System.Windows.Forms.TextBox _txtSerie;
-        private System.Windows.Forms.TextBox _txtDescripcion;
-        private System.Windows.Forms.TextBox _txtClave;
+        private System.Windows.Forms.DateTimePicker dtFechaAdq;
+        private System.Windows.Forms.NumericUpDown numMontoOrigEx;
+        private System.Windows.Forms.TextBox txtStatus;
+        private System.Windows.Forms.ComboBox numDepto;
+        private System.Windows.Forms.NumericUpDown numValMer;
+        private System.Windows.Forms.TextBox txtLocaliz;
+        private System.Windows.Forms.TextBox txtObserv;
+        private System.Windows.Forms.TextBox txtBand;
+        private System.Windows.Forms.NumericUpDown numMontoOrig;
+        private System.Windows.Forms.ComboBox cmbTipo;
+        private System.Windows.Forms.TextBox txtSerie;
+        private System.Windows.Forms.TextBox txtDescripcion;
+        private System.Windows.Forms.TextBox txtClave;
         private System.Windows.Forms.Label lblAcumuladaFiscal;
         private System.Windows.Forms.Label lblDepresiacionAcumulada;
         private System.Windows.Forms.Label lblMaxDeduccion;
@@ -1048,15 +1048,15 @@
         private System.Windows.Forms.Label lblTasaDepFiscal;
         private System.Windows.Forms.Label lblInicioDep;
         private System.Windows.Forms.Label lblMetodo;
-        private System.Windows.Forms.NumericUpDown _numDepFis;
-        private System.Windows.Forms.NumericUpDown _numDepAcu;
-        private System.Windows.Forms.DateTimePicker _dtIniDepFis;
-        private System.Windows.Forms.NumericUpDown _numMaxDed;
-        private System.Windows.Forms.DateTimePicker _dtFechaEliminacion;
-        private System.Windows.Forms.NumericUpDown _numTasDep;
-        private System.Windows.Forms.DateTimePicker _dtIniDep;
-        private System.Windows.Forms.NumericUpDown _numTasDepFis;
-        private System.Windows.Forms.TextBox _txtMetDep;
+        private System.Windows.Forms.NumericUpDown numDepFis;
+        private System.Windows.Forms.NumericUpDown numDepAcu;
+        private System.Windows.Forms.DateTimePicker dtIniDepFis;
+        private System.Windows.Forms.NumericUpDown numMaxDed;
+        private System.Windows.Forms.DateTimePicker dtFechaEliminacion;
+        private System.Windows.Forms.NumericUpDown numTasDep;
+        private System.Windows.Forms.DateTimePicker dtIniDep;
+        private System.Windows.Forms.NumericUpDown numTasDepFis;
+        private System.Windows.Forms.TextBox txtMetDep;
         private System.Windows.Forms.Label lblTelefono;
         private System.Windows.Forms.Label lblCostoMantenimiento;
         private System.Windows.Forms.Label lblDeducible;
@@ -1070,21 +1070,21 @@
         private System.Windows.Forms.Label lblAgente;
         private System.Windows.Forms.Label lblProximoMantenimiento;
         private System.Windows.Forms.Label lblCobertura;
-        private System.Windows.Forms.NumericUpDown _numCostoMan;
+        private System.Windows.Forms.NumericUpDown numCostoMan;
         private System.Windows.Forms.Label lblPolizaSeguro;
-        private System.Windows.Forms.DateTimePicker _dtUltMan;
-        private System.Windows.Forms.NumericUpDown _numDeducible;
-        private System.Windows.Forms.TextBox _txtResponsable;
-        private System.Windows.Forms.NumericUpDown _numMontoAseg;
-        private System.Windows.Forms.DateTimePicker _dtVigencia;
-        private System.Windows.Forms.NumericUpDown _numPeriodoMan;
-        private System.Windows.Forms.TextBox _txtTel;
-        private System.Windows.Forms.NumericUpDown _numPrima;
+        private System.Windows.Forms.DateTimePicker dtUltMan;
+        private System.Windows.Forms.NumericUpDown numDeducible;
+        private System.Windows.Forms.TextBox txtResponsable;
+        private System.Windows.Forms.NumericUpDown numMontoAseg;
+        private System.Windows.Forms.DateTimePicker dtVigencia;
+        private System.Windows.Forms.NumericUpDown numPeriodoMan;
+        private System.Windows.Forms.TextBox txtTelefono;
+        private System.Windows.Forms.NumericUpDown numPrima;
         private System.Windows.Forms.DateTimePicker _dtProxMan;
-        private System.Windows.Forms.TextBox _txtCompAseg;
-        private System.Windows.Forms.TextBox _txtCobertura;
-        private System.Windows.Forms.TextBox _txtAgente;
-        private System.Windows.Forms.TextBox _txtPolizaSeg;
+        private System.Windows.Forms.TextBox txtCompAseg;
+        private System.Windows.Forms.TextBox txtCobertura;
+        private System.Windows.Forms.TextBox txtAgente;
+        private System.Windows.Forms.TextBox txtPolizaSeg;
         private System.Windows.Forms.Label lblMarca;
         private System.Windows.Forms.TextBox txtMarca;
     }

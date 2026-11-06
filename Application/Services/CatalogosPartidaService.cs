@@ -24,7 +24,7 @@ namespace Jaeger.Contable.Application.Services {
             ValidarDescripcion(descripcion);
             if (await _repository.ExisteDepartamentoAsync(departamento))
                 throw new InvalidOperationException("El departamento ya existe.");
-            await _repository.CrearDepartamentoAsync(new Departamento { DEPTO = departamento, DESCRIP = Normalizar(descripcion) });
+            await _repository.CrearDepartamentoAsync(new Departamento { IdDepartamento = departamento, Descripcion = Normalizar(descripcion) });
         }
 
         public async Task ActualizarDepartamentoAsync(short departamento, string descripcion) {
@@ -32,7 +32,7 @@ namespace Jaeger.Contable.Application.Services {
             ValidarDescripcion(descripcion);
             if (!await _repository.ExisteDepartamentoAsync(departamento))
                 throw new InvalidOperationException("El departamento no existe.");
-            await _repository.ActualizarDepartamentoAsync(new Departamento { DEPTO = departamento, DESCRIP = Normalizar(descripcion) });
+            await _repository.ActualizarDepartamentoAsync(new Departamento { IdDepartamento = departamento, Descripcion = Normalizar(descripcion) });
         }
 
         public Task EliminarDepartamentoAsync(short departamento) { ValidarIdDepartamento(departamento); return _repository.EliminarDepartamentoAsync(departamento); }

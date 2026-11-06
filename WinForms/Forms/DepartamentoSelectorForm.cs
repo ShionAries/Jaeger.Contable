@@ -38,16 +38,16 @@ namespace Jaeger.Contable.WinForms.Forms {
             var q = (txtBuscar.Text ?? string.Empty).Trim();
             gridData.DataSource = string.IsNullOrEmpty(q)
                 ? _datos.ToList()
-                : _datos.Where(x => x.DEPTO.ToString().Contains(q) ||
-                    (x.DESCRIP ?? string.Empty).IndexOf(q, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+                : _datos.Where(x => x.IdDepartamento.ToString().Contains(q) ||
+                    (x.Descripcion ?? string.Empty).IndexOf(q, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
         }
         
         private void Aceptar() {
             var x = gridData.CurrentRow == null ? null : gridData.CurrentRow.DataBoundItem as Departamento;
             if (x == null)
                 return;
-            ValorSeleccionado = x.DEPTO;
-            DescripcionSeleccionada = x.DESCRIP ?? string.Empty;
+            ValorSeleccionado = x.IdDepartamento;
+            DescripcionSeleccionada = x.Descripcion ?? string.Empty;
             DialogResult = DialogResult.OK;
             Close();
         }

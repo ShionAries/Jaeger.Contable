@@ -146,7 +146,7 @@ namespace Jaeger.Contable.WinForms.Forms {
         }
 
         private void LimpiarEdicion() { _txtId.Clear(); _txtDescripcion.Clear(); _txtId.ReadOnly = false; }
-        private static int ObtenerId(object item) { var d = item as Departamento; return d != null ? d.DEPTO : item is CentroCosto ? ((CentroCosto)item).Id : ((GrupoContable)item).Id; }
-        private static string ObtenerDescripcion(object item) { var d = item as Departamento; return d != null ? d.DESCRIP ?? string.Empty : item is CentroCosto ? ((CentroCosto)item).Descripcion ?? string.Empty : ((GrupoContable)item).Descripcion ?? string.Empty; }
+        private static int ObtenerId(object item) { var d = item as Departamento; return d != null ? d.IdDepartamento : item is CentroCosto ? ((CentroCosto)item).Id : ((GrupoContable)item).Id; }
+        private static string ObtenerDescripcion(object item) { var d = item as Departamento; return d != null ? d.Descripcion ?? string.Empty : item is CentroCosto ? ((CentroCosto)item).Descripcion ?? string.Empty : ((GrupoContable)item).Descripcion ?? string.Empty; }
     }
 }

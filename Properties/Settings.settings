@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="ConnectionString" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">Server=localhost;Port=3306;Database=jaeger_ipr981125pn9ct;Uid=root;Pwd=ipr9811;</Value>
+      <Value Profile="(Default)">Server=localhost;Port=4530;Database=jaeger_ipr981125pn9ct;Uid=root;Pwd=ipr9811;</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -418,12 +418,12 @@ namespace Jaeger.Contable {
                         .ObtenerDepartamentosAsync();
 
                     var departamento = departamentos.FirstOrDefault(x =>
-                        x.DEPTO == movimiento.NumeroDepartamento.Value);
+                        x.IdDepartamento == movimiento.NumeroDepartamento.Value);
 
                     if (departamento != null) {
                         MostrarDescripcion(
                             txtDescripcionDepartamento,
-                            departamento.DESCRIP);
+                            departamento.Descripcion);
                     }
                 }
 

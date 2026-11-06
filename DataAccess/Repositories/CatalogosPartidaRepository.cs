@@ -20,7 +20,7 @@ namespace Jaeger.Contable.DataAccess.Repositories {
             try {
                 return (
                     await _context.Db.Queryable<DeptoEntity>().OrderBy(x => x.IdDepto, OrderByType.Asc).ToListAsync())
-                    .Select(x => new Departamento { DEPTO = x.IdDepto, DESCRIP = x.Descripcion }).ToList();
+                    .Select(x => new Departamento { IdDepartamento = x.IdDepto, Descripcion = x.Descripcion }).ToList();
             } catch (SqlSugarException ex) {
                 throw new InvalidOperationException("Error al consultar DEPTOS.", ex);
             }
@@ -62,12 +62,12 @@ namespace Jaeger.Contable.DataAccess.Repositories {
         }
 
         public async Task CrearDepartamentoAsync(Departamento item) {
-            try { await _context.Db.Insertable(new DeptoEntity { IdDepto = item.DEPTO, Descripcion = item.DESCRIP }).ExecuteCommandAsync(); } catch (SqlSugarException ex) {
+            try { await _context.Db.Insertable(new DeptoEntity { IdDepto = item.IdDepartamento, Descripcion = item.Descripcion }).ExecuteCommandAsync(); } catch (SqlSugarException ex) {
                 throw new InvalidOperationException("No fue posible crear el departamento.", ex);
             }
         }
         public async Task ActualizarDepartamentoAsync(Departamento item) {
-            try { await _context.Db.Updateable(new DeptoEntity { IdDepto = item.DEPTO, Descripcion = item.DESCRIP }).Where(x => x.IdDepto == item.DEPTO).ExecuteCommandAsync(); } catch (SqlSugarException ex) {
+            try { await _context.Db.Updateable(new DeptoEntity { IdDepto = item.IdDepartamento, Descripcion = item.Descripcion }).Where(x => x.IdDepto == item.IdDepartamento).ExecuteCommandAsync(); } catch (SqlSugarException ex) {
                 throw new InvalidOperationException("No fue posible actualizar el departamento.", ex);
             }
         }
