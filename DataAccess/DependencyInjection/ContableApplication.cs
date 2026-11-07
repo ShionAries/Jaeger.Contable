@@ -23,7 +23,7 @@ namespace Jaeger.Contable.DataAccess.DependencyInjection {
         public IRangoService RangoService { get; private set; }
         public IReversionPolizaService ReversionPolizaService { get; private set; }
         public IMonedaService MonedaService { get; private set; }
-        public ITipoActivoService TipoActivoService { get; private set; }
+        public IActivoFijoTipoService TipoActivoService { get; private set; }
         public IActivoFijoService ActivoFijoService { get; private set; }
         public IActivoFijoHistoricoService ActivoFijoHistoricoService { get; private set; }
         public IDepreciacionActivoService DepreciacionActivoService { get; private set; }
@@ -59,7 +59,7 @@ namespace Jaeger.Contable.DataAccess.DependencyInjection {
             var tipoPolizaRepository = new TipoPolizaRepository(context);
             var conceptoRepository = new ConceptoRepository(context);
             var monedaRepository = new MonedaRepository(context);
-            var tipoActivoRepository = new TipoActivoRepository(context);
+            var tipoActivoRepository = new ActivoFijoTipoRepository(context);
             var activoFijoRepository = new ActivoFijoRepository(context, tableResolver);
             var activoFijoHistoricoRepository = new ActivoFijoHistoricoRepository(context);
             var folioRepository = new FolioContableRepository(context);
@@ -78,7 +78,7 @@ namespace Jaeger.Contable.DataAccess.DependencyInjection {
             RangoService = new RangoService(rangoRepository);
             ConceptoService = new ConceptoService(conceptoRepository);
             MonedaService = new MonedaService(monedaRepository);
-            TipoActivoService = new TipoActivoService(tipoActivoRepository);
+            TipoActivoService = new ActivoFijoTipoService(tipoActivoRepository);
             ActivoFijoService = new ActivoFijoService(activoFijoRepository);
             ActivoFijoHistoricoService = new ActivoFijoHistoricoService(activoFijoHistoricoRepository);
             TipoPolizaService = new TipoPolizaService(tipoPolizaRepository);

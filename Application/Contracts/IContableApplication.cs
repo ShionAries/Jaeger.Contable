@@ -14,7 +14,7 @@ namespace Jaeger.Contable.Application.Contracts {
         IRangoService RangoService { get; }
         IReversionPolizaService ReversionPolizaService { get; }
         IMonedaService MonedaService { get; }
-        ITipoActivoService TipoActivoService { get; }
+        IActivoFijoTipoService TipoActivoService { get; }
         IActivoFijoService ActivoFijoService { get; }
         IActivoFijoHistoricoService ActivoFijoHistoricoService { get; }
         IDepreciacionActivoService DepreciacionActivoService { get; }

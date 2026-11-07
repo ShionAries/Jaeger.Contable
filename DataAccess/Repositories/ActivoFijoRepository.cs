@@ -110,7 +110,7 @@ namespace Jaeger.Contable.DataAccess.Repositories {
 
         public async Task<bool> ExisteTipoAsync(short tipo) {
             try {
-                return await _context.Db.Queryable<TipActivoEntity>().AnyAsync(x => x.CLAVE == tipo);
+                return await _context.Db.Queryable<ActivoFijoTipoEntity>().AnyAsync(x => x.CLAVE == tipo);
             } catch (SqlSugarException ex) {
                 throw new InvalidOperationException("Error al validar el tipo de activo.", ex);
             }

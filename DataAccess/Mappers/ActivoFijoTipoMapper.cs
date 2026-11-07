@@ -2,9 +2,9 @@
 using Jaeger.Contable.Domain.Entities;
 
 namespace Jaeger.Contable.DataAccess.Mappers {
-    internal static class TipoActivoMapper {
-        public static TipoActivo Map(TipActivoEntity x) {
-            return new TipoActivo {
+    internal static class ActivoFijoTipoMapper {
+        public static ActivoFijoTipo Map(ActivoFijoTipoEntity x) {
+            return new ActivoFijoTipo {
                 Clave = x.CLAVE,
                 Descripcion = x.DESCRIP,
                 DepresiacionNormal = x.DEDNORMAL,
@@ -20,8 +20,8 @@ namespace Jaeger.Contable.DataAccess.Mappers {
             };
         }
 
-        public static TipActivoEntity ToEntity(TipoActivo x) {
-            return new TipActivoEntity {
+        public static ActivoFijoTipoEntity ToEntity(ActivoFijoTipo x) {
+            return new ActivoFijoTipoEntity {
                 CLAVE = x.Clave,
                 DESCRIP = x.Descripcion,
                 DEDNORMAL = x.DepresiacionNormal,

@@ -14,13 +14,13 @@ namespace Jaeger.Contable.WinForms.Forms {
     /// </summary>
     public partial class ActivoFijoCatalogoForm : Form {
         private readonly IActivoFijoService _service;
-        private readonly ITipoActivoService _tipoActivoService;
+        private readonly IActivoFijoTipoService _tipoActivoService;
         private List<ActivoFijo> _datos = new List<ActivoFijo>();
-        private List<TipoActivo> _tipos = new List<TipoActivo>();
+        private List<ActivoFijoTipo> _tipos = new List<ActivoFijoTipo>();
         private bool _nuevo;
         private bool _cargandoTipo;
 
-        public ActivoFijoCatalogoForm(IActivoFijoService service, ITipoActivoService tipoActivoService) {
+        public ActivoFijoCatalogoForm(IActivoFijoService service, IActivoFijoTipoService tipoActivoService) {
             _service = service ?? throw new ArgumentNullException(nameof(service));
             _tipoActivoService = tipoActivoService ?? throw new ArgumentNullException(nameof(tipoActivoService));
             InitializeComponent();
@@ -107,7 +107,7 @@ namespace Jaeger.Contable.WinForms.Forms {
         }
 
         private async Task CargarTiposAsync() {
-            _tipos = await _tipoActivoService.ObtenerTodosAsync() ?? new List<TipoActivo>();
+            _tipos = await _tipoActivoService.ObtenerTodosAsync() ?? new List<ActivoFijoTipo>();
             cmbTipo.DataSource = null;
             cmbTipo.DisplayMember = "Descripcion";
             cmbTipo.ValueMember = "Clave";
@@ -119,7 +119,7 @@ namespace Jaeger.Contable.WinForms.Forms {
             if (_cargandoTipo || cmbTipo.SelectedItem == null)
                 return;
 
-            var tipo = cmbTipo.SelectedItem as TipoActivo;
+            var tipo = cmbTipo.SelectedItem as ActivoFijoTipo;
             if (tipo == null)
                 return;
 
@@ -300,7 +300,7 @@ namespace Jaeger.Contable.WinForms.Forms {
         private ActivoFijo Modelo() {
             return new ActivoFijo {
                 Clave = txtClave.Text,
-                Tipo = cmbTipo.SelectedItem is TipoActivo ? (short?)((TipoActivo)cmbTipo.SelectedItem).Clave : null,
+                Tipo = cmbTipo.SelectedItem is ActivoFijoTipo ? (short?)((ActivoFijoTipo)cmbTipo.SelectedItem).Clave : null,
                 Descripcion = txtDescripcion.Text,
                 Localizacion = txtLocaliz.Text,
                 MontoOriginal = Convert.ToDouble(numMontoOrig.Value),

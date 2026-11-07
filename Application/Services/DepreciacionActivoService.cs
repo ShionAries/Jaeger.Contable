@@ -9,15 +9,15 @@ namespace Jaeger.Contable.Application.Services {
     /// <summary>Valida y ejecuta la depreciación mensual sobre las tablas del ejercicio indicado.</summary>
     public sealed class DepreciacionActivoService : IDepreciacionActivoService {
         private readonly IActivoFijoRepository _activoRepository;
-        private readonly ITipoActivoService _tipoActivoService;
-        private readonly ITipoActivoRepository _tipoActivoRepository;
+        private readonly IActivoFijoTipoService _tipoActivoService;
+        private readonly IActivoFijoTipoRepository _tipoActivoRepository;
         private readonly IDepreciacionActivoRepository _depreciacionRepository;
         private readonly IPeriodoContableRepository _periodoRepository;
 
         public DepreciacionActivoService(
             IActivoFijoRepository activoRepository,
-            ITipoActivoService tipoActivoService,
-            ITipoActivoRepository tipoActivoRepository,
+            IActivoFijoTipoService tipoActivoService,
+            IActivoFijoTipoRepository tipoActivoRepository,
             IDepreciacionActivoRepository depreciacionRepository,
             IPeriodoContableRepository periodoRepository) {
             _activoRepository = activoRepository ?? throw new ArgumentNullException(nameof(activoRepository));
@@ -54,13 +54,13 @@ namespace Jaeger.Contable.Application.Services {
             DateTime fechaCorte = FechaFinPeriodo(ejercicio, periodo);
             List<ActivoFijo> activos = await _activoRepository.ObtenerTodosAsync(ejercicio);
             var movimientos = new List<DepreciacionMovimiento>();
-            var tipos = new Dictionary<short, TipoActivo>();
+            var tipos = new Dictionary<short, ActivoFijoTipo>();
 
             foreach (ActivoFijo activo in activos) {
                 if (!DebeDepreciarse(activo, fechaCorte)) continue;
                 if (!activo.Tipo.HasValue) continue;
 
-                TipoActivo tipo;
+                ActivoFijoTipo tipo;
                 if (!tipos.TryGetValue(activo.Tipo.Value, out tipo)) {
                     tipo = await _tipoActivoService.ObtenerAsync(activo.Tipo.Value);
                     if (tipo == null) throw new InvalidOperationException("El tipo de activo " + activo.Tipo.Value + " no existe en TIPACTIV.");
@@ -127,7 +127,7 @@ namespace Jaeger.Contable.Application.Services {
         private async Task<ResultadoValidacionDepreciacion> ValidarInternoAsync(ActivoFijo activo) {
             var observaciones = new List<string>();
             if (activo.Tipo.HasValue) {
-                TipoActivo tipo = await _tipoActivoService.ObtenerAsync(activo.Tipo.Value);
+                ActivoFijoTipo tipo = await _tipoActivoService.ObtenerAsync(activo.Tipo.Value);
                 if (tipo == null) observaciones.Add("El tipo de activo no existe en TIPACTIV.");
                 else {
                     if (string.IsNullOrWhiteSpace(tipo.MetodoDepresiacion)) observaciones.Add("TIPACTIV no tiene METODODEP configurado.");
@@ -151,14 +151,14 @@ namespace Jaeger.Contable.Application.Services {
             return new ResultadoValidacionDepreciacion(activo.Clave, observaciones.Count == 0, observaciones);
         }
 
-        private async Task ValidarReferenciasTipoAsync(TipoActivo tipo, IList<string> observaciones) {
+        private async Task ValidarReferenciasTipoAsync(ActivoFijoTipo tipo, IList<string> observaciones) {
             string[] cuentas = { tipo.CuentaActivo, tipo.CuentaDepresiacion, tipo.CuentaGastos, tipo.CuentaGanancias };
             string[] nombres = { "CTAAACTV", "CTADEPRE", "CTAGASTOS", "CTAPERGAN" };
             for (int i = 0; i < cuentas.Length; i++) if (!string.IsNullOrWhiteSpace(cuentas[i]) && !await _tipoActivoRepository.ExisteCuentaAsync(cuentas[i].Trim())) observaciones.Add(nombres[i] + " referencia una cuenta inexistente: " + cuentas[i].Trim() + ".");
             if (tipo.Moneda.HasValue && !await _tipoActivoRepository.ExisteMonedaAsync(tipo.Moneda.Value)) observaciones.Add("QUEMONEDA referencia una moneda inexistente: " + tipo.Moneda.Value + ".");
         }
 
-        private static void ValidarNumericosTipo(TipoActivo tipo, IList<string> observaciones) {
+        private static void ValidarNumericosTipo(ActivoFijoTipo tipo, IList<string> observaciones) {
             ValidarNumerico(tipo.DepresiacionNormal, "TIPACTIV.DEDNORMAL", observaciones); ValidarNumerico(tipo.DepresiacionInmediata, "TIPACTIV.DEDIMED", observaciones); ValidarNumerico(tipo.MaximoDepresiacion, "TIPACTIV.MAXDED", observaciones); ValidarNumerico(tipo.DepresiacionProyectada, "TIPACTIV.DEPPROY", observaciones);
         }
 

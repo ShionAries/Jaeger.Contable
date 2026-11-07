@@ -90,7 +90,7 @@
     <Compile Include="DataAccess\Mappers\ConceptoMapper.cs" />
     <Compile Include="DataAccess\Mappers\MonedaMapper.cs" />
     <Compile Include="DataAccess\Mappers\PolizaMapper.cs" />
-    <Compile Include="DataAccess\Mappers\TipoActivoMapper.cs" />
+    <Compile Include="DataAccess\Mappers\ActivoFijoTipoMapper.cs" />
     <Compile Include="DataAccess\Mappers\TipoPolizaMapper.cs" />
     <Compile Include="DataAccess\Repositories\BalanzaComprobacionRepository.cs" />
     <Compile Include="Domain\Models\BalanzaComprobacion.cs" />
@@ -170,7 +170,7 @@
     <Compile Include="Application\Contracts\IPolizaContableValidator.cs" />
     <Compile Include="Application\Contracts\IRangoService.cs" />
     <Compile Include="Application\Contracts\IReversionPolizaService.cs" />
-    <Compile Include="Application\Contracts\ITipoActivoService.cs" />
+    <Compile Include="Application\Contracts\IActivoFijoTipoService.cs" />
     <Compile Include="Application\Contracts\ITipoPolizaService.cs" />
     <Compile Include="Application\Contracts\IValidadorJerarquiaCuenta.cs" />
     <Compile Include="Application\Services\MonedaService.cs" />
@@ -182,7 +182,7 @@
     <Compile Include="Application\Services\PolizaContableValidator.cs" />
     <Compile Include="Application\Services\RangoService.cs" />
     <Compile Include="Application\Services\ReversionPolizaService.cs" />
-    <Compile Include="Application\Services\TipoActivoService.cs" />
+    <Compile Include="Application\Services\ActivoFijoTipoService.cs" />
     <Compile Include="Application\Services\TipoPolizaService.cs" />
     <Compile Include="Application\Services\ValidadorJerarquiaCuenta.cs" />
     <Compile Include="DataAccess\Configuration\AppConfigConnectionStringProvider.cs" />
@@ -206,7 +206,7 @@
     <Compile Include="DataAccess\Entities\RubroContableEntity.cs" />
     <Compile Include="DataAccess\Entities\SaldosEntity.cs" />
     <Compile Include="DataAccess\Entities\SaldosDp25Entity.cs" />
-    <Compile Include="DataAccess\Entities\TipActivoEntity.cs" />
+    <Compile Include="DataAccess\Entities\ActivoFijoTipoEntity.cs" />
     <Compile Include="DataAccess\Entities\TiposPolizaEntity.cs" />
     <Compile Include="DataAccess\Mappers\CuentaMapper.cs" />
     <Compile Include="DataAccess\Repositories\ActivoFijoHistoricoRepository.cs" />
@@ -232,7 +232,7 @@
     <Compile Include="DataAccess\Repositories\PolizaContableRepository.cs" />
     <Compile Include="DataAccess\Repositories\RubroContableRepository.cs" />
     <Compile Include="DataAccess\Repositories\ReversionPolizaRepository.cs" />
-    <Compile Include="DataAccess\Repositories\TipoActivoRepository.cs" />
+    <Compile Include="DataAccess\Repositories\ActivoFijoTipoRepository.cs" />
     <Compile Include="DataAccess\Repositories\TipoPolizaRepository.cs" />
     <Compile Include="Domain\Interfaces\Repositories\IActivoFijoHistoricoRepository.cs" />
     <Compile Include="Domain\Interfaces\Repositories\IActivoFijoRepository.cs" />
@@ -258,7 +258,7 @@
     <Compile Include="Domain\Interfaces\Repositories\IPolizaContableRepository.cs" />
     <Compile Include="Domain\Interfaces\Repositories\IRangoRepository.cs" />
     <Compile Include="Domain\Interfaces\Repositories\IReversionPolizaRepository.cs" />
-    <Compile Include="Domain\Interfaces\Repositories\ITipoActivoRepository.cs" />
+    <Compile Include="Domain\Interfaces\Repositories\IActivoFijoTipoRepository.cs" />
     <Compile Include="Domain\Interfaces\Repositories\ITipoPolizaRepository.cs" />
     <Compile Include="Domain\Models\ActivoFijo.cs" />
     <Compile Include="Domain\Models\AcumuladoCuenta.cs" />
@@ -301,7 +301,7 @@
     <Compile Include="Domain\Models\ResultadoValidacionCuenta.cs" />
     <Compile Include="Domain\Models\ResultadoValidacionDepreciacion.cs" />
     <Compile Include="Domain\Models\ResultadoValidacionMovimiento.cs" />
-    <Compile Include="Domain\Models\TipoActivo.cs" />
+    <Compile Include="Domain\Models\ActivoFijoTipo.cs" />
     <Compile Include="Domain\Models\TipoPoliza.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -395,11 +395,11 @@
     <Compile Include="WinForms\Forms\ConceptoSelectorPolizaForm.Designer.cs">
       <DependentUpon>ConceptoSelectorPolizaForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="WinForms\Forms\TipoActivoCatalogoForm.cs">
+    <Compile Include="WinForms\Forms\ActivoFijoTipoCatalogoForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="WinForms\Forms\TipoActivoCatalogoForm.Designer.cs">
-      <DependentUpon>TipoActivoCatalogoForm.cs</DependentUpon>
+    <Compile Include="WinForms\Forms\ActivoFijoTipoCatalogoForm.Designer.cs">
+      <DependentUpon>ActivoFijoTipoCatalogoForm.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForms\Forms\TipoPolizaForm.cs">
       <SubType>Form</SubType>
@@ -494,8 +494,8 @@
     <EmbeddedResource Include="WinForms\Forms\ConceptoSelectorPolizaForm.resx">
       <DependentUpon>ConceptoSelectorPolizaForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\Forms\TipoActivoCatalogoForm.resx">
-      <DependentUpon>TipoActivoCatalogoForm.cs</DependentUpon>
+    <EmbeddedResource Include="WinForms\Forms\ActivoFijoTipoCatalogoForm.resx">
+      <DependentUpon>ActivoFijoTipoCatalogoForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\Forms\TipoPolizaForm.resx">
       <DependentUpon>TipoPolizaForm.cs</DependentUpon>

@@ -99,7 +99,7 @@ namespace Jaeger.Contable {
             this.mTiposActivo.Click += (s, e) => {
                 if (!EnsureAvailable(_application.TipoActivoService, this, "El servicio de tipos de activo no está disponible.", "Tipos de activo"))
                     return;
-                using (var form = new TipoActivoCatalogoForm(_application.TipoActivoService))
+                using (var form = new ActivoFijoTipoCatalogoForm(_application.TipoActivoService))
                     form.ShowDialog(this);
             };
 

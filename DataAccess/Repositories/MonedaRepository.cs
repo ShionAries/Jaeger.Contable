@@ -78,7 +78,7 @@ namespace Jaeger.Contable.DataAccess.Repositories {
 
         public async Task<bool> ExisteEnTiposActivoAsync(short moneda) {
             try {
-                return await _context.Db.Queryable<TipActivoEntity>()
+                return await _context.Db.Queryable<ActivoFijoTipoEntity>()
                     .AnyAsync(x => x.QUEMONEDA == moneda);
             } catch (SqlSugarException ex) {
                 throw new InvalidOperationException("Error al validar el uso de la moneda en TIPACTIV.", ex);

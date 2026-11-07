@@ -1,60 +1,76 @@
-namespace Jaeger.Contable.Domain.Entities {
+using SqlSugar;
+
+namespace Jaeger.Contable.DataAccess.Entities {
     /// <summary>
-    /// Representa un tipo de activo del catálogo TIPACTIV.
+    /// Modelo de persistencia de la tabla TIPACTIV.
     /// </summary>
-    public sealed class TipoActivo {
+    [SugarTable("TIPACTIV")]
+    public sealed class ActivoFijoTipoEntity {
         /// <summary>
         /// Clave que se asigna automáticamente al tipo de activo para identificarlo.
         /// </summary>
-        public short Clave { get; set; }
+        [SugarColumn(IsPrimaryKey = true)]
+        public short CLAVE { get; set; }
 
         /// <summary>
         /// Nombre del tipo de activo
         /// </summary>
-        public string Descripcion { get; set; }
+        [SugarColumn(ColumnName = "DESCRIP", Length = 20)]
+        public string DESCRIP { get; set; }
 
         /// <summary>
         /// Tasa depreciación contable.- Porcentaje de deducción contable anual para el tipo de activo.
         /// </summary>
-        public double? DepresiacionNormal { get; set; }
+        public double? DEDNORMAL { get; set; }
 
         /// <summary>
         /// Tasa depreciación fiscal.- Porcentaje de deducción fiscal anual para el tipo de activo.
         /// </summary>
-        public double? DepresiacionInmediata { get; set; }
+        public double? DEDIMED { get; set; }
 
         /// <summary>
         /// Máximo deducible.- Cantidad máxima que se puede deducir el activo.
         /// </summary>
-        public double? MaximoDepresiacion { get; set; }
+        [SugarColumn(ColumnName = "MAXDED")]
+        public double? MAXDED { get; set; }
 
         /// <summary>
         /// Método de depreciación.-  Tipo de depreciación que se aplica al tipo de activo.
         /// </summary>
-        public string MetodoDepresiacion { get; set; }
+        [SugarColumn(ColumnName = "METODODEP", Length = 1)]
+        public string METODODEP { get; set; }
 
         /// <summary>
         /// Porcentaje de depreciación para el  tipo de activo
         /// </summary>
-        public double? DepresiacionProyectada { get; set; }
+        [SugarColumn(ColumnName = "DEPPROY")]
+        public double? DEPPROY { get; set; }
 
         /// <summary>
         /// Anota o elige la cuenta contable que se afectará por la compra de este tipo de activo.
         /// </summary>
-        public string CuentaActivo { get; set; }
+        [SugarColumn(ColumnName = "CTAAACTV", Length = 21)]
+        public string CTAAACTV { get; set; }
 
         /// <summary>
         /// Anota o elige la cuenta contable que se afectará al depreciar activos de este tipo
         /// </summary>
-        public string CuentaDepresiacion { get; set; }
+        [SugarColumn(ColumnName = "CTADEPRE", Length = 21)]
+        public string CTADEPRE { get; set; }
 
         /// <summary>
         /// Anota o elige la cuenta contable que se afectará con los gastos de depreciación de este tipo de activo
         /// </summary>
-        public string CuentaGastos { get; set; }
+        [SugarColumn(ColumnName = "CTAGASTOS", Length = 21)]
+        public string CTAGASTOS { get; set; }
 
-        public string CuentaGanancias { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        [SugarColumn(ColumnName = "CTAPERGAN", Length = 21)]
+        public string CTAPERGAN { get; set; }
 
-        public short? Moneda { get; set; }
+        [SugarColumn(ColumnName = "QUEMONEDA")]
+        public short? QUEMONEDA { get; set; }
     }
 }

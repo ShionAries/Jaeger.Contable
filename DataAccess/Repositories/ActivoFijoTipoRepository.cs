@@ -12,45 +12,45 @@ namespace Jaeger.Contable.DataAccess.Repositories {
     /// <summary>
     /// Gestiona la persistencia del catálogo TIPACTIV.
     /// </summary>
-    public sealed class TipoActivoRepository : ITipoActivoRepository {
+    public sealed class ActivoFijoTipoRepository : IActivoFijoTipoRepository {
         private readonly MariaDbContext _context;
 
-        public TipoActivoRepository(MariaDbContext context) {
+        public ActivoFijoTipoRepository(MariaDbContext context) {
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public async Task<List<TipoActivo>> ObtenerTodosAsync() {
+        public async Task<List<ActivoFijoTipo>> ObtenerTodosAsync() {
             try {
-                return (await _context.Db.Queryable<TipActivoEntity>()
+                return (await _context.Db.Queryable<ActivoFijoTipoEntity>()
                     .OrderBy(x => x.CLAVE, OrderByType.Asc)
-                    .ToListAsync()).Select(Mappers.TipoActivoMapper.Map).ToList();
+                    .ToListAsync()).Select(Mappers.ActivoFijoTipoMapper.Map).ToList();
             } catch (SqlSugarException ex) {
                 throw new InvalidOperationException("Error al consultar TIPACTIV.", ex);
             }
         }
 
-        public async Task<TipoActivo> ObtenerAsync(short clave) {
+        public async Task<ActivoFijoTipo> ObtenerAsync(short clave) {
             try {
-                var entity = await _context.Db.Queryable<TipActivoEntity>()
+                var entity = await _context.Db.Queryable<ActivoFijoTipoEntity>()
                     .Where(x => x.CLAVE == clave)
                     .FirstAsync();
-                return entity == null ? null :Mappers.TipoActivoMapper. Map(entity);
+                return entity == null ? null :Mappers.ActivoFijoTipoMapper. Map(entity);
             } catch (SqlSugarException ex) {
                 throw new InvalidOperationException("Error al consultar el tipo de activo.", ex);
             }
         }
 
-        public async Task CrearAsync(TipoActivo tipo) {
+        public async Task CrearAsync(ActivoFijoTipo tipo) {
             try {
-                await _context.Db.Insertable(Mappers.TipoActivoMapper.ToEntity(tipo)).ExecuteCommandAsync();
+                await _context.Db.Insertable(Mappers.ActivoFijoTipoMapper.ToEntity(tipo)).ExecuteCommandAsync();
             } catch (SqlSugarException ex) {
                 throw new InvalidOperationException("No fue posible crear el tipo de activo. Es posible que la clave ya exista.", ex);
             }
         }
 
-        public async Task ActualizarAsync(TipoActivo tipo) {
+        public async Task ActualizarAsync(ActivoFijoTipo tipo) {
             try {
-                int afectados = await _context.Db.Updateable(Mappers.TipoActivoMapper.ToEntity(tipo))
+                int afectados = await _context.Db.Updateable(Mappers.ActivoFijoTipoMapper.ToEntity(tipo))
                     .WhereColumns(x => x.CLAVE)
                     .ExecuteCommandAsync();
                 if (afectados == 0)
@@ -62,7 +62,7 @@ namespace Jaeger.Contable.DataAccess.Repositories {
 
         public async Task EliminarAsync(short clave) {
             try {
-                int afectados = await _context.Db.Deleteable<TipActivoEntity>()
+                int afectados = await _context.Db.Deleteable<ActivoFijoTipoEntity>()
                     .Where(x => x.CLAVE == clave)
                     .ExecuteCommandAsync();
                 if (afectados == 0)

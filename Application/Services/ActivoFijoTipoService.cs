@@ -8,23 +8,23 @@ namespace Jaeger.Contable.Application.Services {
     /// <summary>
     /// Aplica las reglas de aplicación del catálogo TIPACTIV.
     /// </summary>
-    public sealed class TipoActivoService : Contracts.ITipoActivoService {
-        private readonly ITipoActivoRepository _repository;
+    public sealed class ActivoFijoTipoService : Contracts.IActivoFijoTipoService {
+        private readonly IActivoFijoTipoRepository _repository;
 
-        public TipoActivoService(ITipoActivoRepository repository) {
+        public ActivoFijoTipoService(IActivoFijoTipoRepository repository) {
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         }
 
-        public Task<List<TipoActivo>> ObtenerTodosAsync() {
+        public Task<List<ActivoFijoTipo>> ObtenerTodosAsync() {
             return _repository.ObtenerTodosAsync();
         }
 
-        public Task<TipoActivo> ObtenerAsync(short clave) {
+        public Task<ActivoFijoTipo> ObtenerAsync(short clave) {
             ValidarClave(clave);
             return _repository.ObtenerAsync(clave);
         }
 
-        public async Task CrearAsync(TipoActivo tipo) {
+        public async Task CrearAsync(ActivoFijoTipo tipo) {
             Validar(tipo);
             if (await _repository.ObtenerAsync(tipo.Clave) != null)
                 throw new InvalidOperationException("El tipo de activo ya existe.");
@@ -33,7 +33,7 @@ namespace Jaeger.Contable.Application.Services {
             await _repository.CrearAsync(Normalizar(tipo));
         }
 
-        public async Task ActualizarAsync(TipoActivo tipo) {
+        public async Task ActualizarAsync(ActivoFijoTipo tipo) {
             Validar(tipo);
             if (await _repository.ObtenerAsync(tipo.Clave) == null)
                 throw new InvalidOperationException("El tipo de activo no existe.");
@@ -53,7 +53,7 @@ namespace Jaeger.Contable.Application.Services {
             await _repository.EliminarAsync(clave);
         }
 
-        private async Task ValidarReferenciasAsync(TipoActivo tipo) {
+        private async Task ValidarReferenciasAsync(ActivoFijoTipo tipo) {
             string[] cuentas = {
                 tipo.CuentaActivo,
                 tipo.CuentaDepresiacion,
@@ -73,8 +73,8 @@ namespace Jaeger.Contable.Application.Services {
                 throw new InvalidOperationException("La moneda indicada no existe en MONEDAS.");
         }
 
-        private static TipoActivo Normalizar(TipoActivo tipo) {
-            return new TipoActivo {
+        private static ActivoFijoTipo Normalizar(ActivoFijoTipo tipo) {
+            return new ActivoFijoTipo {
                 Clave = tipo.Clave,
                 Descripcion = NormalizarTexto(tipo.Descripcion),
                 DepresiacionNormal = tipo.DepresiacionNormal,
@@ -90,7 +90,7 @@ namespace Jaeger.Contable.Application.Services {
             };
         }
 
-        private static void Validar(TipoActivo tipo) {
+        private static void Validar(ActivoFijoTipo tipo) {
             if (tipo == null)
                 throw new ArgumentNullException(nameof(tipo));
 
