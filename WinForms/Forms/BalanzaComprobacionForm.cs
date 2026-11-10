@@ -2,6 +2,7 @@ using System;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using Jaeger.Contable.Application.Contracts;
 using Jaeger.Contable.Domain.Entities;
@@ -14,6 +15,7 @@ namespace Jaeger.Contable.WinForms.Forms {
         private readonly NumericUpDown _periodoInicial;
         private readonly NumericUpDown _periodoFinal;
         private readonly CheckBox _incluirSinMovimientos;
+        private readonly ComboBox _nivelPresentacion;
         private readonly Button _consultar;
         private readonly DataGridView _grid;
         private readonly Label _totales;
@@ -48,6 +50,17 @@ namespace Jaeger.Contable.WinForms.Forms {
                 Margin = new Padding(14, 7, 4, 0)
             };
             filtros.Controls.Add(_incluirSinMovimientos);
+            filtros.Controls.Add(new Label { Text = "Presentación:", AutoSize = true, Margin = new Padding(12, 8, 2, 0) });
+            _nivelPresentacion = new ComboBox {
+                DropDownStyle = ComboBoxStyle.DropDownList,
+                Width = 125,
+                Margin = new Padding(2, 2, 2, 2)
+            };
+            _nivelPresentacion.Items.Add("Todos los niveles");
+            for (short nivel = 1; nivel <= 9; nivel++)
+                _nivelPresentacion.Items.Add("Hasta nivel " + nivel);
+            _nivelPresentacion.SelectedIndex = 0;
+            filtros.Controls.Add(_nivelPresentacion);
             _consultar = new Button { Text = "Consultar", Width = 95, Height = 27, Margin = new Padding(12, 2, 2, 2) };
             _consultar.Click += Consultar_Click;
             filtros.Controls.Add(_consultar);
@@ -82,6 +95,7 @@ namespace Jaeger.Contable.WinForms.Forms {
             AgregarColumna("NumeroCuenta", "Cuenta", 150, DataGridViewContentAlignment.MiddleLeft);
             AgregarColumna("NombreCuenta", "Nombre", 220, DataGridViewContentAlignment.MiddleLeft);
             AgregarColumna("TipoCuenta", "Tipo", 50, DataGridViewContentAlignment.MiddleCenter);
+            AgregarColumna("Nivel", "Nivel", 55, DataGridViewContentAlignment.MiddleCenter);
             AgregarColumna("SaldoInicialDeudor", "Saldo inicial deudor", 115, DataGridViewContentAlignment.MiddleRight, true);
             AgregarColumna("SaldoInicialAcreedor", "Saldo inicial acreedor", 120, DataGridViewContentAlignment.MiddleRight, true);
             AgregarColumna("Cargos", "Cargos", 110, DataGridViewContentAlignment.MiddleRight, true);
@@ -121,7 +135,8 @@ namespace Jaeger.Contable.WinForms.Forms {
                     Ejercicio = Convert.ToInt16(_ejercicio.Value),
                     PeriodoInicial = Convert.ToInt16(_periodoInicial.Value),
                     PeriodoFinal = Convert.ToInt16(_periodoFinal.Value),
-                    IncluirCuentasSinMovimientos = _incluirSinMovimientos.Checked
+                    IncluirCuentasSinMovimientos = _incluirSinMovimientos.Checked,
+                    NivelPresentacion = Convert.ToInt16(_nivelPresentacion.SelectedIndex)
                 };
                 BalanzaComprobacion resultado = await _service.GenerarAsync(request);
                 _grid.DataSource = resultado.Cuentas.ToList();
@@ -130,13 +145,15 @@ namespace Jaeger.Contable.WinForms.Forms {
                     resultado.TotalSaldoInicialDeudor, resultado.TotalSaldoInicialAcreedor,
                     resultado.TotalCargos, resultado.TotalAbonos,
                     resultado.TotalSaldoFinalDeudor, resultado.TotalSaldoFinalAcreedor);
-                Text = string.Format("Balanza de comprobación {0} | períodos {1:00} a {2:00} | {3:N0} cuentas",
-                    resultado.Ejercicio, resultado.PeriodoInicial, resultado.PeriodoFinal, resultado.Cuentas.Count);
-            }
-            catch (Exception ex) {
+                var nivelTexto = request.NivelPresentacion == 0
+                    ? "todos los niveles"
+                    : "hasta nivel " + request.NivelPresentacion;
+                Text = string.Format("Balanza de comprobación {0} | períodos {1:00} a {2:00} | {3} | {4:N0} cuentas",
+                    resultado.Ejercicio, resultado.PeriodoInicial, resultado.PeriodoFinal,
+                    nivelTexto, resultado.Cuentas.Count);
+            } catch (Exception ex) {
                 MessageBox.Show(this, ex.Message, "Balanza de comprobación", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally {
+            } finally {
                 Cursor = Cursors.Default;
                 _consultar.Enabled = true;
             }

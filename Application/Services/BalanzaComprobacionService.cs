@@ -7,9 +7,7 @@ using Jaeger.Contable.Domain.Entities;
 using Jaeger.Contable.Domain.Interfaces.Repositories;
 
 namespace Jaeger.Contable.Application.Services {
-    /// <summary>
-    /// Construye la balanza de comprobación a partir de SALDOSxx y CUENTAS25.
-    /// </summary>
+    /// <summary>Construye la balanza de comprobación a partir de SALDOSxx y CUENTAS25.</summary>
     public sealed class BalanzaComprobacionService : IBalanzaComprobacionService {
         private readonly IBalanzaComprobacionRepository _balanzaRepository;
         private readonly ICuentaRepository _cuentaRepository;
@@ -29,7 +27,7 @@ namespace Jaeger.Contable.Application.Services {
 
             var saldos = (await saldosTask).Where(x => !string.IsNullOrWhiteSpace(x.NumeroCuenta))
                 .ToDictionary(x => Normalizar(x.NumeroCuenta), StringComparer.Ordinal);
-            var cuentas = (await cuentasTask).Where(x => x != null && x.CtaPapa != "-1" && !string.IsNullOrWhiteSpace(x.NumCta))
+            var cuentas = (await cuentasTask).Where(x => x != null && !string.IsNullOrWhiteSpace(x.NumCta))
                 .OrderBy(x => Normalizar(x.NumCta), StringComparer.Ordinal).ToList();
 
             var resultado = new BalanzaComprobacion {
@@ -50,8 +48,81 @@ namespace Jaeger.Contable.Application.Services {
                 resultado.Cuentas.Add(item);
             }
 
+            if (request.NivelPresentacion > 0)
+                AplicarNivelPresentacion(resultado, cuentas, request.NivelPresentacion);
+
             CalcularTotales(resultado);
             return resultado;
+        }
+
+        private static void AplicarNivelPresentacion(
+            BalanzaComprobacion resultado, IList<CuentaContable> cuentas, short nivelPresentacion) {
+            var indice = cuentas
+                .GroupBy(x => Normalizar(x.NumCta), StringComparer.Ordinal)
+                .ToDictionary(x => x.Key, x => x.First(), StringComparer.Ordinal);
+            var acumulados = new Dictionary<string, BalanzaComprobacionItem>(StringComparer.Ordinal);
+
+            foreach (var item in resultado.Cuentas) {
+                CuentaContable cuenta;
+                if (!indice.TryGetValue(Normalizar(item.NumeroCuenta), out cuenta))
+                    continue;
+
+                var destino = ObtenerCuentaDestino(cuenta, indice, nivelPresentacion);
+                var clave = Normalizar(destino.NumCta);
+                BalanzaComprobacionItem acumulado;
+                if (!acumulados.TryGetValue(clave, out acumulado)) {
+                    acumulado = new BalanzaComprobacionItem {
+                        NumeroCuenta = destino.NumCta,
+                        NombreCuenta = destino.Nombre,
+                        TipoCuenta = destino.Tipo,
+                        Nivel = destino.Nivel
+                    };
+                    acumulados.Add(clave, acumulado);
+                }
+
+                acumulado.SaldoInicialDeudor += item.SaldoInicialDeudor;
+                acumulado.SaldoInicialAcreedor += item.SaldoInicialAcreedor;
+                acumulado.Cargos += item.Cargos;
+                acumulado.Abonos += item.Abonos;
+                acumulado.SaldoFinalDeudor += item.SaldoFinalDeudor;
+                acumulado.SaldoFinalAcreedor += item.SaldoFinalAcreedor;
+                acumulado.TieneMovimientos = acumulado.TieneMovimientos || item.TieneMovimientos;
+            }
+
+            resultado.Cuentas = acumulados.Values
+                .OrderBy(x => Normalizar(x.NumeroCuenta), StringComparer.Ordinal)
+                .ToList();
+
+            foreach (var item in resultado.Cuentas) {
+                item.SaldoInicialDeudor = Redondear(item.SaldoInicialDeudor);
+                item.SaldoInicialAcreedor = Redondear(item.SaldoInicialAcreedor);
+                item.Cargos = Redondear(item.Cargos);
+                item.Abonos = Redondear(item.Abonos);
+                item.SaldoFinalDeudor = Redondear(item.SaldoFinalDeudor);
+                item.SaldoFinalAcreedor = Redondear(item.SaldoFinalAcreedor);
+            }
+        }
+
+        private static CuentaContable ObtenerCuentaDestino(
+            CuentaContable cuenta, IDictionary<string, CuentaContable> indice, short nivelPresentacion) {
+            var actual = cuenta;
+            var visitadas = new HashSet<string>(StringComparer.Ordinal);
+
+            while (actual.Nivel > nivelPresentacion) {
+                var numeroActual = Normalizar(actual.NumCta);
+                if (!visitadas.Add(numeroActual))
+                    break;
+
+                var numeroPadre = Normalizar(actual.CtaPapa);
+                CuentaContable padre;
+                if (string.IsNullOrEmpty(numeroPadre) || numeroPadre == "-1" ||
+                    !indice.TryGetValue(numeroPadre, out padre) || padre.Nivel >= actual.Nivel)
+                    break;
+
+                actual = padre;
+            }
+
+            return actual;
         }
 
         private static BalanzaComprobacionItem CalcularItem(
@@ -115,6 +186,8 @@ namespace Jaeger.Contable.Application.Services {
                 throw new ArgumentOutOfRangeException(nameof(request.PeriodoInicial));
             if (request.PeriodoFinal < request.PeriodoInicial || request.PeriodoFinal > 14)
                 throw new ArgumentOutOfRangeException(nameof(request.PeriodoFinal));
+            if (request.NivelPresentacion < 0 || request.NivelPresentacion > 9)
+                throw new ArgumentOutOfRangeException(nameof(request.NivelPresentacion));
         }
 
         private static string Normalizar(string numero) {

@@ -22,6 +22,7 @@ namespace Jaeger.Contable.Forms {
             InitializeComponent();
             _cuentaService = cuentaService ?? throw new ArgumentNullException(nameof(cuentaService));
             _motorContableService = motorContableService ?? throw new ArgumentNullException(nameof(motorContableService));
+            this.grdRubros.AutoGenerateColumns = false;
         }
 
         private async void CuentaContableCatalogoForm_Load(object sender, EventArgs e) {

@@ -47,8 +47,7 @@ namespace Jaeger.Contable.DataAccess.Repositories {
                 }
 
                 return resultado;
-            }
-            catch (SqlSugarException ex) {
+            } catch (SqlSugarException ex) {
                 throw new InvalidOperationException(
                     string.Format(CultureInfo.InvariantCulture, "No fue posible consultar los saldos del ejercicio {0}.", ejercicio), ex);
             }

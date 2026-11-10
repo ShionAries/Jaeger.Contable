@@ -5,5 +5,11 @@ namespace Jaeger.Contable.Domain.Entities {
         public short PeriodoInicial { get; set; }
         public short PeriodoFinal { get; set; }
         public bool IncluirCuentasSinMovimientos { get; set; }
+
+        /// <summary>
+        /// Nivel máximo de presentación. Cero conserva el detalle completo.
+        /// Los niveles inferiores se acumulan en su cuenta padre.
+        /// </summary>
+        public short NivelPresentacion { get; set; }
     }
 }

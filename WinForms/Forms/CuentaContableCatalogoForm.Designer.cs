@@ -24,6 +24,7 @@ namespace Jaeger.Contable.Forms {
         /// </summary>
         private void InitializeComponent() {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CuentaContableCatalogoForm));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.ToolBar = new System.Windows.Forms.ToolStrip();
             this.Agregar = new System.Windows.Forms.ToolStripButton();
             this.Editar = new System.Windows.Forms.ToolStripButton();
@@ -32,12 +33,12 @@ namespace Jaeger.Contable.Forms {
             this.btnCerrar = new System.Windows.Forms.ToolStripButton();
             this.Contenedor1 = new System.Windows.Forms.SplitContainer();
             this.grdRubros = new System.Windows.Forms.DataGridView();
-            this.Rango = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DESCRIP = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblTitulo = new System.Windows.Forms.Label();
             this.tvCuentas = new System.Windows.Forms.TreeView();
             this.EstadoStrip = new System.Windows.Forms.StatusStrip();
             this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.Rango = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DESCRIP = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ToolBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Contenedor1)).BeginInit();
             this.Contenedor1.Panel1.SuspendLayout();
@@ -120,8 +121,8 @@ namespace Jaeger.Contable.Forms {
             // 
             // Contenedor1.Panel2
             // 
-            this.Contenedor1.Panel2.Controls.Add(this.lblTitulo);
             this.Contenedor1.Panel2.Controls.Add(this.tvCuentas);
+            this.Contenedor1.Panel2.Controls.Add(this.lblTitulo);
             this.Contenedor1.Size = new System.Drawing.Size(925, 524);
             this.Contenedor1.SplitterDistance = 229;
             this.Contenedor1.TabIndex = 1;
@@ -146,30 +147,14 @@ namespace Jaeger.Contable.Forms {
             this.grdRubros.TabIndex = 0;
             this.grdRubros.SelectionChanged += new System.EventHandler(this.PolizaGrid_SelectionChanged);
             // 
-            // Rango
-            // 
-            this.Rango.DataPropertyName = "Rango";
-            this.Rango.FillWeight = 50F;
-            this.Rango.HeaderText = "Rango";
-            this.Rango.Name = "Rango";
-            this.Rango.ReadOnly = true;
-            this.Rango.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Rango.Width = 64;
-            // 
-            // DESCRIP
-            // 
-            this.DESCRIP.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.DESCRIP.DataPropertyName = "Descripcion";
-            this.DESCRIP.HeaderText = "Descripción";
-            this.DESCRIP.Name = "DESCRIP";
-            this.DESCRIP.ReadOnly = true;
-            // 
             // lblTitulo
             // 
             this.lblTitulo.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblTitulo.Location = new System.Drawing.Point(0, 0);
+            this.lblTitulo.Margin = new System.Windows.Forms.Padding(3);
             this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(692, 20);
+            this.lblTitulo.Padding = new System.Windows.Forms.Padding(3);
+            this.lblTitulo.Size = new System.Drawing.Size(692, 30);
             this.lblTitulo.TabIndex = 1;
             this.lblTitulo.Text = "   Cuenta  |  Descripción de la cuenta";
             this.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -179,9 +164,9 @@ namespace Jaeger.Contable.Forms {
             this.tvCuentas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tvCuentas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tvCuentas.ItemHeight = 19;
-            this.tvCuentas.Location = new System.Drawing.Point(0, 0);
+            this.tvCuentas.Location = new System.Drawing.Point(0, 30);
             this.tvCuentas.Name = "tvCuentas";
-            this.tvCuentas.Size = new System.Drawing.Size(692, 524);
+            this.tvCuentas.Size = new System.Drawing.Size(692, 494);
             this.tvCuentas.TabIndex = 0;
             // 
             // EstadoStrip
@@ -200,6 +185,29 @@ namespace Jaeger.Contable.Forms {
             this.statusLabel.Name = "statusLabel";
             this.statusLabel.Size = new System.Drawing.Size(15, 17);
             this.statusLabel.Text = "[]";
+            // 
+            // Rango
+            // 
+            this.Rango.DataPropertyName = "Rango";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.Format = "#00";
+            dataGridViewCellStyle1.NullValue = "000";
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(3);
+            this.Rango.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Rango.FillWeight = 50F;
+            this.Rango.HeaderText = "Rango";
+            this.Rango.Name = "Rango";
+            this.Rango.ReadOnly = true;
+            this.Rango.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Rango.Width = 64;
+            // 
+            // DESCRIP
+            // 
+            this.DESCRIP.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.DESCRIP.DataPropertyName = "Descripcion";
+            this.DESCRIP.HeaderText = "Descripción";
+            this.DESCRIP.Name = "DESCRIP";
+            this.DESCRIP.ReadOnly = true;
             // 
             // CuentaContableCatalogoForm
             // 
@@ -239,9 +247,9 @@ namespace Jaeger.Contable.Forms {
         private System.Windows.Forms.ToolStripButton Editar;
         private System.Windows.Forms.ToolStripButton Desactivar;
         private System.Windows.Forms.ToolStripButton Reactivar;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Rango;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DESCRIP;
         private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.ToolStripButton btnCerrar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Rango;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DESCRIP;
     }
 }
