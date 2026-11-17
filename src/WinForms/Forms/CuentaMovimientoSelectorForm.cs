@@ -22,36 +22,36 @@ namespace Jaeger.Contable.WinForms.Forms {
             AcceptButton = null;
             CancelButton = null;
 
-            _txtBuscar.TextChanged += (s, e) => Filtrar();
-            _txtBuscar.KeyDown += Buscar_KeyDown;
+            txtBuscar.TextChanged += (s, e) => Filtrar();
+            txtBuscar.KeyDown += Buscar_KeyDown;
 
-            _grid.AllowUserToAddRows = false;
-            _grid.AllowUserToDeleteRows = false;
-            _grid.AutoGenerateColumns = false;
-            _grid.AllowUserToResizeRows = false;
-            _grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            _grid.MultiSelect = false;
-            _grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            _grid.ShowRowErrors = false;
-            _grid.RowHeadersVisible = false;
+            gridData.AllowUserToAddRows = false;
+            gridData.AllowUserToDeleteRows = false;
+            gridData.AutoGenerateColumns = false;
+            gridData.AllowUserToResizeRows = false;
+            gridData.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            gridData.MultiSelect = false;
+            gridData.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            gridData.ShowRowErrors = false;
+            gridData.RowHeadersVisible = false;
 
-            _grid.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Cuenta", DataPropertyName = "NumCta", FillWeight = 30 });
-            _grid.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Nombre", DataPropertyName = "Nombre", FillWeight = 55 });
-            _grid.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Nivel", DataPropertyName = "NIVEL", FillWeight = 10 });
-            _grid.CellDoubleClick += (s, e) => {
+            gridData.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Cuenta", DataPropertyName = "NumCta", FillWeight = 30 });
+            gridData.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Nombre", DataPropertyName = "Nombre", FillWeight = 55 });
+            gridData.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Nivel", DataPropertyName = "NIVEL", FillWeight = 10 });
+            gridData.CellDoubleClick += (s, e) => {
                 if (e.RowIndex >= 0)
                     Aceptar();
             };
 
-            _btnAceptar.Click += (s, e) => Aceptar();
-            _btnCancelar.Click += (s, e) => { DialogResult = DialogResult.Cancel; Close(); };
+            btnAceptar.Click += (s, e) => Aceptar();
+            btnCancelar.Click += (s, e) => { DialogResult = DialogResult.Cancel; Close(); };
 
             Shown += async (s, e) => await CargarAsync();
         }
 
         private async Task CargarAsync() {
             try {
-                _btnAceptar.Enabled = false;
+                btnAceptar.Enabled = false;
                 Cursor = Cursors.WaitCursor;
                 var cuentas = await _cuentaService.ObtenerCuentasActivasAsync();
                 _cuentas = cuentas
@@ -61,10 +61,10 @@ namespace Jaeger.Contable.WinForms.Forms {
                     .OrderBy(x => x.NumCta, StringComparer.Ordinal)
                     .ToList();
                 Filtrar();
-                if (_grid.Rows.Count > 0) {
-                    _grid.ClearSelection();
-                    _grid.Rows[0].Selected = true;
-                    _grid.CurrentCell = _grid.Rows[0].Cells[0];
+                if (gridData.Rows.Count > 0) {
+                    gridData.ClearSelection();
+                    gridData.Rows[0].Selected = true;
+                    gridData.CurrentCell = gridData.Rows[0].Cells[0];
                 }
             } catch (InvalidOperationException ex) {
                 MessageBox.Show(this, ex.Message, "Cuentas contables", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -76,12 +76,12 @@ namespace Jaeger.Contable.WinForms.Forms {
                 Close();
             } finally {
                 Cursor = Cursors.Default;
-                _btnAceptar.Enabled = true;
+                btnAceptar.Enabled = true;
             }
         }
 
         private void Filtrar() {
-            var texto = (_txtBuscar.Text ?? string.Empty).Trim();
+            var texto = (txtBuscar.Text ?? string.Empty).Trim();
             IEnumerable<CuentaContable> consulta = _cuentas;
             if (!string.IsNullOrWhiteSpace(texto)) {
                 consulta = _cuentas.Where(x =>
@@ -89,28 +89,28 @@ namespace Jaeger.Contable.WinForms.Forms {
                     (x.Nombre ?? string.Empty).IndexOf(texto, StringComparison.OrdinalIgnoreCase) >= 0);
             }
 
-            _grid.DataSource = consulta.ToList();
-            if (_grid.Rows.Count > 0) {
-                _grid.ClearSelection();
-                _grid.Rows[0].Selected = true;
-                _grid.CurrentCell = _grid.Rows[0].Cells[0];
+            gridData.DataSource = consulta.ToList();
+            if (gridData.Rows.Count > 0) {
+                gridData.ClearSelection();
+                gridData.Rows[0].Selected = true;
+                gridData.CurrentCell = gridData.Rows[0].Cells[0];
             }
         }
 
         private void Buscar_KeyDown(object sender, KeyEventArgs e) {
-            if (e.KeyCode == Keys.Enter && _grid.Rows.Count > 0) {
+            if (e.KeyCode == Keys.Enter && gridData.Rows.Count > 0) {
                 Aceptar();
                 e.Handled = true;
             }
         }
 
         private void Aceptar() {
-            if (_grid.CurrentRow == null) {
+            if (gridData.CurrentRow == null) {
                 MessageBox.Show(this, "Seleccione una cuenta.", "Cuentas contables", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            var cuenta = _grid.CurrentRow.DataBoundItem as CuentaContable;
+            var cuenta = gridData.CurrentRow.DataBoundItem as CuentaContable;
             if (cuenta == null || string.IsNullOrWhiteSpace(cuenta.NumCta)) {
                 MessageBox.Show(this, "La cuenta seleccionada no es válida.", "Cuentas contables", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;

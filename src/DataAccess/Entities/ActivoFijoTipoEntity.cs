@@ -21,11 +21,13 @@ namespace Jaeger.Contable.DataAccess.Entities {
         /// <summary>
         /// Tasa depreciación contable.- Porcentaje de deducción contable anual para el tipo de activo.
         /// </summary>
+        [SugarColumn(ColumnName = "DEDNORMAL")]
         public double? DEDNORMAL { get; set; }
 
         /// <summary>
         /// Tasa depreciación fiscal.- Porcentaje de deducción fiscal anual para el tipo de activo.
         /// </summary>
+        [SugarColumn(ColumnName = "DEDIMED")]
         public double? DEDIMED { get; set; }
 
         /// <summary>
@@ -71,6 +73,6 @@ namespace Jaeger.Contable.DataAccess.Entities {
         public string CTAPERGAN { get; set; }
 
         [SugarColumn(ColumnName = "QUEMONEDA")]
-        public short? QUEMONEDA { get; set; }
+        public int? QUEMONEDA { get; set; }
     }
 }

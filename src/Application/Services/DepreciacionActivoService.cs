@@ -155,7 +155,7 @@ namespace Jaeger.Contable.Application.Services {
             string[] cuentas = { tipo.CuentaActivo, tipo.CuentaDepresiacion, tipo.CuentaGastos, tipo.CuentaGanancias };
             string[] nombres = { "CTAAACTV", "CTADEPRE", "CTAGASTOS", "CTAPERGAN" };
             for (int i = 0; i < cuentas.Length; i++) if (!string.IsNullOrWhiteSpace(cuentas[i]) && !await _tipoActivoRepository.ExisteCuentaAsync(cuentas[i].Trim())) observaciones.Add(nombres[i] + " referencia una cuenta inexistente: " + cuentas[i].Trim() + ".");
-            if (tipo.Moneda.HasValue && !await _tipoActivoRepository.ExisteMonedaAsync(tipo.Moneda.Value)) observaciones.Add("QUEMONEDA referencia una moneda inexistente: " + tipo.Moneda.Value + ".");
+            if (tipo.IdMoneda.HasValue && !await _tipoActivoRepository.ExisteMonedaAsync(tipo.IdMoneda.Value)) observaciones.Add("QUEMONEDA referencia una moneda inexistente: " + tipo.IdMoneda.Value + ".");
         }
 
         private static void ValidarNumericosTipo(ActivoFijoTipo tipo, IList<string> observaciones) {

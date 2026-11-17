@@ -10,7 +10,7 @@ namespace Jaeger.Contable.Domain.Interfaces.Repositories {
         Task ActualizarAsync(ActivoFijoTipo tipo);
         Task EliminarAsync(short clave);
         Task<bool> ExisteCuentaAsync(string numeroCuenta);
-        Task<bool> ExisteMonedaAsync(short moneda);
+        Task<bool> ExisteMonedaAsync(int moneda);
         Task<bool> EstaEnUsoAsync(short clave);
     }
 }

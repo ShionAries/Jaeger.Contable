@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Jaeger.Contable.Application.Contracts;
+using Jaeger.Contable.DataAccess.Entities;
 using Jaeger.Contable.Domain.Entities;
 using Jaeger.Contable.WinForms.Context;
 
@@ -14,11 +15,15 @@ namespace Jaeger.Contable.WinForms.Forms {
     /// </summary>
     public partial class ActivoFijoTipoCatalogoForm : Form {
         private readonly IActivoFijoTipoService _service;
+        private readonly ICuentaService _cuentaService;
         private List<ActivoFijoTipo> _datos = new List<ActivoFijoTipo>();
+        private List<Moneda> _monedas = new List<Moneda>();
         private bool _nuevo;
+        private bool _catalogosCargados;
 
-        public ActivoFijoTipoCatalogoForm(IActivoFijoTipoService service) {
+        public ActivoFijoTipoCatalogoForm(IActivoFijoTipoService service, ICuentaService cuentaService) {
             _service = service ?? throw new ArgumentNullException(nameof(service));
+            _cuentaService = cuentaService ?? throw new ArgumentNullException(nameof(cuentaService));
             InitializeComponent();
             Text = "Catálogo de tipos de activo";
             gridData.ReadOnly = true;
@@ -28,15 +33,10 @@ namespace Jaeger.Contable.WinForms.Forms {
             gridData.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             gridData.MultiSelect = false;
             gridData.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-
-            gridData.ColumnText("CLAVE", "Clave");
-            gridData.ColumnText("Descripcion", "Descripción");
-            gridData.AddColumnNumeric("DepresiacionNormal", "Ded. normal", "N4");
-            gridData.AddColumnNumeric("DepresiacionInmediata", "Ded. inmediata", "N4");
-            gridData.AddColumnNumeric("MaximoDepresiacion", "Máx. ded.", "N4");
-            gridData.ColumnText("MetodoDepresiacion", "Método");
-            gridData.AddColumnNumeric("DepresiacionProyectada", "Dep. proyectada", "N4");
-            gridData.ColumnText("Moneda", "Moneda");
+            var colMoneda = gridData.Columns["IdMoneda"] as DataGridViewComboBoxColumn;
+            colMoneda.DisplayMember = "Nombre";
+            colMoneda.ValueMember = "IdMoneda";
+            colMoneda.DataPropertyName = "IdMoneda";
 
             gridData.CellDoubleClick += (s, e) => CargarSeleccion();
             gridData.KeyDown += (s, e) => { if (e.KeyCode == Keys.Enter) { e.Handled = true; CargarSeleccion(); } };
@@ -51,10 +51,10 @@ namespace Jaeger.Contable.WinForms.Forms {
             numMoneda.Minimum = 0;
             numMoneda.Maximum = short.MaxValue;
 
-            AgregarCampoDecimal(numDedNormal);
-            AgregarCampoDecimal(numDedImed);
-            AgregarCampoDecimal(numMaxDepresiacion);
-            AgregarCampoDecimal(numDepProyectada);
+            numDedNormal.ToNumericUpDown(4);
+            numDedImed.ToNumericUpDown(4);
+            numMaxDepresiacion.ToNumericUpDown(4);
+            numDepProyectada.ToNumericUpDown(4);
 
             txtCtaActivo.MaxLength = 21;
             txtCtaDepre.MaxLength = 21;
@@ -64,23 +64,21 @@ namespace Jaeger.Contable.WinForms.Forms {
             btnNuevo.Click += (s, e) => Nuevo();
             btnGuardar.Click += async (s, e) => await GuardarAsync();
             btnEliminar.Click += async (s, e) => await EliminarAsync();
+            btnCuentaActivo.Click += btnCuenta_Click;
+            btnCuentaDepresia.Click += btnCuenta_Click;
+            btnCuentaGanancia.Click += btnCuenta_Click;
+            btnCuentaGastos.Click += btnCuenta_Click;
             btnCerrar.Click += (s, e) => Close();
             AcceptButton = btnGuardar;
             Shown += async (s, e) => await CargarAsync();
         }
 
-        private void AgregarCampoDecimal(NumericUpDown control) {
-            control.DecimalPlaces = 6;
-            control.Maximum = 999999999999999m;
-            control.Minimum = -999999999999999m;
-            control.Increment = 0.000001m;
-            control.ThousandsSeparator = true;
-            control.TextAlign = HorizontalAlignment.Right;
-        }
-
         private async Task CargarAsync() {
             try {
+                await CargarCatalogosAsync();
                 _datos = await _service.ObtenerTodosAsync();
+                var monedas = await _service.ObtenerMonedasAsync();
+
                 Filtrar();
             } catch (Exception ex) {
                 MessageBox.Show(this, ex.Message, "Tipos de activo", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -102,16 +100,16 @@ namespace Jaeger.Contable.WinForms.Forms {
                 return;
             numClave.Value = item.Clave;
             txtDescripcion.Text = item.Descripcion ?? string.Empty;
-            numDedNormal.Value = ToDecimal(item.DepresiacionNormal);
-            numDedImed.Value = ToDecimal(item.DepresiacionInmediata);
-            numMaxDepresiacion.Value = ToDecimal(item.MaximoDepresiacion);
+            numDedNormal.Value = GridViewExtensions.SetValueDecimal(item.DepresiacionNormal);
+            numDedImed.Value = GridViewExtensions.SetValueDecimal(item.DepresiacionInmediata);
+            numMaxDepresiacion.Value = GridViewExtensions.SetValueDecimal(item.MaximoDepresiacion);
             txtMetodo.Text = item.MetodoDepresiacion ?? string.Empty;
-            numDepProyectada.Value = ToDecimal(item.DepresiacionProyectada);
+            numDepProyectada.Value = GridViewExtensions.SetValueDecimal(item.DepresiacionProyectada);
             txtCtaActivo.Text = item.CuentaActivo ?? string.Empty;
             txtCtaDepre.Text = item.CuentaDepresiacion ?? string.Empty;
             txtCtaGastos.Text = item.CuentaGastos ?? string.Empty;
             txtCtaGan.Text = item.CuentaGanancias ?? string.Empty;
-            numMoneda.Value = item.Moneda ?? 0;
+            numMoneda.Value = item.IdMoneda ?? 0;
             numClave.Enabled = false;
             _nuevo = false;
         }
@@ -159,20 +157,52 @@ namespace Jaeger.Contable.WinForms.Forms {
             }
         }
 
+        private async Task CargarCatalogosAsync() {
+            if (_catalogosCargados)
+                return;
+
+            var monedas = await _service.ObtenerMonedasAsync();
+            _monedas = (monedas ?? new List<Moneda>())
+                .OrderBy(x => x.Nombre)
+                .ToList();
+
+            ActualizarCatalogoCombo("IdMoneda", _monedas);
+            _catalogosCargados = true;
+        }
+
+        private void btnCuenta_Click(object sender, EventArgs e) {
+            var button = sender as Button;
+            if (button == null)
+                return;
+
+            using (var form = new CuentaContableSelectorForm(_cuentaService)) {
+                if (form.ShowDialog(this) != DialogResult.OK)
+                    return;
+                if (sender == btnCuentaActivo)
+                    txtCtaActivo.Text = form.NumeroCuentaSeleccionada ?? string.Empty;
+                else if (sender == btnCuentaDepresia)
+                    txtCtaDepre.Text = form.NumeroCuentaSeleccionada ?? string.Empty;
+                else if (sender == btnCuentaGastos)
+                    txtCtaGastos.Text = form.NumeroCuentaSeleccionada ?? string.Empty;
+                else if (sender == btnCuentaGanancia)
+                    txtCtaGan.Text = form.NumeroCuentaSeleccionada ?? string.Empty;
+            }
+        }
+
         private ActivoFijoTipo ObtenerModelo() {
             return new ActivoFijoTipo {
                 Clave = Convert.ToInt16(numClave.Value),
                 Descripcion = txtDescripcion.Text,
-                DepresiacionNormal = ToNullableDouble(numDedNormal.Value),
-                DepresiacionInmediata = ToNullableDouble(numDedImed.Value),
-                MaximoDepresiacion = ToNullableDouble(numMaxDepresiacion.Value),
+                DepresiacionNormal = GridViewExtensions.ToNullableDouble(numDedNormal.Value),
+                DepresiacionInmediata = GridViewExtensions.ToNullableDouble(numDedImed.Value),
+                MaximoDepresiacion = GridViewExtensions.ToNullableDouble(numMaxDepresiacion.Value),
                 MetodoDepresiacion = txtMetodo.Text,
-                DepresiacionProyectada = ToNullableDouble(numDepProyectada.Value),
+                DepresiacionProyectada = GridViewExtensions.ToNullableDouble(numDepProyectada.Value),
                 CuentaActivo = txtCtaActivo.Text,
                 CuentaDepresiacion = txtCtaDepre.Text,
                 CuentaGastos = txtCtaGastos.Text,
                 CuentaGanancias = txtCtaGan.Text,
-                Moneda = numMoneda.Value == 0 ? (short?)null : Convert.ToInt16(numMoneda.Value)
+                IdMoneda = numMoneda.Value == 0 ? (short?)null : Convert.ToInt16(numMoneda.Value)
             };
         }
 
@@ -191,18 +221,13 @@ namespace Jaeger.Contable.WinForms.Forms {
             numMoneda.Value = 0;
         }
 
-        private static decimal ToDecimal(double? value) {
-            if (!value.HasValue || double.IsNaN(value.Value) || double.IsInfinity(value.Value))
-                return 0m;
-            if (value.Value > (double)decimal.MaxValue)
-                return decimal.MaxValue;
-            if (value.Value < (double)decimal.MinValue)
-                return decimal.MinValue;
-            return Convert.ToDecimal(value.Value);
-        }
+        private void ActualizarCatalogoCombo(string nombreColumna, object fuente) {
+            var columna = this.gridData.Columns[nombreColumna] as DataGridViewComboBoxColumn;
+            if (columna == null)
+                return;
 
-        private static double? ToNullableDouble(decimal value) {
-            return Convert.ToDouble(value);
+            columna.DataSource = null;
+            columna.DataSource = fuente;
         }
     }
 }

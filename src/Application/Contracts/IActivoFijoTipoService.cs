@@ -9,5 +9,6 @@ namespace Jaeger.Contable.Application.Contracts {
         Task CrearAsync(ActivoFijoTipo tipo);
         Task ActualizarAsync(ActivoFijoTipo tipo);
         Task EliminarAsync(short clave);
+        Task<List<Moneda>> ObtenerMonedasAsync();
     }
 }

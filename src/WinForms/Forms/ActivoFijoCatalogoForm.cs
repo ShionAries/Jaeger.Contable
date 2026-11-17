@@ -123,7 +123,7 @@ namespace Jaeger.Contable.WinForms.Forms {
             if (tipo == null)
                 return;
 
-            numMaxDed.Value = D(tipo.MaximoDepresiacion);
+            numMaxDed.Value = GridViewExtensions.SetValueDecimal(tipo.MaximoDepresiacion);
             txtMetDep.Text = tipo.MetodoDepresiacion ?? string.Empty;
         }
 
@@ -183,39 +183,39 @@ namespace Jaeger.Contable.WinForms.Forms {
             SeleccionarTipo(x.Tipo, false);
             txtDescripcion.Text = x.Descripcion ?? "";
             txtLocaliz.Text = x.Localizacion ?? "";
-            numMontoOrig.Value = D(x.MontoOriginal);
-            numMontoOrigEx.Value = D(x.MontoOriginalMonedaExtranjera);
+            numMontoOrig.Value = GridViewExtensions.SetValueDecimal(x.MontoOriginal);
+            numMontoOrigEx.Value = GridViewExtensions.SetValueDecimal(x.MontoOriginalMonedaExtranjera);
             dtFechaAdq.SetFecha(x.FecAdquisicion);
-            numMaxDed.Value = D(x.MaximoDeducible);
-            numValMer.Value = D(x.ValorMercado);
-            numDepAcu.Value = D(x.DepresiacionAcumulada);
-            numVida.Value = D(x.VidaUtil);
+            numMaxDed.Value = GridViewExtensions.SetValueDecimal(x.MaximoDeducible);
+            numValMer.Value = GridViewExtensions.SetValueDecimal(x.ValorMercado);
+            numDepAcu.Value = GridViewExtensions.SetValueDecimal(x.DepresiacionAcumulada);
+            numVida.Value = GridViewExtensions.SetValueDecimal(x.VidaUtil);
             txtMetDep.Text = x.MetodoDepresiacion ?? "";
-            numTasDep.Value = D(x.TasaDepresiacion);
-            numTasDepFis.Value = D(x.TasaDepresiacionFiscal);
+            numTasDep.Value = GridViewExtensions.SetValueDecimal(x.TasaDepresiacion);
+            numTasDepFis.Value = GridViewExtensions.SetValueDecimal(x.TasaDepresiacionFiscal);
             txtStatus.Text = x.Status ?? "";
            // _numDepto.Value = x.IdDepartamento ?? 0;
             txtSerie.Text = x.NumSerie ?? "";
             txtBand.Text = x.BANDEDINM ?? "";
             dtIniDep.SetFecha(x.FecInicioDepresiacion);
             dtIniDepFis.SetFecha(x.FecInicioDepresiacionFiscal);
-            numDepFis.Value = D(x.DepresiacionAcumuladaFiscal);
+            numDepFis.Value = GridViewExtensions.SetValueDecimal(x.DepresiacionAcumuladaFiscal);
             dtFechaEliminacion.SetFecha(x.FechaBaja);
             txtObserv.Text = x.Nota ?? "";
-            numTipoCambio.Value = D(x.TipoCambio);
+            numTipoCambio.Value = GridViewExtensions.SetValueDecimal(x.TipoCambio);
             txtPolizaSeg.Text = x.PolizaSeguro ?? "";
             txtCompAseg.Text = x.CompaniaSeguro ?? "";
             txtAgente.Text = x.AgenteSeguro ?? "";
             txtTelefono.Text = x.TelefonoSiniestro ?? "";
             txtCobertura.Text = x.TipoCobertura ?? "";
-            numMontoAseg.Value = D(x.MontoAsegurado);
-            numPrima.Value = D(x.PrimaTotal);
-            numDeducible.Value = D(x.Deducible);
+            numMontoAseg.Value = GridViewExtensions.SetValueDecimal(x.MontoAsegurado);
+            numPrima.Value = GridViewExtensions.SetValueDecimal(x.PrimaTotal);
+            numDeducible.Value = GridViewExtensions.SetValueDecimal(x.Deducible);
             dtVigencia.SetFecha(x.FecVigencia);
             _dtProxMan.SetFecha(x.FecProximoMantto);
             dtUltMan.SetFecha(x.FecUltMantto);
             numPeriodoMan.Value = x.PeriodoMantto ?? 0;
-            numCostoMan.Value = D(x.CostoMantto);
+            numCostoMan.Value = GridViewExtensions.SetValueDecimal(x.CostoMantto);
             txtResponsable.Text = x.Responsable ?? "";
         }
 
@@ -338,16 +338,6 @@ namespace Jaeger.Contable.WinForms.Forms {
                 CostoMantto = Convert.ToDouble(numCostoMan.Value),
                 Responsable = txtResponsable.Text
             };
-        }
-
-        private static decimal D(double? x) {
-            if (!x.HasValue || double.IsNaN(x.Value) || double.IsInfinity(x.Value))
-                return 0m;
-            if (x.Value > (double)decimal.MaxValue)
-                return decimal.MaxValue;
-            if (x.Value < (double)decimal.MinValue)
-                return decimal.MinValue;
-            return Convert.ToDecimal(x.Value);
         }
     }
 }

@@ -33,6 +33,7 @@
             this.mCuentasCuentas = new System.Windows.Forms.ToolStripMenuItem();
             this.mPolizas = new System.Windows.Forms.ToolStripMenuItem();
             this.mPolizasConsulta = new System.Windows.Forms.ToolStripMenuItem();
+            this.mBalanzaComprobacion = new System.Windows.Forms.ToolStripMenuItem();
             this.mPolizasCaptura = new System.Windows.Forms.ToolStripMenuItem();
             this.mContabilizarPeriodo = new System.Windows.Forms.ToolStripMenuItem();
             this.mConceptos = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,8 +48,8 @@
             this.mAuditaria = new System.Windows.Forms.ToolStripMenuItem();
             this.mAuditoriaCuentas = new System.Windows.Forms.ToolStripMenuItem();
             this.mAuditoriaRubros = new System.Windows.Forms.ToolStripMenuItem();
-            this.mBalanzaComprobacion = new System.Windows.Forms.ToolStripMenuItem();
             this.mVentana = new System.Windows.Forms.ToolStripMenuItem();
+            this.mDepartamentos = new System.Windows.Forms.ToolStripMenuItem();
             this.Estado.SuspendLayout();
             this.menuMain.SuspendLayout();
             this.SuspendLayout();
@@ -135,7 +136,8 @@
             this.mTiposActivo,
             this.mActivosFijos,
             this.mHistoricoActivos,
-            this.mDepreciacionActivos});
+            this.mDepreciacionActivos,
+            this.mDepartamentos});
             this.mPolizas.Name = "mPolizas";
             this.mPolizas.Size = new System.Drawing.Size(123, 22);
             this.mPolizas.Text = "Pólizas";
@@ -143,80 +145,79 @@
             // mPolizasConsulta
             // 
             this.mPolizasConsulta.Name = "mPolizasConsulta";
-            this.mPolizasConsulta.Size = new System.Drawing.Size(201, 22);
+            this.mPolizasConsulta.Size = new System.Drawing.Size(211, 22);
             this.mPolizasConsulta.Text = "Consulta";
             // 
             // mBalanzaComprobacion
             // 
             this.mBalanzaComprobacion.Name = "mBalanzaComprobacion";
-            this.mBalanzaComprobacion.Size = new System.Drawing.Size(201, 22);
+            this.mBalanzaComprobacion.Size = new System.Drawing.Size(211, 22);
             this.mBalanzaComprobacion.Text = "Balanza de comprobación";
-            // 
             // 
             // mPolizasCaptura
             // 
             this.mPolizasCaptura.Name = "mPolizasCaptura";
-            this.mPolizasCaptura.Size = new System.Drawing.Size(201, 22);
+            this.mPolizasCaptura.Size = new System.Drawing.Size(211, 22);
             this.mPolizasCaptura.Text = "Captura";
             // 
             // mContabilizarPeriodo
             // 
             this.mContabilizarPeriodo.Name = "mContabilizarPeriodo";
-            this.mContabilizarPeriodo.Size = new System.Drawing.Size(201, 22);
+            this.mContabilizarPeriodo.Size = new System.Drawing.Size(211, 22);
             this.mContabilizarPeriodo.Text = "Contabilizar período";
             // 
             // mConceptos
             // 
             this.mConceptos.Name = "mConceptos";
-            this.mConceptos.Size = new System.Drawing.Size(201, 22);
+            this.mConceptos.Size = new System.Drawing.Size(211, 22);
             this.mConceptos.Text = "Conceptos";
             // 
             // mCatalogosPartida
             // 
             this.mCatalogosPartida.Name = "mCatalogosPartida";
-            this.mCatalogosPartida.Size = new System.Drawing.Size(201, 22);
+            this.mCatalogosPartida.Size = new System.Drawing.Size(211, 22);
             this.mCatalogosPartida.Text = "Catálogos de partidas";
             // 
             // mTiposPoliza
             // 
             this.mTiposPoliza.Name = "mTiposPoliza";
-            this.mTiposPoliza.Size = new System.Drawing.Size(201, 22);
+            this.mTiposPoliza.Size = new System.Drawing.Size(211, 22);
             this.mTiposPoliza.Text = "Tipos de póliza";
             // 
             // mRangos
             // 
             this.mRangos.Name = "mRangos";
-            this.mRangos.Size = new System.Drawing.Size(201, 22);
+            this.mRangos.Size = new System.Drawing.Size(211, 22);
             this.mRangos.Text = "Rangos";
             // 
             // mMonedas
             // 
             this.mMonedas.Name = "mMonedas";
-            this.mMonedas.Size = new System.Drawing.Size(201, 22);
+            this.mMonedas.Size = new System.Drawing.Size(211, 22);
             this.mMonedas.Text = "Monedas";
             // 
             // mTiposActivo
             // 
             this.mTiposActivo.Name = "mTiposActivo";
-            this.mTiposActivo.Size = new System.Drawing.Size(201, 22);
+            this.mTiposActivo.Size = new System.Drawing.Size(211, 22);
             this.mTiposActivo.Text = "Tipos de activo";
             // 
             // mActivosFijos
             // 
             this.mActivosFijos.Name = "mActivosFijos";
-            this.mActivosFijos.Size = new System.Drawing.Size(201, 22);
+            this.mActivosFijos.Size = new System.Drawing.Size(211, 22);
             this.mActivosFijos.Text = "Activos fijos";
             // 
             // mHistoricoActivos
             // 
             this.mHistoricoActivos.Name = "mHistoricoActivos";
-            this.mHistoricoActivos.Size = new System.Drawing.Size(201, 22);
+            this.mHistoricoActivos.Size = new System.Drawing.Size(211, 22);
             this.mHistoricoActivos.Text = "Histórico de activos";
             // 
             // mDepreciacionActivos
             // 
             this.mDepreciacionActivos.Name = "mDepreciacionActivos";
-            this.mDepreciacionActivos.Size = new System.Drawing.Size(201, 22);
+            this.mDepreciacionActivos.Size = new System.Drawing.Size(211, 22);
             this.mDepreciacionActivos.Text = "Control de depreciación";
             // 
             // mAuditaria
@@ -245,6 +246,12 @@
             this.mVentana.Name = "mVentana";
             this.mVentana.Size = new System.Drawing.Size(61, 20);
             this.mVentana.Text = "Ventana";
+            // 
+            // mDepartamentos
+            // 
+            this.mDepartamentos.Name = "mDepartamentos";
+            this.mDepartamentos.Size = new System.Drawing.Size(211, 22);
+            this.mDepartamentos.Text = "Departamentos";
             // 
             // MainForm
             // 
@@ -294,5 +301,6 @@
         private System.Windows.Forms.ToolStripMenuItem mAuditoriaRubros;
         private System.Windows.Forms.ToolStripMenuItem mBalanzaComprobacion;
         private System.Windows.Forms.ToolStripMenuItem mVentana;
+        private System.Windows.Forms.ToolStripMenuItem mDepartamentos;
     }
 }

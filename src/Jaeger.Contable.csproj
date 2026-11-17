@@ -82,17 +82,22 @@
   <ItemGroup>
     <Compile Include="Application\Contracts\IBalanzaComprobacionService.cs" />
     <Compile Include="Application\Contracts\IContableApplication.cs" />
+    <Compile Include="Application\Contracts\IDepartamentoService.cs" />
     <Compile Include="Application\Contracts\IParametroEmpresaService.cs" />
     <Compile Include="Application\Services\BalanzaComprobacionService.cs" />
+    <Compile Include="Application\Services\DepartamentoService.cs" />
     <Compile Include="Application\Services\ParametroEmpresaService.cs" />
     <Compile Include="DataAccess\DependencyInjection\ContableApplication.cs" />
     <Compile Include="DataAccess\Mappers\ActivoFijoMapper.cs" />
     <Compile Include="DataAccess\Mappers\ConceptoMapper.cs" />
+    <Compile Include="DataAccess\Mappers\DepartamentoMapper.cs" />
     <Compile Include="DataAccess\Mappers\MonedaMapper.cs" />
     <Compile Include="DataAccess\Mappers\PolizaMapper.cs" />
     <Compile Include="DataAccess\Mappers\ActivoFijoTipoMapper.cs" />
     <Compile Include="DataAccess\Mappers\TipoPolizaMapper.cs" />
     <Compile Include="DataAccess\Repositories\BalanzaComprobacionRepository.cs" />
+    <Compile Include="DataAccess\Repositories\DepartamentoRepository.cs" />
+    <Compile Include="Domain\Interfaces\Repositories\IDepartamentoRepository.cs" />
     <Compile Include="Domain\Models\BalanzaComprobacion.cs" />
     <Compile Include="Domain\Models\BalanzaComprobacionItem.cs" />
     <Compile Include="Domain\Models\BalanzaComprobacionRequest.cs" />
@@ -127,6 +132,18 @@
     </Compile>
     <Compile Include="WinForms\Forms\BalanzaComprobacionForm.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\Forms\CuentaContableSelectorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\Forms\CuentaContableSelectorForm.Designer.cs">
+      <DependentUpon>CuentaContableSelectorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForms\Forms\DepartamentoCatalogoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\Forms\DepartamentoCatalogoForm.Designer.cs">
+      <DependentUpon>DepartamentoCatalogoForm.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForms\Forms\PartidaSelectorForm.cs">
       <SubType>Form</SubType>
@@ -445,6 +462,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\Forms\AuditoriaCuentasForm.resx">
       <DependentUpon>AuditoriaCuentasForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\Forms\CuentaContableSelectorForm.resx">
+      <DependentUpon>CuentaContableSelectorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\Forms\DepartamentoCatalogoForm.resx">
+      <DependentUpon>DepartamentoCatalogoForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\Forms\PartidaSelectorForm.resx">
       <DependentUpon>PartidaSelectorForm.cs</DependentUpon>

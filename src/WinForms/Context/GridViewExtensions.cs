@@ -76,5 +76,9 @@ namespace Jaeger.Contable.WinForms.Context {
             pickerDateTime.Checked = v.HasValue;
             pickerDateTime.Value = v ?? DateTime.Today;
         }
+
+        public static double? ToNullableDouble(decimal value) {
+            return Convert.ToDouble(value);
+        }
     }
 }

@@ -2,6 +2,9 @@
 using Jaeger.Contable.Domain.Entities;
 
 namespace Jaeger.Contable.DataAccess.Mappers {
+    /// <summary>
+    /// mapeador del catalogo de monedas
+    /// </summary>
     internal static class MonedaMapper {
         public static Moneda Map(MonedaEntity x) {
             return new Moneda {

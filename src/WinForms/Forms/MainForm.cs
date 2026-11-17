@@ -99,7 +99,7 @@ namespace Jaeger.Contable {
             this.mTiposActivo.Click += (s, e) => {
                 if (!EnsureAvailable(_application.TipoActivoService, this, "El servicio de tipos de activo no está disponible.", "Tipos de activo"))
                     return;
-                using (var form = new ActivoFijoTipoCatalogoForm(_application.TipoActivoService))
+                using (var form = new ActivoFijoTipoCatalogoForm(_application.TipoActivoService, _application.CuentaService))
                     form.ShowDialog(this);
             };
 
@@ -138,6 +138,13 @@ namespace Jaeger.Contable {
                 using (var form = new AuditoriaCtarubForm(resultado, _application.MotorContableService))
                     form.ShowDialog(this);
                 //return string.Format("Auditoría CTARUB: {0} válidas, {1} con errores de {2} relaciones.", resultado.Validas, resultado.Invalidas, resultado.Total);
+            };
+
+            this.mDepartamentos.Click += async (s, e) => {
+                if (!EnsureAvailable(_application.DepartamentoService, this, "El servicio de departamentos no está disponible.", "Departamentos"))
+                    return;
+                using (var form = new DepartamentoCatalogoForm(_application.DepartamentoService))
+                    form.ShowDialog(this);
             };
 
             this.mSalir.Click += (s, e) => Close();

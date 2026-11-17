@@ -10,9 +10,11 @@ namespace Jaeger.Contable.Application.Services {
     /// </summary>
     public sealed class ActivoFijoTipoService : Contracts.IActivoFijoTipoService {
         private readonly IActivoFijoTipoRepository _repository;
+        private readonly IMonedaRepository _monedaRepository;
 
-        public ActivoFijoTipoService(IActivoFijoTipoRepository repository) {
+        public ActivoFijoTipoService(IActivoFijoTipoRepository repository, IMonedaRepository monedaRepository) {
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
+            _monedaRepository = monedaRepository ?? throw new ArgumentNullException(nameof(monedaRepository));
         }
 
         public Task<List<ActivoFijoTipo>> ObtenerTodosAsync() {
@@ -53,6 +55,10 @@ namespace Jaeger.Contable.Application.Services {
             await _repository.EliminarAsync(clave);
         }
 
+        public Task<List<Moneda>> ObtenerMonedasAsync() {
+            return this._monedaRepository.ObtenerTodosAsync();
+        }
+
         private async Task ValidarReferenciasAsync(ActivoFijoTipo tipo) {
             string[] cuentas = {
                 tipo.CuentaActivo,
@@ -69,7 +75,7 @@ namespace Jaeger.Contable.Application.Services {
                     throw new InvalidOperationException("La cuenta " + cuenta.Trim() + " no existe en CUENTAS25.");
             }
 
-            if (tipo.Moneda.HasValue && !await _repository.ExisteMonedaAsync(tipo.Moneda.Value))
+            if (tipo.IdMoneda.HasValue && !await _repository.ExisteMonedaAsync(tipo.IdMoneda.Value))
                 throw new InvalidOperationException("La moneda indicada no existe en MONEDAS.");
         }
 
@@ -86,7 +92,7 @@ namespace Jaeger.Contable.Application.Services {
                 CuentaDepresiacion = NormalizarTexto(tipo.CuentaDepresiacion),
                 CuentaGastos = NormalizarTexto(tipo.CuentaGastos),
                 CuentaGanancias = NormalizarTexto(tipo.CuentaGanancias),
-                Moneda = tipo.Moneda
+                IdMoneda = tipo.IdMoneda
             };
         }
 

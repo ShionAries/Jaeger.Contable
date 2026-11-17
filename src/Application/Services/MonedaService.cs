@@ -19,11 +19,6 @@ namespace Jaeger.Contable.Application.Services {
             return _repository.ObtenerTodosAsync();
         }
 
-        //public Task<Moneda> ObtenerAsync(short moneda) {
-        //    ValidarCodigo(moneda);
-        //    return _repository.ObtenerAsync(moneda);
-        //}
-
         public async Task<double?> ObtenerTipoCambioAsync(short moneda) {
             ValidarCodigo(moneda);
 
@@ -105,7 +100,7 @@ namespace Jaeger.Contable.Application.Services {
                 throw new ArgumentException("DESPAUTO debe contener un solo carácter.", nameof(moneda.DESPAUTO));
         }
 
-        private static void ValidarCodigo(short moneda) {
+        private static void ValidarCodigo(int moneda) {
             if (moneda < 0)
                 throw new ArgumentOutOfRangeException(nameof(moneda), "El código de moneda no puede ser negativo.");
         }

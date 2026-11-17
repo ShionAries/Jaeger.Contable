@@ -5,7 +5,7 @@ using Jaeger.Contable.Domain.Entities;
 namespace Jaeger.Contable.Domain.Interfaces.Repositories {
     public interface IMonedaRepository {
         Task<List<Moneda>> ObtenerTodosAsync();
-        Task<Moneda> ObtenerAsync(short moneda);
+        Task<Moneda> ObtenerAsync(int moneda);
         Task CrearAsync(Moneda moneda);
         Task ActualizarAsync(Moneda moneda);
         Task<bool> ExisteEnHistorialAsync(short moneda);

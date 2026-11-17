@@ -6,7 +6,7 @@ namespace Jaeger.Contable.Domain.Entities {
     /// </summary>
     public sealed class Moneda : Domain.Abstractions.BasePropertyChangeImplementation {
         #region declaraciones
-        private short _MONEDA;
+        private int _MONEDA;
         private string _Nombre;
         private string _Prefijo;
         private DateTime? _Fecha;
@@ -16,7 +16,7 @@ namespace Jaeger.Contable.Domain.Entities {
         private string _CveSAT;
         #endregion
 
-        public short IdMoneda {
+        public int IdMoneda {
             get { return this._MONEDA; }
             set {
                 this._MONEDA = value;

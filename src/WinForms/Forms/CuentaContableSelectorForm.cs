@@ -1,0 +1,122 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using Jaeger.Contable.Application.Contracts;
+using Jaeger.Contable.Domain.Entities;
+
+namespace Jaeger.Contable.WinForms.Forms {
+    public partial class CuentaContableSelectorForm : Form {
+        private readonly ICuentaService _cuentaService;
+        private List<CuentaContable> _cuentas = new List<CuentaContable>();
+        public string NumeroCuentaSeleccionada { get; private set; }
+        public string DescripcionCuentaSeleccionada { get; private set; }
+
+        public CuentaContableSelectorForm(ICuentaService cuentaService) {
+            _cuentaService = cuentaService ?? throw new ArgumentNullException(nameof(cuentaService));
+            InitializeComponent();
+
+            KeyPreview = true;
+            AcceptButton = null;
+            CancelButton = null;
+
+            txtBuscar.TextChanged += (s, e) => Filtrar();
+            txtBuscar.KeyDown += Buscar_KeyDown;
+
+            gridData.AllowUserToAddRows = false;
+            gridData.AllowUserToDeleteRows = false;
+            gridData.AutoGenerateColumns = false;
+            gridData.AllowUserToResizeRows = false;
+            gridData.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            gridData.MultiSelect = false;
+            gridData.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            gridData.ShowRowErrors = false;
+            gridData.RowHeadersVisible = false;
+
+            gridData.CellDoubleClick += (s, e) => {
+                if (e.RowIndex >= 0)
+                    Aceptar();
+            };
+
+            btnAceptar.Click += (s, e) => Aceptar();
+            btnCancelar.Click += (s, e) => { DialogResult = DialogResult.Cancel; Close(); };
+
+            Shown += async (s, e) => await CargarAsync();
+        }
+
+        private async Task CargarAsync() {
+            try {
+                btnAceptar.Enabled = false;
+                Cursor = Cursors.WaitCursor;
+                var cuentas = await _cuentaService.ObtenerCuentasActivasAsync();
+                _cuentas = cuentas
+                    .Where(x => x != null &&
+                                !string.IsNullOrWhiteSpace(x.NumCta) &&
+                                string.Equals(x.Tipo, "D", StringComparison.OrdinalIgnoreCase))
+                    .OrderBy(x => x.NumCta, StringComparer.Ordinal)
+                    .ToList();
+                Filtrar();
+                if (gridData.Rows.Count > 0) {
+                    gridData.ClearSelection();
+                    gridData.Rows[0].Selected = true;
+                    gridData.CurrentCell = gridData.Rows[0].Cells[0];
+                }
+            } catch (InvalidOperationException ex) {
+                MessageBox.Show(this, ex.Message, "Cuentas contables", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                DialogResult = DialogResult.Cancel;
+                Close();
+            } catch (Exception ex) {
+                MessageBox.Show(this, "No fue posible cargar las cuentas: " + ex.Message, "Cuentas contables", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                DialogResult = DialogResult.Cancel;
+                Close();
+            } finally {
+                Cursor = Cursors.Default;
+                btnAceptar.Enabled = true;
+            }
+        }
+
+        private void Filtrar() {
+            var texto = (txtBuscar.Text ?? string.Empty).Trim();
+            IEnumerable<CuentaContable> consulta = _cuentas;
+            if (!string.IsNullOrWhiteSpace(texto)) {
+                consulta = _cuentas.Where(x =>
+                    (x.NumCta ?? string.Empty).IndexOf(texto, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                    (x.Nombre ?? string.Empty).IndexOf(texto, StringComparison.OrdinalIgnoreCase) >= 0);
+            }
+
+            gridData.DataSource = consulta.ToList();
+            if (gridData.Rows.Count > 0) {
+                gridData.ClearSelection();
+                gridData.Rows[0].Selected = true;
+                gridData.CurrentCell = gridData.Rows[0].Cells[0];
+            }
+        }
+
+        private void Buscar_KeyDown(object sender, KeyEventArgs e) {
+            if (e.KeyCode == Keys.Enter && gridData.Rows.Count > 0) {
+                Aceptar();
+                e.Handled = true;
+            }
+        }
+
+        private void Aceptar() {
+            if (gridData.CurrentRow == null) {
+                MessageBox.Show(this, "Seleccione una cuenta.", "Cuentas contables", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            var cuenta = gridData.CurrentRow.DataBoundItem as CuentaContable;
+            if (cuenta == null || string.IsNullOrWhiteSpace(cuenta.NumCta)) {
+                MessageBox.Show(this, "La cuenta seleccionada no es válida.", "Cuentas contables", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            NumeroCuentaSeleccionada = cuenta.NumCta.Trim();
+            DescripcionCuentaSeleccionada = (cuenta.Nombre ?? string.Empty).Trim();
+            DialogResult = DialogResult.OK;
+            Close();
+        }
+    }
+}

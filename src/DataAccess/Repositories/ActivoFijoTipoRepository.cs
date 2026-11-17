@@ -81,7 +81,7 @@ namespace Jaeger.Contable.DataAccess.Repositories {
             }
         }
 
-        public async Task<bool> ExisteMonedaAsync(short moneda) {
+        public async Task<bool> ExisteMonedaAsync(int moneda) {
             try {
                 return await _context.Db.Queryable<MonedaEntity>()
                     .AnyAsync(x => x.IdMoneda == moneda);

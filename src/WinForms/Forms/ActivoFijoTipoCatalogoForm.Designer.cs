@@ -23,6 +23,10 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnCerrar = new System.Windows.Forms.Button();
             this.btnEliminar = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
@@ -55,6 +59,18 @@
             this.txtCtaGastos = new System.Windows.Forms.TextBox();
             this.txtCtaGan = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnCuentaActivo = new System.Windows.Forms.Button();
+            this.btnCuentaDepresia = new System.Windows.Forms.Button();
+            this.btnCuentaGastos = new System.Windows.Forms.Button();
+            this.btnCuentaGanancia = new System.Windows.Forms.Button();
+            this.Clave = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DepresiacionNormal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DepresiacionInmediata = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MaximoDepresiacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MetodoDepresiacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DepresiacionProyectada = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IdMoneda = new System.Windows.Forms.DataGridViewComboBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.numMoneda)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numClave)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridData)).BeginInit();
@@ -121,12 +137,24 @@
             // 
             // gridData
             // 
+            this.gridData.AllowUserToAddRows = false;
+            this.gridData.AllowUserToDeleteRows = false;
             this.gridData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gridData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Clave,
+            this.Descripcion,
+            this.DepresiacionNormal,
+            this.DepresiacionInmediata,
+            this.MaximoDepresiacion,
+            this.MetodoDepresiacion,
+            this.DepresiacionProyectada,
+            this.IdMoneda});
             this.gridData.Location = new System.Drawing.Point(12, 42);
             this.gridData.Name = "gridData";
+            this.gridData.ReadOnly = true;
             this.gridData.RowHeadersVisible = false;
             this.gridData.Size = new System.Drawing.Size(831, 185);
             this.gridData.TabIndex = 21;
@@ -280,7 +308,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(164, 83);
+            this.label6.Location = new System.Drawing.Point(202, 83);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(107, 13);
             this.label6.TabIndex = 11;
@@ -288,7 +316,7 @@
             // 
             // txtCtaDepre
             // 
-            this.txtCtaDepre.Location = new System.Drawing.Point(164, 101);
+            this.txtCtaDepre.Location = new System.Drawing.Point(202, 101);
             this.txtCtaDepre.Name = "txtCtaDepre";
             this.txtCtaDepre.Size = new System.Drawing.Size(150, 20);
             this.txtCtaDepre.TabIndex = 17;
@@ -296,7 +324,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(320, 83);
+            this.label7.Location = new System.Drawing.Point(398, 83);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(78, 13);
             this.label7.TabIndex = 11;
@@ -305,7 +333,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(485, 83);
+            this.label9.Location = new System.Drawing.Point(594, 82);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(96, 13);
             this.label9.TabIndex = 11;
@@ -313,14 +341,14 @@
             // 
             // txtCtaGastos
             // 
-            this.txtCtaGastos.Location = new System.Drawing.Point(320, 101);
+            this.txtCtaGastos.Location = new System.Drawing.Point(398, 101);
             this.txtCtaGastos.Name = "txtCtaGastos";
             this.txtCtaGastos.Size = new System.Drawing.Size(150, 20);
             this.txtCtaGastos.TabIndex = 17;
             // 
             // txtCtaGan
             // 
-            this.txtCtaGan.Location = new System.Drawing.Point(485, 101);
+            this.txtCtaGan.Location = new System.Drawing.Point(594, 102);
             this.txtCtaGan.Name = "txtCtaGan";
             this.txtCtaGan.Size = new System.Drawing.Size(150, 20);
             this.txtCtaGan.TabIndex = 17;
@@ -329,6 +357,10 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.btnCuentaGanancia);
+            this.groupBox1.Controls.Add(this.btnCuentaGastos);
+            this.groupBox1.Controls.Add(this.btnCuentaDepresia);
+            this.groupBox1.Controls.Add(this.btnCuentaActivo);
             this.groupBox1.Controls.Add(this.lblCodigo);
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.lblNombre);
@@ -358,6 +390,125 @@
             this.groupBox1.Size = new System.Drawing.Size(833, 133);
             this.groupBox1.TabIndex = 31;
             this.groupBox1.TabStop = false;
+            // 
+            // btnCuentaActivo
+            // 
+            this.btnCuentaActivo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnCuentaActivo.Location = new System.Drawing.Point(162, 101);
+            this.btnCuentaActivo.Name = "btnCuentaActivo";
+            this.btnCuentaActivo.Size = new System.Drawing.Size(34, 20);
+            this.btnCuentaActivo.TabIndex = 32;
+            this.btnCuentaActivo.Text = "...";
+            this.btnCuentaActivo.UseVisualStyleBackColor = true;
+            // 
+            // btnCuentaDepresia
+            // 
+            this.btnCuentaDepresia.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnCuentaDepresia.Location = new System.Drawing.Point(358, 101);
+            this.btnCuentaDepresia.Name = "btnCuentaDepresia";
+            this.btnCuentaDepresia.Size = new System.Drawing.Size(34, 20);
+            this.btnCuentaDepresia.TabIndex = 32;
+            this.btnCuentaDepresia.Text = "...";
+            this.btnCuentaDepresia.UseVisualStyleBackColor = true;
+            // 
+            // btnCuentaGastos
+            // 
+            this.btnCuentaGastos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnCuentaGastos.Location = new System.Drawing.Point(554, 101);
+            this.btnCuentaGastos.Name = "btnCuentaGastos";
+            this.btnCuentaGastos.Size = new System.Drawing.Size(34, 20);
+            this.btnCuentaGastos.TabIndex = 32;
+            this.btnCuentaGastos.Text = "...";
+            this.btnCuentaGastos.UseVisualStyleBackColor = true;
+            // 
+            // btnCuentaGanancia
+            // 
+            this.btnCuentaGanancia.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnCuentaGanancia.Location = new System.Drawing.Point(750, 102);
+            this.btnCuentaGanancia.Name = "btnCuentaGanancia";
+            this.btnCuentaGanancia.Size = new System.Drawing.Size(34, 20);
+            this.btnCuentaGanancia.TabIndex = 32;
+            this.btnCuentaGanancia.Text = "...";
+            this.btnCuentaGanancia.UseVisualStyleBackColor = true;
+            // 
+            // Clave
+            // 
+            this.Clave.DataPropertyName = "Clave";
+            this.Clave.FillWeight = 50F;
+            this.Clave.HeaderText = "Clave";
+            this.Clave.Name = "Clave";
+            this.Clave.ReadOnly = true;
+            this.Clave.Width = 50;
+            // 
+            // Descripcion
+            // 
+            this.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Descripcion.DataPropertyName = "Descripcion";
+            this.Descripcion.HeaderText = "Descripción";
+            this.Descripcion.Name = "Descripcion";
+            this.Descripcion.ReadOnly = true;
+            this.Descripcion.Width = 88;
+            // 
+            // DepresiacionNormal
+            // 
+            this.DepresiacionNormal.DataPropertyName = "DepresiacionNormal";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle1.Format = "N4";
+            dataGridViewCellStyle1.NullValue = "0.00";
+            this.DepresiacionNormal.DefaultCellStyle = dataGridViewCellStyle1;
+            this.DepresiacionNormal.HeaderText = "Dep. normal";
+            this.DepresiacionNormal.Name = "DepresiacionNormal";
+            this.DepresiacionNormal.ReadOnly = true;
+            // 
+            // DepresiacionInmediata
+            // 
+            this.DepresiacionInmediata.DataPropertyName = "DepresiacionInmediata";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Format = "N4";
+            this.DepresiacionInmediata.DefaultCellStyle = dataGridViewCellStyle2;
+            this.DepresiacionInmediata.HeaderText = "Dep. inmediata";
+            this.DepresiacionInmediata.Name = "DepresiacionInmediata";
+            this.DepresiacionInmediata.ReadOnly = true;
+            // 
+            // MaximoDepresiacion
+            // 
+            this.MaximoDepresiacion.DataPropertyName = "MaximoDepresiacion";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.Format = "N4";
+            this.MaximoDepresiacion.DefaultCellStyle = dataGridViewCellStyle3;
+            this.MaximoDepresiacion.HeaderText = "Máx. ded.";
+            this.MaximoDepresiacion.Name = "MaximoDepresiacion";
+            this.MaximoDepresiacion.ReadOnly = true;
+            // 
+            // MetodoDepresiacion
+            // 
+            this.MetodoDepresiacion.DataPropertyName = "MetodoDepresiacion";
+            this.MetodoDepresiacion.HeaderText = "Método";
+            this.MetodoDepresiacion.Name = "MetodoDepresiacion";
+            this.MetodoDepresiacion.ReadOnly = true;
+            // 
+            // DepresiacionProyectada
+            // 
+            this.DepresiacionProyectada.DataPropertyName = "DepresiacionProyectada";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.Format = "N4";
+            this.DepresiacionProyectada.DefaultCellStyle = dataGridViewCellStyle4;
+            this.DepresiacionProyectada.HeaderText = "Dep. proyectada";
+            this.DepresiacionProyectada.Name = "DepresiacionProyectada";
+            this.DepresiacionProyectada.ReadOnly = true;
+            // 
+            // IdMoneda
+            // 
+            this.IdMoneda.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.IdMoneda.DataPropertyName = "IdMoneda";
+            this.IdMoneda.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.Nothing;
+            this.IdMoneda.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.IdMoneda.HeaderText = "Moneda";
+            this.IdMoneda.Name = "IdMoneda";
+            this.IdMoneda.ReadOnly = true;
+            this.IdMoneda.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.IdMoneda.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.IdMoneda.Width = 71;
             // 
             // ActivoFijoTipoCatalogoForm
             // 
@@ -427,5 +578,17 @@
         private System.Windows.Forms.TextBox txtCtaGastos;
         private System.Windows.Forms.TextBox txtCtaGan;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btnCuentaGastos;
+        private System.Windows.Forms.Button btnCuentaDepresia;
+        private System.Windows.Forms.Button btnCuentaActivo;
+        private System.Windows.Forms.Button btnCuentaGanancia;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Clave;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DepresiacionNormal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DepresiacionInmediata;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MaximoDepresiacion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MetodoDepresiacion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DepresiacionProyectada;
+        private System.Windows.Forms.DataGridViewComboBoxColumn IdMoneda;
     }
 }

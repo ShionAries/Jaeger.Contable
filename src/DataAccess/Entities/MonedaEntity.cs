@@ -8,7 +8,7 @@ namespace Jaeger.Contable.DataAccess.Entities {
     [SugarTable("MONEDAS")]
     public sealed class MonedaEntity {
         [SugarColumn(ColumnName = "Moneda", IsPrimaryKey = true, IsNullable = false)] 
-        public short IdMoneda { get; set; }
+        public int IdMoneda { get; set; }
 
         /// <summary>
         /// obtener o establecer nombre de la moneda

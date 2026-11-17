@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Jaeger.Contable.Application.Contracts;
 using Jaeger.Contable.Domain.Entities;
+using Jaeger.Contable.WinForms.Context;
 
 namespace Jaeger.Contable.WinForms.Forms {
     /// <summary>
@@ -58,9 +59,9 @@ namespace Jaeger.Contable.WinForms.Forms {
             dtFecha.Format = DateTimePickerFormat.Short;
             dtFecha.Enabled = false;
 
-            ConfigurarDecimal(numTipoCambio, 6);
+            numTipoCambio.ToNumericUpDown(6);
 
-            ConfigurarDecimal(numMonto, 6);
+            numMonto.ToNumericUpDown(6);
 
             txtDespAuto.MaxLength = 1;
 
@@ -86,14 +87,14 @@ namespace Jaeger.Contable.WinForms.Forms {
             };
         }
 
-        private static void ConfigurarDecimal(NumericUpDown control, int decimales) {
-            control.DecimalPlaces = decimales;
-            control.Maximum = 999999999999999m;
-            control.Minimum = -999999999999999m;
-            control.Increment = 0.000001m;
-            control.ThousandsSeparator = true;
-            control.TextAlign = HorizontalAlignment.Right;
-        }
+        //private static void ConfigurarDecimal(NumericUpDown control, int decimales) {
+        //    control.DecimalPlaces = decimales;
+        //    control.Maximum = 999999999999999m;
+        //    control.Minimum = -999999999999999m;
+        //    control.Increment = 0.000001m;
+        //    control.ThousandsSeparator = true;
+        //    control.TextAlign = HorizontalAlignment.Right;
+        //}
 
         private async Task CargarAsync() {
             try {

@@ -16,7 +16,7 @@ namespace Jaeger.Contable.DataAccess.Mappers {
                 CuentaDepresiacion = x.CTADEPRE,
                 CuentaGastos = x.CTAGASTOS,
                 CuentaGanancias = x.CTAPERGAN,
-                Moneda = x.QUEMONEDA
+                IdMoneda = x.QUEMONEDA
             };
         }
 
@@ -33,7 +33,7 @@ namespace Jaeger.Contable.DataAccess.Mappers {
                 CTADEPRE = x.CuentaDepresiacion,
                 CTAGASTOS = x.CuentaGastos,
                 CTAPERGAN = x.CuentaGanancias,
-                QUEMONEDA = x.Moneda
+                QUEMONEDA = x.IdMoneda
             };
         }
     }
