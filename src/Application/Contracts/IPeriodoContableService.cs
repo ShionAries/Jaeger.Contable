@@ -11,6 +11,8 @@ namespace Jaeger.Contable.Application.Contracts {
         //Task<PeriodoContable> ObtenerAsync(short ejercicio, short periodo);
         Task<List<PeriodoContable>> ObtenerTodosAsync(short ejercicio);
         Task<List<short>> ObtenerEjerciciosAsync();
+        Task<int> CrearEjercicioAsync(short ejercicio);
+        Task ActualizarOrdenAsync(short ejercicio, IList<short> periodosOrdenados);
         Task CerrarAsync(short ejercicio, short periodo);
         Task AbrirAsync(short ejercicio, short periodo);
     }

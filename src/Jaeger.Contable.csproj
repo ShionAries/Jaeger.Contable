@@ -92,6 +92,7 @@
     <Compile Include="DataAccess\Mappers\ConceptoMapper.cs" />
     <Compile Include="DataAccess\Mappers\DepartamentoMapper.cs" />
     <Compile Include="DataAccess\Mappers\MonedaMapper.cs" />
+    <Compile Include="DataAccess\Mappers\PeriodoContableMapper.cs" />
     <Compile Include="DataAccess\Mappers\PolizaMapper.cs" />
     <Compile Include="DataAccess\Mappers\ActivoFijoTipoMapper.cs" />
     <Compile Include="DataAccess\Mappers\TipoPolizaMapper.cs" />
@@ -207,7 +208,7 @@
     <Compile Include="DataAccess\Context\MariaDbContext.cs" />
     <Compile Include="DataAccess\DataAccessException.cs" />
     <Compile Include="DataAccess\Entities\ActivoFijoEntity.cs" />
-    <Compile Include="DataAccess\Entities\AdmperEntity.cs" />
+    <Compile Include="DataAccess\Entities\PeriodoContableEntity.cs" />
     <Compile Include="DataAccess\Entities\Auxiliar25Entity.cs" />
     <Compile Include="DataAccess\Entities\CcostosEntity.cs" />
     <Compile Include="DataAccess\Entities\CgruposEntity.cs" />
@@ -379,7 +380,7 @@
     <Compile Include="WinForms\Forms\PeriodoContabilizacionForm.Designer.cs">
       <DependentUpon>PeriodoContabilizacionForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="WinForms\Forms\PeriodoContableMantenimientoForm.cs">
+    <Compile Include="WinForms\Forms\PeriodoContableAdministrarForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="WinForms\Forms\PolizaCapturaForm.cs">

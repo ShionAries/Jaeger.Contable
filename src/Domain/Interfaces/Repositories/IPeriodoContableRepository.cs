@@ -8,6 +8,8 @@ namespace Jaeger.Contable.Domain.Interfaces.Repositories {
         Task<PeriodoContable> ObtenerAsync(short ejercicio, short periodo);
         Task<List<PeriodoContable>> ObtenerTodosAsync(short ejercicio);
         Task<List<short>> ObtenerEjerciciosAsync();
+        Task<int> CrearEjercicioAsync(short ejercicio);
+        Task ActualizarOrdenAsync(short ejercicio, IList<short> periodosOrdenados);
         Task ActualizarCierreAsync(short ejercicio, short periodo, bool cerrado);
     }
 }

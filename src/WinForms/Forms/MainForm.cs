@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Windows.Forms;
 using Jaeger.Contable.Application.Contracts;
 using Jaeger.Contable.Forms;
@@ -68,10 +68,10 @@ namespace Jaeger.Contable {
                     form.ShowDialog(this);
             };
 
-            this.mCatalogosPartida.Click += (s, e) => {
-                if (!EnsureAvailable(_application.CatalogosPartidaService, this, "El servicio de catálogos de partidas no está disponible.", "Catálogos"))
+            this.mPeriodosContables.Click += (s, e) => {
+                if (!EnsureAvailable(_application.PeriodoContableService, this, "El servicio de periodos contables no está disponible.", "Periodos contables"))
                     return;
-                using (var form = new PeriodoContableMantenimientoForm(_application.PeriodoContableService))
+                using (var form = new PeriodoContableAdministrarForm(_application.PeriodoContableService))
                     form.ShowDialog(this);
             };
 
@@ -89,7 +89,7 @@ namespace Jaeger.Contable {
                     form.ShowDialog(this);
             };
 
-            this.mMonedas.Click += (s, e) => {
+            this.bMonedas.Click += (s, e) => {
                 if (!EnsureAvailable(_application.MonedaService, this, "El servicio de monedas no está disponible.", "Monedas"))
                     return;
                 using (var form = new MonedaCatalogoForm(_application.MonedaService))
@@ -140,7 +140,7 @@ namespace Jaeger.Contable {
                 //return string.Format("Auditoría CTARUB: {0} válidas, {1} con errores de {2} relaciones.", resultado.Validas, resultado.Invalidas, resultado.Total);
             };
 
-            this.mDepartamentos.Click += async (s, e) => {
+            this.bDepartamentos.Click += async (s, e) => {
                 if (!EnsureAvailable(_application.DepartamentoService, this, "El servicio de departamentos no está disponible.", "Departamentos"))
                     return;
                 using (var form = new DepartamentoCatalogoForm(_application.DepartamentoService))

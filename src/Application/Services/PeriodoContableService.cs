@@ -28,6 +28,40 @@ namespace Jaeger.Contable.Application.Services {
             return await _repository.ObtenerEjerciciosAsync();
         }
 
+        /// <summary>
+        /// Crea los periodos faltantes del ejercicio contable (1 a 14).
+        /// Los registros existentes se conservan sin modificaciones.
+        /// </summary>
+        public async Task<int> CrearEjercicioAsync(short ejercicio) {
+            if (ejercicio <= 0)
+                throw new ArgumentOutOfRangeException(nameof(ejercicio));
+
+            return await _repository.CrearEjercicioAsync(ejercicio);
+        }
+
+        /// <summary>
+        /// Guarda el orden visual de los periodos del ejercicio.
+        /// ORDENADO se utiliza exclusivamente como criterio de ordenamiento.
+        /// </summary>
+        public async Task ActualizarOrdenAsync(short ejercicio, IList<short> periodosOrdenados) {
+            if (ejercicio <= 0)
+                throw new ArgumentOutOfRangeException(nameof(ejercicio));
+            if (periodosOrdenados == null)
+                throw new ArgumentNullException(nameof(periodosOrdenados));
+            if (periodosOrdenados.Count > 14)
+                throw new ArgumentException("Un ejercicio no puede contener más de 14 periodos.", nameof(periodosOrdenados));
+
+            var unicos = new HashSet<short>();
+            foreach (short periodo in periodosOrdenados) {
+                if (periodo < 1 || periodo > 14)
+                    throw new ArgumentOutOfRangeException(nameof(periodosOrdenados), "Todos los periodos deben estar entre 1 y 14.");
+                if (!unicos.Add(periodo))
+                    throw new ArgumentException("La lista contiene periodos duplicados.", nameof(periodosOrdenados));
+            }
+
+            await _repository.ActualizarOrdenAsync(ejercicio, periodosOrdenados);
+        }
+
         public async Task CerrarAsync(short ejercicio, short periodo) {
             await CambiarCierreAsync(ejercicio, periodo, true);
         }
