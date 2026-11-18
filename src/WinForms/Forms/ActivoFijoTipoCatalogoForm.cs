@@ -5,7 +5,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Jaeger.Contable.Application.Contracts;
-using Jaeger.Contable.DataAccess.Entities;
 using Jaeger.Contable.Domain.Entities;
 using Jaeger.Contable.WinForms.Context;
 
@@ -47,9 +46,6 @@ namespace Jaeger.Contable.WinForms.Forms {
             txtDescripcion.MaxLength = 20;
 
             txtMetodo.MaxLength = 1;
-
-            numMoneda.Minimum = 0;
-            numMoneda.Maximum = short.MaxValue;
 
             numDedNormal.ToNumericUpDown(4);
             numDedImed.ToNumericUpDown(4);
@@ -109,7 +105,7 @@ namespace Jaeger.Contable.WinForms.Forms {
             txtCtaDepre.Text = item.CuentaDepresiacion ?? string.Empty;
             txtCtaGastos.Text = item.CuentaGastos ?? string.Empty;
             txtCtaGan.Text = item.CuentaGanancias ?? string.Empty;
-            numMoneda.Value = item.IdMoneda ?? 0;
+            cboMoneda.SelectedValue = item.IdMoneda ?? 0;
             numClave.Enabled = false;
             _nuevo = false;
         }
@@ -165,7 +161,9 @@ namespace Jaeger.Contable.WinForms.Forms {
             _monedas = (monedas ?? new List<Moneda>())
                 .OrderBy(x => x.Nombre)
                 .ToList();
-
+            cboMoneda.DataSource = _monedas;
+            cboMoneda.DisplayMember = "Nombre";
+            cboMoneda.ValueMember = "IdMoneda";
             ActualizarCatalogoCombo("IdMoneda", _monedas);
             _catalogosCargados = true;
         }
@@ -202,7 +200,7 @@ namespace Jaeger.Contable.WinForms.Forms {
                 CuentaDepresiacion = txtCtaDepre.Text,
                 CuentaGastos = txtCtaGastos.Text,
                 CuentaGanancias = txtCtaGan.Text,
-                IdMoneda = numMoneda.Value == 0 ? (short?)null : Convert.ToInt16(numMoneda.Value)
+                IdMoneda = cboMoneda.SelectedValue == null || Convert.ToInt16(cboMoneda.SelectedValue) == 0 ? (short?)null : Convert.ToInt16(cboMoneda.SelectedValue)
             };
         }
 
@@ -218,7 +216,7 @@ namespace Jaeger.Contable.WinForms.Forms {
             txtCtaDepre.Clear();
             txtCtaGastos.Clear();
             txtCtaGan.Clear();
-            numMoneda.Value = 0;
+            cboMoneda.SelectedValue = 0;
         }
 
         private void ActualizarCatalogoCombo(string nombreColumna, object fuente) {
