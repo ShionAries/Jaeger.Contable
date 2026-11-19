@@ -23,11 +23,23 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblBuscar = new System.Windows.Forms.Label();
             this.txtBuscar = new System.Windows.Forms.TextBox();
             this.gridData = new System.Windows.Forms.DataGridView();
+            this.IdMoneda = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Prefijo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TipoCambio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Monto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DESPAUTO = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CveSAT = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblCodigo = new System.Windows.Forms.Label();
-            this.numMoneda = new System.Windows.Forms.NumericUpDown();
+            this.codigo = new System.Windows.Forms.TextBox();
             this.lblNombre = new System.Windows.Forms.Label();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.lblPrefijo = new System.Windows.Forms.Label();
@@ -48,7 +60,6 @@
             this.btnEliminar = new System.Windows.Forms.Button();
             this.btnCerrar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gridData)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numMoneda)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTipoCambio)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numMonto)).BeginInit();
             this.SuspendLayout();
@@ -59,7 +70,7 @@
             this.lblBuscar.Location = new System.Drawing.Point(14, 16);
             this.lblBuscar.Name = "lblBuscar";
             this.lblBuscar.Size = new System.Drawing.Size(40, 13);
-            this.lblBuscar.TabIndex = 0;
+            this.lblBuscar.TabIndex = 14;
             this.lblBuscar.Text = "Buscar";
             // 
             // txtBuscar
@@ -67,16 +78,105 @@
             this.txtBuscar.Location = new System.Drawing.Point(60, 12);
             this.txtBuscar.Name = "txtBuscar";
             this.txtBuscar.Size = new System.Drawing.Size(397, 20);
-            this.txtBuscar.TabIndex = 1;
+            this.txtBuscar.TabIndex = 0;
             // 
             // gridData
             // 
             this.gridData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.IdMoneda,
+            this.Nombre,
+            this.Prefijo,
+            this.Fecha,
+            this.TipoCambio,
+            this.Monto,
+            this.DESPAUTO,
+            this.CveSAT});
             this.gridData.Location = new System.Drawing.Point(12, 38);
             this.gridData.Name = "gridData";
             this.gridData.RowHeadersVisible = false;
             this.gridData.Size = new System.Drawing.Size(678, 150);
-            this.gridData.TabIndex = 2;
+            this.gridData.TabIndex = 1;
+            // 
+            // IdMoneda
+            // 
+            this.IdMoneda.DataPropertyName = "IdMoneda";
+            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle25.Format = "000";
+            dataGridViewCellStyle25.NullValue = null;
+            this.IdMoneda.DefaultCellStyle = dataGridViewCellStyle25;
+            this.IdMoneda.FillWeight = 60F;
+            this.IdMoneda.HeaderText = "Clave";
+            this.IdMoneda.Name = "IdMoneda";
+            this.IdMoneda.ReadOnly = true;
+            this.IdMoneda.Width = 60;
+            // 
+            // Nombre
+            // 
+            this.Nombre.DataPropertyName = "Nombre";
+            this.Nombre.FillWeight = 180F;
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.ReadOnly = true;
+            this.Nombre.Width = 180;
+            // 
+            // Prefijo
+            // 
+            this.Prefijo.DataPropertyName = "Prefijo";
+            this.Prefijo.FillWeight = 80F;
+            this.Prefijo.HeaderText = "Prefijo";
+            this.Prefijo.Name = "Prefijo";
+            this.Prefijo.ReadOnly = true;
+            this.Prefijo.Width = 80;
+            // 
+            // Fecha
+            // 
+            this.Fecha.DataPropertyName = "Fecha";
+            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle26.Format = "dd/MM/yyyy";
+            dataGridViewCellStyle26.NullValue = null;
+            this.Fecha.DefaultCellStyle = dataGridViewCellStyle26;
+            this.Fecha.HeaderText = "Fecha";
+            this.Fecha.Name = "Fecha";
+            this.Fecha.ReadOnly = true;
+            // 
+            // TipoCambio
+            // 
+            this.TipoCambio.DataPropertyName = "TipoCambio";
+            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle27.Format = "N2";
+            dataGridViewCellStyle27.NullValue = null;
+            this.TipoCambio.DefaultCellStyle = dataGridViewCellStyle27;
+            this.TipoCambio.HeaderText = "T. Cambio";
+            this.TipoCambio.Name = "TipoCambio";
+            this.TipoCambio.ReadOnly = true;
+            // 
+            // Monto
+            // 
+            this.Monto.DataPropertyName = "Monto";
+            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle28.Format = "N2";
+            dataGridViewCellStyle28.NullValue = null;
+            this.Monto.DefaultCellStyle = dataGridViewCellStyle28;
+            this.Monto.HeaderText = "Monto";
+            this.Monto.Name = "Monto";
+            this.Monto.ReadOnly = true;
+            // 
+            // DESPAUTO
+            // 
+            this.DESPAUTO.DataPropertyName = "DESPAUTO";
+            this.DESPAUTO.FillWeight = 80F;
+            this.DESPAUTO.HeaderText = "Desp. auto";
+            this.DESPAUTO.Name = "DESPAUTO";
+            this.DESPAUTO.ReadOnly = true;
+            this.DESPAUTO.Width = 80;
+            // 
+            // CveSAT
+            // 
+            this.CveSAT.DataPropertyName = "CveSAT";
+            this.CveSAT.HeaderText = "Cve. SAT";
+            this.CveSAT.Name = "CveSAT";
+            this.CveSAT.ReadOnly = true;
             // 
             // lblCodigo
             // 
@@ -87,17 +187,19 @@
             this.lblCodigo.TabIndex = 0;
             this.lblCodigo.Text = "Código";
             // 
-            // numMoneda
+            // codigo
             // 
-            this.numMoneda.Location = new System.Drawing.Point(55, 202);
-            this.numMoneda.Name = "numMoneda";
-            this.numMoneda.Size = new System.Drawing.Size(89, 20);
-            this.numMoneda.TabIndex = 3;
+            this.codigo.Location = new System.Drawing.Point(55, 202);
+            this.codigo.Name = "codigo";
+            this.codigo.ReadOnly = true;
+            this.codigo.Size = new System.Drawing.Size(86, 20);
+            this.codigo.TabIndex = 2;
+            this.codigo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lblNombre
             // 
             this.lblNombre.AutoSize = true;
-            this.lblNombre.Location = new System.Drawing.Point(150, 206);
+            this.lblNombre.Location = new System.Drawing.Point(147, 206);
             this.lblNombre.Name = "lblNombre";
             this.lblNombre.Size = new System.Drawing.Size(47, 13);
             this.lblNombre.TabIndex = 0;
@@ -105,10 +207,10 @@
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(203, 202);
+            this.txtNombre.Location = new System.Drawing.Point(200, 202);
             this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(336, 20);
-            this.txtNombre.TabIndex = 1;
+            this.txtNombre.Size = new System.Drawing.Size(339, 20);
+            this.txtNombre.TabIndex = 3;
             // 
             // lblPrefijo
             // 
@@ -138,7 +240,7 @@
             // chkFecha
             // 
             this.chkFecha.AutoSize = true;
-            this.chkFecha.Location = new System.Drawing.Point(63, 234);
+            this.chkFecha.Location = new System.Drawing.Point(55, 235);
             this.chkFecha.Name = "chkFecha";
             this.chkFecha.Size = new System.Drawing.Size(78, 17);
             this.chkFecha.TabIndex = 4;
@@ -147,9 +249,9 @@
             // 
             // dtFecha
             // 
-            this.dtFecha.Location = new System.Drawing.Point(147, 232);
+            this.dtFecha.Location = new System.Drawing.Point(139, 232);
             this.dtFecha.Name = "dtFecha";
-            this.dtFecha.Size = new System.Drawing.Size(200, 20);
+            this.dtFecha.Size = new System.Drawing.Size(208, 20);
             this.dtFecha.TabIndex = 5;
             // 
             // lblTipoCambio
@@ -167,6 +269,7 @@
             this.numTipoCambio.Name = "numTipoCambio";
             this.numTipoCambio.Size = new System.Drawing.Size(97, 20);
             this.numTipoCambio.TabIndex = 3;
+            this.numTipoCambio.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label8
             // 
@@ -183,6 +286,7 @@
             this.numMonto.Name = "numMonto";
             this.numMonto.Size = new System.Drawing.Size(97, 20);
             this.numMonto.TabIndex = 3;
+            this.numMonto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // lblDespAuto
             // 
@@ -269,7 +373,7 @@
             this.Controls.Add(this.chkFecha);
             this.Controls.Add(this.numMonto);
             this.Controls.Add(this.numTipoCambio);
-            this.Controls.Add(this.numMoneda);
+            this.Controls.Add(this.codigo);
             this.Controls.Add(this.gridData);
             this.Controls.Add(this.txtPrefijo);
             this.Controls.Add(this.txtClassSat);
@@ -291,7 +395,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "MonedaCatalogoForm";
             ((System.ComponentModel.ISupportInitialize)(this.gridData)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numMoneda)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTipoCambio)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numMonto)).EndInit();
             this.ResumeLayout(false);
@@ -305,7 +408,7 @@
         private System.Windows.Forms.TextBox txtBuscar;
         private System.Windows.Forms.DataGridView gridData;
         private System.Windows.Forms.Label lblCodigo;
-        private System.Windows.Forms.NumericUpDown numMoneda;
+        private System.Windows.Forms.TextBox codigo;
         private System.Windows.Forms.Label lblNombre;
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Label lblPrefijo;
@@ -325,5 +428,13 @@
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.Button btnCerrar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdMoneda;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Prefijo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Fecha;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TipoCambio;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Monto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DESPAUTO;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CveSAT;
     }
 }

@@ -31,14 +31,6 @@ namespace Jaeger.Contable.WinForms.Forms {
             gridData.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             gridData.MultiSelect = false;
             gridData.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            gridData.Columns.Add(CrearColumna("IdMoneda", "Código", 60));
-            gridData.Columns.Add(CrearColumna("Nombre", "Nombre", 180));
-            gridData.Columns.Add(CrearColumna("Prefijo", "Prefijo", 80));
-            gridData.Columns.Add(CrearColumna("Fecha", "Fecha", 110, "dd/MM/yyyy"));
-            gridData.Columns.Add(CrearColumna("TipoCambio", "Tipo cambio", 100, "N6"));
-            gridData.Columns.Add(CrearColumna("Monto", "Monto", 100, "N6"));
-            gridData.Columns.Add(CrearColumna("DESPAUTO", "Desp. auto", 80));
-            gridData.Columns.Add(CrearColumna("CveSAT", "SAT", 80));
             gridData.CellDoubleClick += (s, e) => CargarSeleccion();
             gridData.KeyDown += (s, e) => {
                 if (e.KeyCode == Keys.Enter) {
@@ -46,9 +38,6 @@ namespace Jaeger.Contable.WinForms.Forms {
                     CargarSeleccion();
                 }
             };
-
-            numMoneda.Maximum = short.MaxValue;
-            numMoneda.Minimum = 0;
 
             txtNombre.MaxLength = 20;
 
@@ -59,9 +48,9 @@ namespace Jaeger.Contable.WinForms.Forms {
             dtFecha.Format = DateTimePickerFormat.Short;
             dtFecha.Enabled = false;
 
-            numTipoCambio.ToNumericUpDown(6);
+            numTipoCambio.ToNumericUpDown(4);
 
-            numMonto.ToNumericUpDown(6);
+            numMonto.ToNumericUpDown(2);
 
             txtDespAuto.MaxLength = 1;
 
@@ -75,26 +64,6 @@ namespace Jaeger.Contable.WinForms.Forms {
             AcceptButton = btnGuardar;
             Shown += async (s, e) => await CargarAsync();
         }
-
-        private static DataGridViewTextBoxColumn CrearColumna(string propiedad, string titulo, int minimo, string formato = null) {
-            return new DataGridViewTextBoxColumn {
-                DataPropertyName = propiedad,
-                HeaderText = titulo,
-                Name = propiedad,
-                MinimumWidth = minimo,
-                ReadOnly = true,
-                DefaultCellStyle = { Format = formato }
-            };
-        }
-
-        //private static void ConfigurarDecimal(NumericUpDown control, int decimales) {
-        //    control.DecimalPlaces = decimales;
-        //    control.Maximum = 999999999999999m;
-        //    control.Minimum = -999999999999999m;
-        //    control.Increment = 0.000001m;
-        //    control.ThousandsSeparator = true;
-        //    control.TextAlign = HorizontalAlignment.Right;
-        //}
 
         private async Task CargarAsync() {
             try {
@@ -120,7 +89,7 @@ namespace Jaeger.Contable.WinForms.Forms {
             if (item == null)
                 return;
 
-            numMoneda.Value = item.IdMoneda;
+            codigo.Text = item.IdMoneda.ToString();
             txtNombre.Text = item.Nombre ?? string.Empty;
             txtPrefijo.Text = item.Prefijo ?? string.Empty;
             chkFecha.Checked = item.Fecha.HasValue;
@@ -129,15 +98,15 @@ namespace Jaeger.Contable.WinForms.Forms {
             numMonto.Value = ToDecimal(item.Monto);
             txtDespAuto.Text = item.DESPAUTO ?? string.Empty;
             txtClassSat.Text = item.CveSAT ?? string.Empty;
-            numMoneda.Enabled = false;
+            codigo.Enabled = false;
             IsNuevo = false;
         }
 
         private void Nuevo() {
             Limpiar();
             IsNuevo = true;
-            numMoneda.Enabled = true;
-            numMoneda.Focus();
+            codigo.Enabled = true;
+            codigo.Focus();
         }
 
         private async Task GuardarAsync() {
@@ -150,7 +119,7 @@ namespace Jaeger.Contable.WinForms.Forms {
 
                 MessageBox.Show(this, IsNuevo ? "Moneda creada correctamente." : "Moneda actualizada correctamente.", "Monedas", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 IsNuevo = false;
-                numMoneda.Enabled = false;
+                codigo.Enabled = false;
                 await CargarAsync();
             } catch (ArgumentException ex) {
                 MessageBox.Show(this, ex.Message, "Monedas", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -163,7 +132,7 @@ namespace Jaeger.Contable.WinForms.Forms {
 
         private async Task EliminarAsync() {
             try {
-                short codigo = Convert.ToInt16(numMoneda.Value);
+                short codigo = Convert.ToInt16(this.codigo.Text);
                 if (MessageBox.Show(this, "¿Desea eliminar la moneda seleccionada?", "Monedas", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
                     return;
 
@@ -181,7 +150,7 @@ namespace Jaeger.Contable.WinForms.Forms {
 
         private Moneda ObtenerModelo() {
             return new Moneda {
-                IdMoneda = Convert.ToInt16(numMoneda.Value),
+                IdMoneda = Convert.ToInt16(codigo.Text),
                 Nombre = txtNombre.Text,
                 Prefijo = txtPrefijo.Text,
                 Fecha = chkFecha.Checked ? dtFecha.Value.Date : (DateTime?)null,
@@ -201,7 +170,7 @@ namespace Jaeger.Contable.WinForms.Forms {
         }
 
         private void Limpiar() {
-            numMoneda.Value = 0;
+            codigo.Text = string.Empty;
             txtNombre.Clear();
             txtPrefijo.Clear();
             chkFecha.Checked = false;
