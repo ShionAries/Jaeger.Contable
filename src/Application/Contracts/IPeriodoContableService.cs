@@ -8,7 +8,6 @@ namespace Jaeger.Contable.Application.Contracts {
     /// </summary>
     public interface IPeriodoContableService {
         Task ValidarRegistroAsync(short ejercicio, short periodo);
-        //Task<PeriodoContable> ObtenerAsync(short ejercicio, short periodo);
         Task<List<PeriodoContable>> ObtenerTodosAsync(short ejercicio);
         Task<List<short>> ObtenerEjerciciosAsync();
         Task<int> CrearEjercicioAsync(short ejercicio);

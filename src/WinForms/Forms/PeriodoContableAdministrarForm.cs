@@ -1,71 +1,67 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Jaeger.Contable.Application.Contracts;
 using Jaeger.Contable.Domain.Entities;
 
-namespace Jaeger.Contable.Forms {
-    /// <summary>Consulta, crea y administra los periodos contables almacenados en ADMPER.</summary>
-    public sealed class PeriodoContableAdministrarForm : Form {
+namespace Jaeger.Contable.WinForms.Forms {
+    /// <summary>
+    /// Consulta, crea y administra los periodos contables almacenados en ADMPER.
+    /// </summary>
+    public partial class PeriodoContableAdministrarForm : Form {
         private readonly IPeriodoContableService _service;
-        private readonly NumericUpDown _ejercicio;
-        private readonly DataGridView _grid;
-        private readonly Button _btnCerrar;
-        private readonly Button _btnAbrir;
-        private readonly Button _btnActualizar;
-        private readonly Button _btnCrearEjercicio;
-        private readonly Button _btnSubir;
-        private readonly Button _btnBajar;
-        private readonly Label _estado;
-        private List<PeriodoRow> _rows = new List<PeriodoRow>();
+        private List<PeriodoContable> _rows = new List<PeriodoContable>();
 
         public PeriodoContableAdministrarForm(IPeriodoContableService service) {
             _service = service ?? throw new ArgumentNullException(nameof(service));
-            Text = "Periodos contables"; Width = 760; Height = 430; StartPosition = FormStartPosition.CenterParent;
+            InitializeComponent();
+            Text = "Periodos contables";
+            StartPosition = FormStartPosition.CenterParent;
 
-            var top = new FlowLayoutPanel { Dock = DockStyle.Top, Height = 42, Padding = new Padding(8) };
-            top.Controls.Add(new Label { Text = "Ejercicio:", AutoSize = true, Margin = new Padding(3, 7, 3, 3) });
-            _ejercicio = new NumericUpDown { Minimum = 1, Maximum = 9999, Width = 90, Value = DateTime.Now.Year };
-            top.Controls.Add(_ejercicio);
-            _btnActualizar = new Button { Text = "Actualizar", Width = 95 };
-            _btnActualizar.Click += async (s,e) => await CargarAsync(); top.Controls.Add(_btnActualizar);
-            _btnCrearEjercicio = new Button { Text = "Crear ejercicio", Width = 110 };
-            _btnCrearEjercicio.Click += async (s,e) => await CrearEjercicioAsync();
-            top.Controls.Add(_btnCrearEjercicio);
-            _estado = new Label { AutoSize = true, Margin = new Padding(12, 7, 3, 3) }; top.Controls.Add(_estado);
-            Controls.Add(top);
+            Ejercicio.Minimum = 1;
+            Ejercicio.Maximum = 9999;
+            Ejercicio.Value = DateTime.Now.Year;
 
-            _grid = new DataGridView { Dock = DockStyle.Fill, ReadOnly = true, AutoGenerateColumns = false, AllowUserToAddRows = false, SelectionMode = DataGridViewSelectionMode.FullRowSelect };
-            _grid.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "Periodo", HeaderText = "Periodo", Width = 70 });
-            _grid.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "Ejercicio", HeaderText = "Ejercicio", Width = 80 });
-            _grid.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "EstadoTexto", HeaderText = "Estado", Width = 100 });
-            _grid.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "CtPolizas", HeaderText = "Pólizas", Width = 90 });
-            _grid.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "Ordenado", HeaderText = "Orden", Width = 70 });
-            Controls.Add(_grid);
+            btnActualizar.Click += async (s, e) => await CargarAsync();
 
-            var bottom = new FlowLayoutPanel { Dock = DockStyle.Bottom, Height = 45, FlowDirection = FlowDirection.RightToLeft, Padding = new Padding(8) };
-            _btnAbrir = new Button { Text = "Abrir periodo", Width = 110 }; _btnAbrir.Click += async (s,e) => await CambiarAsync(false); bottom.Controls.Add(_btnAbrir);
-            _btnCerrar = new Button { Text = "Cerrar periodo", Width = 110 }; _btnCerrar.Click += async (s,e) => await CambiarAsync(true); bottom.Controls.Add(_btnCerrar);
-            _btnBajar = new Button { Text = "Bajar", Width = 75 }; _btnBajar.Click += async (s,e) => await MoverSeleccionadoAsync(1); bottom.Controls.Add(_btnBajar);
-            _btnSubir = new Button { Text = "Subir", Width = 75 }; _btnSubir.Click += async (s,e) => await MoverSeleccionadoAsync(-1); bottom.Controls.Add(_btnSubir);
-            var cerrar = new Button { Text = "Cerrar ventana", Width = 110 }; cerrar.Click += (s,e) => Close(); bottom.Controls.Add(cerrar);
-            Controls.Add(bottom);
-            Shown += async (s,e) => await CargarAsync();
+            btnCrearEjercicio.Click += async (s, e) => await CrearEjercicioAsync();
+
+            gridData.ReadOnly = true;
+            gridData.AutoGenerateColumns = false;
+            gridData.AllowUserToAddRows = false;
+            gridData.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            var periodoColumn = this.gridData.Columns["Periodo"] as DataGridViewComboBoxColumn;
+            periodoColumn.DataPropertyName = "Periodo";
+            periodoColumn.ValueMember = "Numero";
+            periodoColumn.DisplayMember = "Nombre";
+            for (short i = 1; i <= 14; i++)
+                periodoColumn.Items.Add(new Domain.Models.PeriodoItem(i, ObtenerNombrePeriodo(i)));
+
+            btnAbrirPeriodo.Click += async (s, e) => await CambiarAsync(false);
+
+            btnCerrarPeriodo.Click += async (s, e) => await CambiarAsync(true);
+
+            btnBajar.Click += async (s, e) => await MoverSeleccionadoAsync(1);
+            
+            btnSubir.Click += async (s, e) => await MoverSeleccionadoAsync(-1);
+
+            btnCerrar.Click += (s, e) => Close();
+
+            Shown += async (s, e) => await CargarAsync();
         }
 
         private async Task CargarAsync() {
             try {
-                var items = await _service.ObtenerTodosAsync((short)_ejercicio.Value);
-                _rows = new List<PeriodoRow>(); foreach (var x in items) _rows.Add(new PeriodoRow(x));
-                _grid.DataSource = null;
-                _grid.DataSource = _rows;
-                _estado.Text = _rows.Count == 0 ? "Sin periodos" : "Periodos cargados";
+                _rows = await _service.ObtenerTodosAsync((short)Ejercicio.Value);
+                gridData.DataSource = null;
+                gridData.DataSource = _rows;
+                lblEstado.Text = _rows.Count == 0 ? "Sin periodos" : "Periodos cargados";
             } catch (Exception ex) { MostrarError(ex); }
         }
 
         private async Task CrearEjercicioAsync() {
-            short ejercicio = (short)_ejercicio.Value;
+            short ejercicio = (short)Ejercicio.Value;
             if (MessageBox.Show(this,
                 string.Format("Se crearán los periodos faltantes (01 a 14) del ejercicio {0}. Los registros existentes no se modificarán. ¿Deseas continuar?", ejercicio),
                 "Crear ejercicio contable", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
@@ -80,24 +76,22 @@ namespace Jaeger.Contable.Forms {
                         ? string.Format("El ejercicio {0} ya cuenta con sus 14 periodos.", ejercicio)
                         : string.Format("Se crearon {0} periodos para el ejercicio {1}.", creados, ejercicio),
                     "Periodos contables", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 MostrarError(ex);
-            }
-            finally {
+            } finally {
                 CambiarControles(true);
             }
         }
 
         private void CambiarControles(bool habilitar) {
-            _ejercicio.Enabled = habilitar;
-            _btnActualizar.Enabled = habilitar;
-            _btnCrearEjercicio.Enabled = habilitar;
-            _btnCerrar.Enabled = habilitar;
-            _btnAbrir.Enabled = habilitar;
-            _btnSubir.Enabled = habilitar;
-            _btnBajar.Enabled = habilitar;
-            _grid.Enabled = habilitar;
+            Ejercicio.Enabled = habilitar;
+            btnActualizar.Enabled = habilitar;
+            btnCrearEjercicio.Enabled = habilitar;
+            btnCerrarPeriodo.Enabled = habilitar;
+            btnAbrirPeriodo.Enabled = habilitar;
+            btnSubir.Enabled = habilitar;
+            btnBajar.Enabled = habilitar;
+            gridData.Enabled = habilitar;
         }
 
         private async Task MoverSeleccionadoAsync(int desplazamiento) {
@@ -111,7 +105,7 @@ namespace Jaeger.Contable.Forms {
                 return;
 
             var periodos = new List<short>();
-            var copia = new List<PeriodoRow>(_rows);
+            var copia = new List<PeriodoContable>(_rows);
             copia.RemoveAt(indice);
             copia.Insert(nuevoIndice, seleccionado);
             foreach (var row in copia)
@@ -119,32 +113,76 @@ namespace Jaeger.Contable.Forms {
 
             CambiarControles(false);
             try {
-                await _service.ActualizarOrdenAsync((short)_ejercicio.Value, periodos);
+                await _service.ActualizarOrdenAsync((short)Ejercicio.Value, periodos);
                 await CargarAsync();
-                if (nuevoIndice >= 0 && nuevoIndice < _grid.Rows.Count)
-                    _grid.CurrentCell = _grid.Rows[nuevoIndice].Cells[0];
-            }
-            catch (Exception ex) {
+                if (nuevoIndice >= 0 && nuevoIndice < gridData.Rows.Count)
+                    gridData.CurrentCell = gridData.Rows[nuevoIndice].Cells[0];
+            } catch (Exception ex) {
                 MostrarError(ex);
-            }
-            finally {
+            } finally {
                 CambiarControles(true);
             }
         }
 
         private async Task CambiarAsync(bool cerrar) {
-            var row = ObtenerSeleccionado(); if (row == null) { MessageBox.Show(this, "Selecciona un periodo.", "Periodos", MessageBoxButtons.OK, MessageBoxIcon.Information); return; }
+            var row = ObtenerSeleccionado();
+            if (row == null) {
+                MessageBox.Show(this, "Selecciona un periodo.", "Periodos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
             var accion = cerrar ? "cerrar" : "abrir";
-            if (MessageBox.Show(this, string.Format("¿Deseas {0} el periodo {1}?", accion, row.Periodo), "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) return;
-            try { if (cerrar) await _service.CerrarAsync(row.Ejercicio, row.Periodo); else await _service.AbrirAsync(row.Ejercicio, row.Periodo); await CargarAsync(); } catch (Exception ex) { MostrarError(ex); }
+            if (MessageBox.Show(this, string.Format("¿Deseas {0} el periodo {1}?", accion, row.Periodo), "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                return;
+            try {
+                if (cerrar)
+                    await _service.CerrarAsync(row.Ejercicio, row.Periodo);
+                else
+                    await _service.AbrirAsync(row.Ejercicio, row.Periodo);
+                await CargarAsync();
+            } catch (Exception ex) { MostrarError(ex); }
         }
 
-        private PeriodoRow ObtenerSeleccionado() { return _grid.CurrentRow == null ? null : _grid.CurrentRow.DataBoundItem as PeriodoRow; }
-        private void MostrarError(Exception ex) { MessageBox.Show(this, ex.Message, "Periodos contables", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+        private PeriodoContable ObtenerSeleccionado() {
+            return gridData.CurrentRow == null ? null : gridData.CurrentRow.DataBoundItem as PeriodoContable;
+        }
 
-        private sealed class PeriodoRow {
-            public short Periodo { get; private set; } public short Ejercicio { get; private set; } public string EstadoTexto { get; private set; } public int CtPolizas { get; private set; } public int Ordenado { get; private set; }
-            public PeriodoRow(PeriodoContable x) { Periodo=x.Periodo; Ejercicio=x.Ejercicio; EstadoTexto=x.EstaCerrado ? "CERRADO" : "ABIERTO"; CtPolizas=x.CtPolizas; Ordenado=x.Ordenado; }
+        private void MostrarError(Exception ex) {
+            MessageBox.Show(this, ex.Message, "Periodos contables", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private static string ObtenerNombrePeriodo(short periodo) {
+            switch (periodo) {
+                case 1:
+                    return "01 - Enero";
+                case 2:
+                    return "02 - Febrero";
+                case 3:
+                    return "03 - Marzo";
+                case 4:
+                    return "04 - Abril";
+                case 5:
+                    return "05 - Mayo";
+                case 6:
+                    return "06 - Junio";
+                case 7:
+                    return "07 - Julio";
+                case 8:
+                    return "08 - Agosto";
+                case 9:
+                    return "09 - Septiembre";
+                case 10:
+                    return "10 - Octubre";
+                case 11:
+                    return "11 - Noviembre";
+                case 12:
+                    return "12 - Diciembre";
+                case 13:
+                    return "13 - Ajuste";
+                case 14:
+                    return "14 - Cierre";
+                default:
+                    return periodo.ToString("00") + " - Periodo";
+            }
         }
     }
 }

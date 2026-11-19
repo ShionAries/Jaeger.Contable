@@ -104,6 +104,7 @@
     <Compile Include="Domain\Models\BalanzaComprobacionRequest.cs" />
     <Compile Include="Domain\Models\FilaAuditoria.cs" />
     <Compile Include="Domain\Interfaces\Repositories\IBalanzaComprobacionRepository.cs" />
+    <Compile Include="Domain\Models\PeriodoItem.cs" />
     <Compile Include="Domain\Models\SaldoCuentaEjercicio.cs" />
     <Compile Include="WinForms\Context\GridViewExtensions.cs" />
     <Compile Include="WinForms\Context\IPolizaCapturaMovimientoContext.cs" />
@@ -383,6 +384,9 @@
     <Compile Include="WinForms\Forms\PeriodoContableAdministrarForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="WinForms\Forms\PeriodoContableAdministrarForm.Designer.cs">
+      <DependentUpon>PeriodoContableAdministrarForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="WinForms\Forms\PolizaCapturaForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -502,6 +506,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\Forms\PeriodoContabilizacionForm.resx">
       <DependentUpon>PeriodoContabilizacionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\Forms\PeriodoContableAdministrarForm.resx">
+      <DependentUpon>PeriodoContableAdministrarForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\Forms\PolizaCapturaForm.resx">
       <DependentUpon>PolizaCapturaForm.cs</DependentUpon>
