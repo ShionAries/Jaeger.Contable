@@ -26,6 +26,9 @@ namespace Jaeger.Contable.Application.Contracts {
         IParametroEmpresaService ParametroEmpresaService { get; }
         IFolioContableService FolioContableService { get; }
         IBalanzaComprobacionService BalanzaComprobacionService { get; }
+        IAuxiliarCuentaService AuxiliarCuentaService { get; }
         IDepartamentoService DepartamentoService { get; }
+        ICentroCostosService CentroCostosService { get; }
+        ICGruposService CGruposService { get; }
     }
 }

@@ -80,15 +80,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application\Contracts\IAuxiliarCuentaService.cs" />
     <Compile Include="Application\Contracts\IBalanzaComprobacionService.cs" />
+    <Compile Include="Application\Contracts\ICentroCostosService.cs" />
+    <Compile Include="Application\Contracts\ICGruposService.cs" />
     <Compile Include="Application\Contracts\IContableApplication.cs" />
     <Compile Include="Application\Contracts\IDepartamentoService.cs" />
     <Compile Include="Application\Contracts\IParametroEmpresaService.cs" />
+    <Compile Include="Application\Services\AuxiliarCuentaService.cs" />
     <Compile Include="Application\Services\BalanzaComprobacionService.cs" />
+    <Compile Include="Application\Services\CentroCostosService.cs" />
+    <Compile Include="Application\Services\CGruposService.cs" />
     <Compile Include="Application\Services\DepartamentoService.cs" />
     <Compile Include="Application\Services\ParametroEmpresaService.cs" />
     <Compile Include="DataAccess\DependencyInjection\ContableApplication.cs" />
     <Compile Include="DataAccess\Mappers\ActivoFijoMapper.cs" />
+    <Compile Include="DataAccess\Mappers\AuxiliarMapper.cs" />
+    <Compile Include="DataAccess\Mappers\CentroCostosMapper.cs" />
+    <Compile Include="DataAccess\Mappers\CGrupoMapper.cs" />
     <Compile Include="DataAccess\Mappers\ConceptoMapper.cs" />
     <Compile Include="DataAccess\Mappers\DepartamentoMapper.cs" />
     <Compile Include="DataAccess\Mappers\MonedaMapper.cs" />
@@ -96,9 +105,20 @@
     <Compile Include="DataAccess\Mappers\PolizaMapper.cs" />
     <Compile Include="DataAccess\Mappers\ActivoFijoTipoMapper.cs" />
     <Compile Include="DataAccess\Mappers\TipoPolizaMapper.cs" />
+    <Compile Include="DataAccess\Repositories\AuxiliarCuentaRepository.cs" />
     <Compile Include="DataAccess\Repositories\BalanzaComprobacionRepository.cs" />
+    <Compile Include="DataAccess\Repositories\CentroCostosRepository.cs" />
+    <Compile Include="DataAccess\Repositories\CGruposRepository.cs" />
     <Compile Include="DataAccess\Repositories\DepartamentoRepository.cs" />
+    <Compile Include="Domain\Interfaces\Repositories\IAuxiliarCuentaRepository.cs" />
+    <Compile Include="Domain\Interfaces\Repositories\ICentroCostosRepository.cs" />
+    <Compile Include="Domain\Interfaces\Repositories\ICGruposRepository.cs" />
     <Compile Include="Domain\Interfaces\Repositories\IDepartamentoRepository.cs" />
+    <Compile Include="Domain\Models\AuxiliarCuenta.cs" />
+    <Compile Include="Domain\Models\AuxiliarCuentaRequest.cs" />
+    <Compile Include="Domain\Models\AuxiliarCuentaResultado.cs" />
+    <Compile Include="Domain\Models\AuxiliarMovimiento.cs" />
+    <Compile Include="Domain\Models\AuxiliarSaldoInicial.cs" />
     <Compile Include="Domain\Models\BalanzaComprobacion.cs" />
     <Compile Include="Domain\Models\BalanzaComprobacionItem.cs" />
     <Compile Include="Domain\Models\BalanzaComprobacionRequest.cs" />
@@ -132,8 +152,23 @@
     <Compile Include="WinForms\Forms\AuditoriaCuentasForm.Designer.cs">
       <DependentUpon>AuditoriaCuentasForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="WinForms\Forms\AuxiliarCuentaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="WinForms\Forms\BalanzaComprobacionForm.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\Forms\ProyectosForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\Forms\ProyectosForm.Designer.cs">
+      <DependentUpon>ProyectosForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForms\Forms\CentroCostosForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\Forms\CentroCostosForm.Designer.cs">
+      <DependentUpon>CentroCostosForm.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForms\Forms\CuentaContableSelectorForm.cs">
       <SubType>Form</SubType>
@@ -211,8 +246,8 @@
     <Compile Include="DataAccess\Entities\ActivoFijoEntity.cs" />
     <Compile Include="DataAccess\Entities\PeriodoContableEntity.cs" />
     <Compile Include="DataAccess\Entities\Auxiliar25Entity.cs" />
-    <Compile Include="DataAccess\Entities\CcostosEntity.cs" />
-    <Compile Include="DataAccess\Entities\CgruposEntity.cs" />
+    <Compile Include="DataAccess\Entities\CentroCostosEntity.cs" />
+    <Compile Include="DataAccess\Entities\CGruposEntity.cs" />
     <Compile Include="DataAccess\Entities\ConceptoEntity.cs" />
     <Compile Include="DataAccess\Entities\CuentaRubroContableEntity.cs" />
     <Compile Include="DataAccess\Entities\CuentaContableEntity.cs" />
@@ -467,6 +502,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\Forms\AuditoriaCuentasForm.resx">
       <DependentUpon>AuditoriaCuentasForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\Forms\ProyectosForm.resx">
+      <DependentUpon>ProyectosForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\Forms\CentroCostosForm.resx">
+      <DependentUpon>CentroCostosForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\Forms\CuentaContableSelectorForm.resx">
       <DependentUpon>CuentaContableSelectorForm.cs</DependentUpon>

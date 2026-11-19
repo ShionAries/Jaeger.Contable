@@ -10,5 +10,12 @@ namespace Jaeger.Contable.DataAccess.Mappers {
                 ClaveSAT = x.ClaveSAT
             };
         }
+        public static TiposPolizaEntity Map(TipoPoliza x) {
+            return new TiposPolizaEntity {
+                Tipo = x.Tipo,
+                Descripcion = x.Descripcion,
+                ClaveSAT = x.ClaveSAT
+            };
+        }
     }
 }

@@ -48,6 +48,13 @@ namespace Jaeger.Contable {
                 this.OpenForm(new BalanzaComprobacionForm(_application.BalanzaComprobacionService));
             };
 
+            this.mAuxiliarCuentas.Click += (s, e) => {
+                if (!EnsureAvailable(_application.AuxiliarCuentaService, this,
+                    "El servicio de auxiliares no está disponible.", "Auxiliar de cuentas"))
+                    return;
+                this.OpenForm(new AuxiliarCuentaForm(_application.AuxiliarCuentaService, _application.CuentaService));
+            };
+
             this.mPolizasCaptura.Click += (s, e) => {
                 var movimientoContext = new PolizaCapturaMovimientoContext(_application.CuentaService, _application.CatalogosPartidaService, _application.MonedaService);
                 using (var form = new PolizaCapturaForm(_application.PolizaContableService, _application.TipoPolizaService, _application.ConceptoService, _application.PeriodoContableService, movimientoContext, null, _application.ParametroEmpresaService, _application.ContabilizacionContableService))
@@ -147,6 +154,19 @@ namespace Jaeger.Contable {
                     form.ShowDialog(this);
             };
 
+            this.bCentroCostos.Click += async (s, e) => {
+                if (!EnsureAvailable(_application.CentroCostosService, this, "El servicio de centros de costos no está disponible.", "Centros de costos"))
+                    return;
+                using (var form = new CentroCostosForm(_application.CentroCostosService))
+                    form.ShowDialog(this);
+            };
+
+            this.bProyectos.Click += async (s, e) => {
+                if (!EnsureAvailable(_application.CGruposService, this, "El servicio de grupos contables no está disponible.", "Grupos contables"))
+                    return;
+                using (var form = new ProyectosForm(_application.CGruposService))
+                    form.ShowDialog(this);
+            };
             this.mSalir.Click += (s, e) => Close();
         }
 

@@ -35,7 +35,10 @@ namespace Jaeger.Contable.DataAccess.DependencyInjection {
         public IParametroEmpresaService ParametroEmpresaService { get; private set; }
         public IFolioContableService FolioContableService { get; private set; }
         public IBalanzaComprobacionService BalanzaComprobacionService { get; private set; }
+        public IAuxiliarCuentaService AuxiliarCuentaService { get; private set; }
         public IDepartamentoService DepartamentoService { get; private set; }
+        public ICentroCostosService CentroCostosService { get; private set; }
+        public ICGruposService CGruposService { get; private set; }
 
         public ContableApplication(string connectionString) {
             if (string.IsNullOrWhiteSpace(connectionString))
@@ -68,8 +71,11 @@ namespace Jaeger.Contable.DataAccess.DependencyInjection {
             var polizaRepository = new PolizaContableRepository(context, folioRepository, periodoRepository, tableResolver);
             var polizaConsultaRepository = new PolizaConsultaRepository(context, tableResolver);
             var balanzaRepository = new BalanzaComprobacionRepository(context, tableResolver);
+            var auxiliarCuentaRepository = new AuxiliarCuentaRepository(context, tableResolver);
             var reversionRepository = new ReversionPolizaRepository(context);
             var departamentoRepository = new DepartamentoRepository(context);
+            var centroCostosRepository = new CentroCostosRepository(context);
+            var cgruposRepository = new CGruposRepository(context);
 
             ConfiguracionCuentaService = new ConfiguracionCuentaService(configuracionRepository);
             ConciliacionCuentaService = new ConciliacionCuentaService(conciliacionRepository);
@@ -102,8 +108,10 @@ namespace Jaeger.Contable.DataAccess.DependencyInjection {
             PolizaConsultaService = new PolizaConsultaService(polizaConsultaRepository);
             BalanzaComprobacionService = new BalanzaComprobacionService(balanzaRepository, cuentaRepository);
             ReversionPolizaService = new ReversionPolizaService(PeriodoContableService, reversionRepository, FolioContableService);
-
+            AuxiliarCuentaService = new AuxiliarCuentaService(auxiliarCuentaRepository, cuentaRepository);
             DepartamentoService = new DepartamentoService(departamentoRepository);
+            CentroCostosService = new CentroCostosService(centroCostosRepository);
+            CGruposService = new CGruposService(cgruposRepository);
         }
 
         public static IContableApplication Create() {

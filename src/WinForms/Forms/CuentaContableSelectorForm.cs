@@ -10,12 +10,18 @@ using Jaeger.Contable.Domain.Entities;
 namespace Jaeger.Contable.WinForms.Forms {
     public partial class CuentaContableSelectorForm : Form {
         private readonly ICuentaService _cuentaService;
+        private readonly bool _soloDetalle;
         private List<CuentaContable> _cuentas = new List<CuentaContable>();
         public string NumeroCuentaSeleccionada { get; private set; }
         public string DescripcionCuentaSeleccionada { get; private set; }
 
-        public CuentaContableSelectorForm(ICuentaService cuentaService) {
+        public CuentaContableSelectorForm(ICuentaService cuentaService)
+            : this(cuentaService, true) {
+        }
+
+        public CuentaContableSelectorForm(ICuentaService cuentaService, bool soloDetalle) {
             _cuentaService = cuentaService ?? throw new ArgumentNullException(nameof(cuentaService));
+            _soloDetalle = soloDetalle;
             InitializeComponent();
 
             KeyPreview = true;
@@ -54,7 +60,7 @@ namespace Jaeger.Contable.WinForms.Forms {
                 _cuentas = cuentas
                     .Where(x => x != null &&
                                 !string.IsNullOrWhiteSpace(x.NumCta) &&
-                                string.Equals(x.Tipo, "D", StringComparison.OrdinalIgnoreCase))
+                                (!_soloDetalle || string.Equals(x.Tipo, "D", StringComparison.OrdinalIgnoreCase)))
                     .OrderBy(x => x.NumCta, StringComparer.Ordinal)
                     .ToList();
                 Filtrar();

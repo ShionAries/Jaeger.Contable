@@ -28,7 +28,7 @@ namespace Jaeger.Contable.DataAccess.Repositories {
 
         public async Task<List<CentroCosto>> ObtenerCentrosCostosAsync() {
             try {
-                return (await _context.Db.Queryable<CcostosEntity>().OrderBy(x => x.ID, OrderByType.Asc).ToListAsync()).Select(x => new CentroCosto { Id = x.ID, Descripcion = x.DESCRIPCION }).ToList();
+                return (await _context.Db.Queryable<CentroCostosEntity>().OrderBy(x => x.ID, OrderByType.Asc).ToListAsync()).Select(x => new CentroCosto { Id = x.ID, Descripcion = x.DESCRIPCION }).ToList();
             } catch (SqlSugarException ex) {
                 throw new InvalidOperationException("Error al consultar CCOSTOS.", ex);
             }
@@ -37,7 +37,7 @@ namespace Jaeger.Contable.DataAccess.Repositories {
         public async Task<List<GrupoContable>> ObtenerGruposAsync() {
             try {
                 return (
-                    await _context.Db.Queryable<CgruposEntity>().OrderBy(x => x.ID, OrderByType.Asc).ToListAsync()).Select(x => new GrupoContable { Id = x.ID, Descripcion = x.DESCRIPCION }).ToList();
+                    await _context.Db.Queryable<CGruposEntity>().OrderBy(x => x.ID, OrderByType.Asc).ToListAsync()).Select(x => new GrupoContable { Id = x.ID, Descripcion = x.DESCRIPCION }).ToList();
             } catch (SqlSugarException ex) {
                 throw new InvalidOperationException("Error al consultar CGRUPOS.", ex);
             }
@@ -51,12 +51,12 @@ namespace Jaeger.Contable.DataAccess.Repositories {
             }
         }
         public async Task<bool> ExisteCentroCostoAsync(int centroCosto) {
-            try { return await _context.Db.Queryable<CcostosEntity>().AnyAsync(x => x.ID == centroCosto); } catch (SqlSugarException ex) {
+            try { return await _context.Db.Queryable<CentroCostosEntity>().AnyAsync(x => x.ID == centroCosto); } catch (SqlSugarException ex) {
                 throw new InvalidOperationException("Error al validar CCOSTOS.", ex);
             }
         }
         public async Task<bool> ExisteGrupoAsync(int grupo) {
-            try { return await _context.Db.Queryable<CgruposEntity>().AnyAsync(x => x.ID == grupo); } catch (SqlSugarException ex) {
+            try { return await _context.Db.Queryable<CGruposEntity>().AnyAsync(x => x.ID == grupo); } catch (SqlSugarException ex) {
                 throw new InvalidOperationException("Error al validar CGRUPOS.", ex);
             }
         }
@@ -76,23 +76,23 @@ namespace Jaeger.Contable.DataAccess.Repositories {
         }
 
         public async Task CrearCentroCostoAsync(CentroCosto item) {
-            try { await _context.Db.Insertable(new CcostosEntity { ID = item.Id, DESCRIPCION = item.Descripcion }).ExecuteCommandAsync(); } catch (SqlSugarException ex) { throw new InvalidOperationException("No fue posible crear el centro de costos.", ex); }
+            try { await _context.Db.Insertable(new CentroCostosEntity { ID = item.Id, DESCRIPCION = item.Descripcion }).ExecuteCommandAsync(); } catch (SqlSugarException ex) { throw new InvalidOperationException("No fue posible crear el centro de costos.", ex); }
         }
         public async Task ActualizarCentroCostoAsync(CentroCosto item) {
-            try { await _context.Db.Updateable(new CcostosEntity { ID = item.Id, DESCRIPCION = item.Descripcion }).Where(x => x.ID == item.Id).ExecuteCommandAsync(); } catch (SqlSugarException ex) { throw new InvalidOperationException("No fue posible actualizar el centro de costos.", ex); }
+            try { await _context.Db.Updateable(new CentroCostosEntity { ID = item.Id, DESCRIPCION = item.Descripcion }).Where(x => x.ID == item.Id).ExecuteCommandAsync(); } catch (SqlSugarException ex) { throw new InvalidOperationException("No fue posible actualizar el centro de costos.", ex); }
         }
         public async Task EliminarCentroCostoAsync(int id) {
-            try { await _context.Db.Deleteable<CcostosEntity>().Where(x => x.ID == id).ExecuteCommandAsync(); } catch (SqlSugarException ex) { throw new InvalidOperationException("No fue posible eliminar el centro de costos.", ex); }
+            try { await _context.Db.Deleteable<CentroCostosEntity>().Where(x => x.ID == id).ExecuteCommandAsync(); } catch (SqlSugarException ex) { throw new InvalidOperationException("No fue posible eliminar el centro de costos.", ex); }
         }
 
         public async Task CrearGrupoAsync(GrupoContable item) {
-            try { await _context.Db.Insertable(new CgruposEntity { ID = item.Id, DESCRIPCION = item.Descripcion }).ExecuteCommandAsync(); } catch (SqlSugarException ex) { throw new InvalidOperationException("No fue posible crear el grupo.", ex); }
+            try { await _context.Db.Insertable(new CGruposEntity { ID = item.Id, DESCRIPCION = item.Descripcion }).ExecuteCommandAsync(); } catch (SqlSugarException ex) { throw new InvalidOperationException("No fue posible crear el grupo.", ex); }
         }
         public async Task ActualizarGrupoAsync(GrupoContable item) {
-            try { await _context.Db.Updateable(new CgruposEntity { ID = item.Id, DESCRIPCION = item.Descripcion }).Where(x => x.ID == item.Id).ExecuteCommandAsync(); } catch (SqlSugarException ex) { throw new InvalidOperationException("No fue posible actualizar el grupo.", ex); }
+            try { await _context.Db.Updateable(new CGruposEntity { ID = item.Id, DESCRIPCION = item.Descripcion }).Where(x => x.ID == item.Id).ExecuteCommandAsync(); } catch (SqlSugarException ex) { throw new InvalidOperationException("No fue posible actualizar el grupo.", ex); }
         }
         public async Task EliminarGrupoAsync(int id) {
-            try { await _context.Db.Deleteable<CgruposEntity>().Where(x => x.ID == id).ExecuteCommandAsync(); } catch (SqlSugarException ex) { throw new InvalidOperationException("No fue posible eliminar el grupo.", ex); }
+            try { await _context.Db.Deleteable<CGruposEntity>().Where(x => x.ID == id).ExecuteCommandAsync(); } catch (SqlSugarException ex) { throw new InvalidOperationException("No fue posible eliminar el grupo.", ex); }
         }
     }
 }

@@ -33,8 +33,11 @@ namespace Jaeger.Contable {
             this.mCuentas = new System.Windows.Forms.ToolStripMenuItem();
             this.mCuentasCuentas = new System.Windows.Forms.ToolStripMenuItem();
             this.mPolizas = new System.Windows.Forms.ToolStripMenuItem();
+            this.bPolizas = new System.Windows.Forms.ToolStripMenuItem();
             this.mPolizasConsulta = new System.Windows.Forms.ToolStripMenuItem();
             this.mPolizasCaptura = new System.Windows.Forms.ToolStripMenuItem();
+            this.mAuxiliares = new System.Windows.Forms.ToolStripMenuItem();
+            this.mAuxiliarCuentas = new System.Windows.Forms.ToolStripMenuItem();
             this.mContabilizarPeriodo = new System.Windows.Forms.ToolStripMenuItem();
             this.mConceptos = new System.Windows.Forms.ToolStripMenuItem();
             this.mTiposPoliza = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,6 +62,7 @@ namespace Jaeger.Contable {
             this.mDepreciacionActivos = new System.Windows.Forms.ToolStripMenuItem();
             this.bDepreciación = new System.Windows.Forms.ToolStripMenuItem();
             this.mVentana = new System.Windows.Forms.ToolStripMenuItem();
+            this.mAuxiliarCuentaDeptos = new System.Windows.Forms.ToolStripMenuItem();
             this.Estado.SuspendLayout();
             this.menuMain.SuspendLayout();
             this.SuspendLayout();
@@ -121,8 +125,8 @@ namespace Jaeger.Contable {
             this.mPolizas,
             this.mBalanza,
             this.mSegmentos,
-            this.mAuditaria,
-            this.mMonedas});
+            this.mMonedas,
+            this.mAuditaria});
             this.mCuentasPolizas.Name = "mCuentasPolizas";
             this.mCuentasPolizas.Size = new System.Drawing.Size(110, 20);
             this.mCuentasPolizas.Text = "Cuentas y Pólizas";
@@ -132,7 +136,7 @@ namespace Jaeger.Contable {
             this.mCuentas.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mCuentasCuentas});
             this.mCuentas.Name = "mCuentas";
-            this.mCuentas.Size = new System.Drawing.Size(133, 22);
+            this.mCuentas.Size = new System.Drawing.Size(180, 22);
             this.mCuentas.Text = "Cuentas";
             // 
             // mCuentasCuentas
@@ -144,50 +148,74 @@ namespace Jaeger.Contable {
             // mPolizas
             // 
             this.mPolizas.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mPolizasConsulta,
-            this.mPolizasCaptura,
-            this.mContabilizarPeriodo,
+            this.bPolizas,
             this.mConceptos,
             this.mTiposPoliza,
-            this.mRangos});
+            this.mRangos,
+            this.mContabilizarPeriodo});
             this.mPolizas.Name = "mPolizas";
-            this.mPolizas.Size = new System.Drawing.Size(133, 22);
+            this.mPolizas.Size = new System.Drawing.Size(180, 22);
             this.mPolizas.Text = "Pólizas";
+            // 
+            // bPolizas
+            // 
+            this.bPolizas.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mPolizasConsulta,
+            this.mPolizasCaptura,
+            this.mAuxiliares});
+            this.bPolizas.Name = "bPolizas";
+            this.bPolizas.Size = new System.Drawing.Size(186, 22);
+            this.bPolizas.Text = "Pólizas";
             // 
             // mPolizasConsulta
             // 
             this.mPolizasConsulta.Name = "mPolizasConsulta";
-            this.mPolizasConsulta.Size = new System.Drawing.Size(181, 22);
-            this.mPolizasConsulta.Text = "Consulta";
+            this.mPolizasConsulta.Size = new System.Drawing.Size(180, 22);
+            this.mPolizasConsulta.Text = "Pólizas";
             // 
             // mPolizasCaptura
             // 
             this.mPolizasCaptura.Name = "mPolizasCaptura";
-            this.mPolizasCaptura.Size = new System.Drawing.Size(181, 22);
+            this.mPolizasCaptura.Size = new System.Drawing.Size(180, 22);
             this.mPolizasCaptura.Text = "Captura";
+            // 
+            // mAuxiliares
+            // 
+            this.mAuxiliares.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mAuxiliarCuentas,
+            this.mAuxiliarCuentaDeptos});
+            this.mAuxiliares.Name = "mAuxiliares";
+            this.mAuxiliares.Size = new System.Drawing.Size(180, 22);
+            this.mAuxiliares.Text = "Auxiliares";
+            // 
+            // mAuxiliarCuentas
+            // 
+            this.mAuxiliarCuentas.Name = "mAuxiliarCuentas";
+            this.mAuxiliarCuentas.Size = new System.Drawing.Size(226, 22);
+            this.mAuxiliarCuentas.Text = "Auxiliar de cuentas";
             // 
             // mContabilizarPeriodo
             // 
             this.mContabilizarPeriodo.Name = "mContabilizarPeriodo";
-            this.mContabilizarPeriodo.Size = new System.Drawing.Size(181, 22);
+            this.mContabilizarPeriodo.Size = new System.Drawing.Size(186, 22);
             this.mContabilizarPeriodo.Text = "Contabilizar período";
             // 
             // mConceptos
             // 
             this.mConceptos.Name = "mConceptos";
-            this.mConceptos.Size = new System.Drawing.Size(181, 22);
-            this.mConceptos.Text = "Conceptos";
+            this.mConceptos.Size = new System.Drawing.Size(186, 22);
+            this.mConceptos.Text = "Conceptos de pólizas";
             // 
             // mTiposPoliza
             // 
             this.mTiposPoliza.Name = "mTiposPoliza";
-            this.mTiposPoliza.Size = new System.Drawing.Size(181, 22);
+            this.mTiposPoliza.Size = new System.Drawing.Size(186, 22);
             this.mTiposPoliza.Text = "Tipos de póliza";
             // 
             // mRangos
             // 
             this.mRangos.Name = "mRangos";
-            this.mRangos.Size = new System.Drawing.Size(181, 22);
+            this.mRangos.Size = new System.Drawing.Size(186, 22);
             this.mRangos.Text = "Rangos";
             // 
             // mBalanza
@@ -195,7 +223,7 @@ namespace Jaeger.Contable {
             this.mBalanza.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mBalanzaComprobacion});
             this.mBalanza.Name = "mBalanza";
-            this.mBalanza.Size = new System.Drawing.Size(133, 22);
+            this.mBalanza.Size = new System.Drawing.Size(180, 22);
             this.mBalanza.Text = "Balanza";
             // 
             // mBalanzaComprobacion
@@ -211,7 +239,7 @@ namespace Jaeger.Contable {
             this.bCentroCostos,
             this.bProyectos});
             this.mSegmentos.Name = "mSegmentos";
-            this.mSegmentos.Size = new System.Drawing.Size(133, 22);
+            this.mSegmentos.Size = new System.Drawing.Size(180, 22);
             this.mSegmentos.Text = "Segmentos";
             // 
             // bDepartamentos
@@ -238,7 +266,7 @@ namespace Jaeger.Contable {
             this.mAuditoriaCuentas,
             this.mAuditoriaRubros});
             this.mAuditaria.Name = "mAuditaria";
-            this.mAuditaria.Size = new System.Drawing.Size(133, 22);
+            this.mAuditaria.Size = new System.Drawing.Size(180, 22);
             this.mAuditaria.Text = "Auditoria";
             // 
             // mAuditoriaCuentas
@@ -258,7 +286,7 @@ namespace Jaeger.Contable {
             this.mMonedas.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.bMonedas});
             this.mMonedas.Name = "mMonedas";
-            this.mMonedas.Size = new System.Drawing.Size(133, 22);
+            this.mMonedas.Size = new System.Drawing.Size(180, 22);
             this.mMonedas.Text = "Monedas";
             // 
             // bMonedas
@@ -285,7 +313,7 @@ namespace Jaeger.Contable {
             this.toolStripMenuItem3,
             this.mDepreciacionActivos});
             this.bActivos.Name = "bActivos";
-            this.bActivos.Size = new System.Drawing.Size(180, 22);
+            this.bActivos.Size = new System.Drawing.Size(143, 22);
             this.bActivos.Text = "Activos";
             // 
             // mTiposActivo
@@ -321,7 +349,7 @@ namespace Jaeger.Contable {
             // bDepreciación
             // 
             this.bDepreciación.Name = "bDepreciación";
-            this.bDepreciación.Size = new System.Drawing.Size(180, 22);
+            this.bDepreciación.Size = new System.Drawing.Size(143, 22);
             this.bDepreciación.Text = "Depreciación";
             // 
             // mVentana
@@ -329,6 +357,12 @@ namespace Jaeger.Contable {
             this.mVentana.Name = "mVentana";
             this.mVentana.Size = new System.Drawing.Size(61, 20);
             this.mVentana.Text = "Ventana";
+            // 
+            // mAuxiliarCuentaDeptos
+            // 
+            this.mAuxiliarCuentaDeptos.Name = "mAuxiliarCuentaDeptos";
+            this.mAuxiliarCuentaDeptos.Size = new System.Drawing.Size(226, 22);
+            this.mAuxiliarCuentaDeptos.Text = "Auxiliares con departamento";
             // 
             // MainForm
             // 
@@ -389,5 +423,9 @@ namespace Jaeger.Contable {
         private System.Windows.Forms.ToolStripMenuItem bActivos;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem bDepreciación;
+        private System.Windows.Forms.ToolStripMenuItem mAuxiliares;
+        private System.Windows.Forms.ToolStripMenuItem mAuxiliarCuentas;
+        private System.Windows.Forms.ToolStripMenuItem bPolizas;
+        private System.Windows.Forms.ToolStripMenuItem mAuxiliarCuentaDeptos;
     }
 }
