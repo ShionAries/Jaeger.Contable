@@ -122,6 +122,7 @@
     <Compile Include="Domain\Models\BalanzaComprobacion.cs" />
     <Compile Include="Domain\Models\BalanzaComprobacionItem.cs" />
     <Compile Include="Domain\Models\BalanzaComprobacionRequest.cs" />
+    <Compile Include="Domain\Models\EjercicioContable.cs" />
     <Compile Include="Domain\Models\FilaAuditoria.cs" />
     <Compile Include="Domain\Interfaces\Repositories\IBalanzaComprobacionRepository.cs" />
     <Compile Include="Domain\Models\PeriodoItem.cs" />

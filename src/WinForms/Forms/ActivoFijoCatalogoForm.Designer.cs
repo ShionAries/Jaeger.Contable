@@ -23,6 +23,8 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gridData = new System.Windows.Forms.DataGridView();
             this.txtBuscar = new System.Windows.Forms.TextBox();
             this.lblBuscar = new System.Windows.Forms.Label();
@@ -112,6 +114,16 @@
             this.txtCobertura = new System.Windows.Forms.TextBox();
             this.txtAgente = new System.Windows.Forms.TextBox();
             this.txtPolizaSeg = new System.Windows.Forms.TextBox();
+            this.lblEjercicio = new System.Windows.Forms.Label();
+            this.cmbEjercicio = new System.Windows.Forms.ComboBox();
+            this.Clave = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tipo = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MontoOriginal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FecAdquisicion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NumSerie = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TipoCambio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gridData)).BeginInit();
             this.tabControls.SuspendLayout();
             this.tabPageGeneral.SuspendLayout();
@@ -140,6 +152,15 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gridData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Clave,
+            this.Tipo,
+            this.Descripcion,
+            this.MontoOriginal,
+            this.FecAdquisicion,
+            this.Status,
+            this.NumSerie,
+            this.TipoCambio});
             this.gridData.Location = new System.Drawing.Point(14, 38);
             this.gridData.Name = "gridData";
             this.gridData.RowHeadersVisible = false;
@@ -148,7 +169,7 @@
             // 
             // txtBuscar
             // 
-            this.txtBuscar.Location = new System.Drawing.Point(60, 12);
+            this.txtBuscar.Location = new System.Drawing.Point(230, 12);
             this.txtBuscar.Name = "txtBuscar";
             this.txtBuscar.Size = new System.Drawing.Size(397, 20);
             this.txtBuscar.TabIndex = 23;
@@ -156,7 +177,7 @@
             // lblBuscar
             // 
             this.lblBuscar.AutoSize = true;
-            this.lblBuscar.Location = new System.Drawing.Point(14, 16);
+            this.lblBuscar.Location = new System.Drawing.Point(184, 16);
             this.lblBuscar.Name = "lblBuscar";
             this.lblBuscar.Size = new System.Drawing.Size(40, 13);
             this.lblBuscar.TabIndex = 22;
@@ -950,11 +971,92 @@
             this.txtPolizaSeg.Size = new System.Drawing.Size(151, 20);
             this.txtPolizaSeg.TabIndex = 46;
             // 
+            // lblEjercicio
+            // 
+            this.lblEjercicio.AutoSize = true;
+            this.lblEjercicio.Location = new System.Drawing.Point(15, 15);
+            this.lblEjercicio.Name = "lblEjercicio";
+            this.lblEjercicio.Size = new System.Drawing.Size(50, 13);
+            this.lblEjercicio.TabIndex = 22;
+            this.lblEjercicio.Text = "Ejercicio:";
+            // 
+            // cmbEjercicio
+            // 
+            this.cmbEjercicio.Location = new System.Drawing.Point(71, 11);
+            this.cmbEjercicio.Name = "cmbEjercicio";
+            this.cmbEjercicio.Size = new System.Drawing.Size(107, 21);
+            this.cmbEjercicio.TabIndex = 36;
+            // 
+            // Clave
+            // 
+            this.Clave.DataPropertyName = "Clave";
+            this.Clave.HeaderText = "Clave";
+            this.Clave.Name = "Clave";
+            this.Clave.ReadOnly = true;
+            // 
+            // Tipo
+            // 
+            this.Tipo.DataPropertyName = "Tipo";
+            this.Tipo.HeaderText = "Tipo";
+            this.Tipo.Name = "Tipo";
+            this.Tipo.ReadOnly = true;
+            this.Tipo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Tipo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // Descripcion
+            // 
+            this.Descripcion.DataPropertyName = "Descripcion";
+            this.Descripcion.HeaderText = "Descripción";
+            this.Descripcion.Name = "Descripcion";
+            this.Descripcion.ReadOnly = true;
+            // 
+            // MontoOriginal
+            // 
+            this.MontoOriginal.DataPropertyName = "MontoOriginal";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle1.Format = "N2";
+            this.MontoOriginal.DefaultCellStyle = dataGridViewCellStyle1;
+            this.MontoOriginal.HeaderText = "Monto orig.";
+            this.MontoOriginal.Name = "MontoOriginal";
+            this.MontoOriginal.ReadOnly = true;
+            // 
+            // FecAdquisicion
+            // 
+            this.FecAdquisicion.DataPropertyName = "FecAdquisicion";
+            this.FecAdquisicion.HeaderText = "Adquisición";
+            this.FecAdquisicion.Name = "FecAdquisicion";
+            this.FecAdquisicion.ReadOnly = true;
+            // 
+            // Status
+            // 
+            this.Status.DataPropertyName = "Status";
+            this.Status.HeaderText = "Estatus";
+            this.Status.Name = "Status";
+            this.Status.ReadOnly = true;
+            // 
+            // NumSerie
+            // 
+            this.NumSerie.DataPropertyName = "NumSerie";
+            this.NumSerie.HeaderText = "Serie";
+            this.NumSerie.Name = "NumSerie";
+            this.NumSerie.ReadOnly = true;
+            // 
+            // TipoCambio
+            // 
+            this.TipoCambio.DataPropertyName = "TipoCambio";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Format = "N6";
+            this.TipoCambio.DefaultCellStyle = dataGridViewCellStyle2;
+            this.TipoCambio.HeaderText = "T. cambio";
+            this.TipoCambio.Name = "TipoCambio";
+            this.TipoCambio.ReadOnly = true;
+            // 
             // ActivoFijoCatalogoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 530);
+            this.Controls.Add(this.cmbEjercicio);
             this.Controls.Add(this.tabControls);
             this.Controls.Add(this.btnCerrar);
             this.Controls.Add(this.btnEliminar);
@@ -962,6 +1064,7 @@
             this.Controls.Add(this.btnNuevo);
             this.Controls.Add(this.gridData);
             this.Controls.Add(this.txtBuscar);
+            this.Controls.Add(this.lblEjercicio);
             this.Controls.Add(this.lblBuscar);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -1087,5 +1190,15 @@
         private System.Windows.Forms.TextBox txtPolizaSeg;
         private System.Windows.Forms.Label lblMarca;
         private System.Windows.Forms.TextBox txtMarca;
+        private System.Windows.Forms.Label lblEjercicio;
+        private System.Windows.Forms.ComboBox cmbEjercicio;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Clave;
+        private System.Windows.Forms.DataGridViewComboBoxColumn Tipo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MontoOriginal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FecAdquisicion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Status;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NumSerie;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TipoCambio;
     }
 }

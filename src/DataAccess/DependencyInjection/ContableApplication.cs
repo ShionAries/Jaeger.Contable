@@ -87,7 +87,7 @@ namespace Jaeger.Contable.DataAccess.DependencyInjection {
             ConceptoService = new ConceptoService(conceptoRepository);
             MonedaService = new MonedaService(monedaRepository);
             TipoActivoService = new ActivoFijoTipoService(tipoActivoRepository, monedaRepository);
-            ActivoFijoService = new ActivoFijoService(activoFijoRepository);
+            ActivoFijoService = new ActivoFijoService(activoFijoRepository, periodoRepository);
             ActivoFijoHistoricoService = new ActivoFijoHistoricoService(activoFijoHistoricoRepository);
             TipoPolizaService = new TipoPolizaService(tipoPolizaRepository);
             CatalogosPartidaService = new CatalogosPartidaService(catalogosPartidaRepository);
@@ -98,7 +98,7 @@ namespace Jaeger.Contable.DataAccess.DependencyInjection {
             AuditoriaCtarubService = new AuditoriaCtarubService(ctarubRepository, cuentaRepository, rangoRepository, ConfiguracionCuentaService, 1);
 
             MotorContableService = new MotorContableService(cuentaRepository, ConfiguracionCuentaService);
-            CuentaService = new CuentaService(cuentaRepository, parametroRepository, MotorContableService, historialCuentaRepository, estadoContableCuentaRepository, 1);
+            CuentaService = new CuentaService(cuentaRepository, parametroRepository, MotorContableService, historialCuentaRepository, estadoContableCuentaRepository, periodoRepository, 1);
 
             var motorMovimiento = new MotorMovimientoContableService(CuentaService, PeriodoContableService);
             DepreciacionActivoService = new DepreciacionActivoService(activoFijoRepository, TipoActivoService, tipoActivoRepository, depreciacionRepository, periodoRepository);

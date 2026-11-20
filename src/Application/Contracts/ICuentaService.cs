@@ -19,5 +19,6 @@ namespace Jaeger.Contable.Application.Contracts {
         Task<bool> AsociarCuentaRangoAsync(string numeroCuenta, int rango);
         Task<bool> DesasociarCuentaRangoAsync(string numeroCuenta, int rango);
         Task<CuentaContable> ObtenerPorNumeroAsync(string numeroCuenta);
+        Task<List<short>> ObtenerEjercicioTodosAsync();
     }
 }

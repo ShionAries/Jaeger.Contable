@@ -36,7 +36,8 @@ namespace Jaeger.Contable.Forms {
             _cargandoCatalogo = true;
             try {
                 await _motorContableService.InicializarAsync(1);
-
+                this.cmbEjercicio.Items.Clear();
+                this.cmbEjercicio.Items.AddRange((await this._cuentaService.ObtenerEjercicioTodosAsync()).Select(x => x.ToString()).ToArray());
                 _cuentas = await _cuentaService.Lista1();
                 var rangos = await _cuentaService.ListarEstructuraRangosActivosAsync();
 
@@ -389,10 +390,23 @@ namespace Jaeger.Contable.Forms {
             }
         }
 
+        private void btnCerrar_Click(object sender, EventArgs e) {
+            this.Close();
+        }
+
         private RubroContableModel ObtenerRangoSeleccionado() {
             return grdRubros.CurrentRow == null
                 ? null
                 : grdRubros.CurrentRow.DataBoundItem as RubroContableModel;
+        }
+
+        private short ObtenerEjercicioSeleccionado() {
+            if (cmbEjercicio.SelectedItem == null)
+                return 0;
+            short ejercicio;
+            if (!short.TryParse(cmbEjercicio.SelectedItem.ToString(), out ejercicio))
+                return 0;
+            return ejercicio;
         }
 
         private static CuentaContable CopiarCuenta(CuentaContable origen) {
@@ -428,10 +442,6 @@ namespace Jaeger.Contable.Forms {
             return string.IsNullOrWhiteSpace(numero)
                 ? string.Empty
                 : numero.Trim();
-        }
-
-        private void btnCerrar_Click(object sender, EventArgs e) {
-            this.Close();
         }
     }
 }

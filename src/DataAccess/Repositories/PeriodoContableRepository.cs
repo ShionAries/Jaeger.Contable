@@ -19,6 +19,19 @@ namespace Jaeger.Contable.DataAccess.Repositories {
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
+        public async Task<List<EjercicioContable>> ObtenerEjerciciosTodosAsync() {
+            try {
+                var entities = await _context.Db.Queryable<PeriodoContableEntity>()
+                    .Select(x => new EjercicioContable { Ejercicio = x.EJERCICIO })
+                    .Distinct()
+                    .ToListAsync();
+                return entities;
+            } catch (SqlSugarException ex) {
+                throw new InvalidOperationException(
+                    "No fue posible consultar los ejercicios contables en ADMPER.", ex);
+            }
+        }
+
         public async Task<PeriodoContable> ObtenerAsync(short ejercicio, short periodo) {
             try {
                 var entity = await _context.Db.Queryable<PeriodoContableEntity>()
@@ -33,6 +46,7 @@ namespace Jaeger.Contable.DataAccess.Repositories {
                     "No fue posible consultar el estado del periodo en ADMPER.", ex);
             }
         }
+
         public async Task<List<PeriodoContable>> ObtenerTodosAsync(short ejercicio) {
             try {
                 var entities = await _context.Db.Queryable<PeriodoContableEntity>()

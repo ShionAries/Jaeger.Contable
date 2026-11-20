@@ -10,13 +10,19 @@ namespace Jaeger.Contable.Application.Services {
     /// </summary>
     public sealed class ActivoFijoService : Contracts.IActivoFijoService {
         private readonly IActivoFijoRepository _repository;
+        private readonly IPeriodoContableRepository periodoContableRepository;
 
-        public ActivoFijoService(IActivoFijoRepository repository) {
+        public ActivoFijoService(IActivoFijoRepository repository, IPeriodoContableRepository periodoContableRepository) {
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
+            this.periodoContableRepository = periodoContableRepository ?? throw new ArgumentNullException(nameof(periodoContableRepository));
         }
 
         public Task<List<ActivoFijo>> ObtenerTodosAsync() {
             return _repository.ObtenerTodosAsync();
+        }
+        
+        public Task<List<ActivoFijo>> ObtenerPorEjercicioAsync(int ejercicio) {
+            return _repository.ObtenerTodosAsync((short)ejercicio);
         }
 
         public Task<ActivoFijo> ObtenerAsync(string clave) {
@@ -47,6 +53,13 @@ namespace Jaeger.Contable.Application.Services {
             await _repository.EliminarAsync(clave.Trim());
         }
 
+        #region periodos contables
+        public async Task<List<EjercicioContable>> ObtenerEjerciciosTodos() {
+            return await periodoContableRepository.ObtenerEjerciciosTodosAsync();
+        }
+        #endregion
+
+        #region Validaciones
         private async Task ValidarReferenciasAsync(ActivoFijo activo) {
             if (activo.Tipo.HasValue && !await _repository.ExisteTipoAsync(activo.Tipo.Value))
                 throw new InvalidOperationException("El tipo de activo indicado no existe en TIPACTIV.");
@@ -124,5 +137,6 @@ namespace Jaeger.Contable.Application.Services {
                 CostoMantto = x.CostoMantto, Responsable = Texto(x.Responsable)
             };
         }
+        #endregion
     }
 }

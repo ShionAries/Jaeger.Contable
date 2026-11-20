@@ -25,7 +25,7 @@ namespace Jaeger.Contable.WinForms.Forms {
             _tipoActivoService = tipoActivoService ?? throw new ArgumentNullException(nameof(tipoActivoService));
             InitializeComponent();
             ConfiguraComponent();
-            Shown += async (s, e) => { await CargarTiposAsync(); await CargarAsync(); };
+            Shown += async (s, e) => { await CargarTiposAsync(); await CargarEjerciciosAsync(); };
         }
 
         private void ConfiguraComponent() {
@@ -39,14 +39,6 @@ namespace Jaeger.Contable.WinForms.Forms {
             gridData.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             gridData.MultiSelect = false;
             gridData.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            gridData.ColumnText("Clave", "Clave");
-            gridData.ColumnComboBox("Tipo", "Tipo", "CLAVE", "Descrip");
-            gridData.ColumnText("Descripcion", "Descripción");
-            gridData.ColumnText("MontoOriginal", "Monto orig.", "N4");
-            gridData.ColumnText("FecAdquisicion", "Adquisición", "d");
-            gridData.ColumnText("Status", "Estatus");
-            gridData.ColumnText("NumSerie", "Serie");
-            gridData.ColumnText("TipoCambio", "T. cambio", "N6");
             gridData.CellDoubleClick += (s, e) => CargarSeleccion();
             gridData.KeyDown += (s, e) => { if (e.KeyCode == Keys.Enter) { e.Handled = true; CargarSeleccion(); } };
 
@@ -64,7 +56,7 @@ namespace Jaeger.Contable.WinForms.Forms {
             this.numMontoOrig.ToNumericUpDown(4);
             this.numMontoOrigEx.ToNumericUpDown(4);
             this.numValMer.ToNumericUpDown(4);
-            this.numVida.ToNumericUpDown(4);
+            this.numVida.ToNumericUpDown(2);
             txtObserv.Multiline = true;
             txtObserv.Height = 55;
             txtObserv.MaxLength = 250;
@@ -104,6 +96,14 @@ namespace Jaeger.Contable.WinForms.Forms {
             CancelButton = btnCerrar;
             AcceptButton = btnGuardar;
             Nuevo();
+            cmbEjercicio.SelectedIndexChanged += async (s, e) => await CargarAsync();
+        }
+
+        private async Task CargarEjerciciosAsync() {
+            var ejercicios = await _service.ObtenerEjerciciosTodos();
+            this.cmbEjercicio.DataSource = ejercicios;
+            this.cmbEjercicio.DisplayMember = "Ejercicio";
+            this.cmbEjercicio.ValueMember = "Ejercicio";
         }
 
         private async Task CargarTiposAsync() {
@@ -151,7 +151,8 @@ namespace Jaeger.Contable.WinForms.Forms {
 
         private async Task CargarAsync() {
             try {
-                _datos = await _service.ObtenerTodosAsync();
+                var ejercicio = EjercicioSeleccionado();
+                _datos = await _service.ObtenerPorEjercicioAsync(ejercicio?.Ejercicio ?? 0);
                 Filtrar();
             } catch (Exception ex) {
                 MessageBox.Show(this, ex.Message, "Activos fijos", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -338,6 +339,10 @@ namespace Jaeger.Contable.WinForms.Forms {
                 CostoMantto = Convert.ToDouble(numCostoMan.Value),
                 Responsable = txtResponsable.Text
             };
+        }
+
+        private EjercicioContable EjercicioSeleccionado() {
+            return cmbEjercicio.SelectedItem as EjercicioContable;
         }
     }
 }

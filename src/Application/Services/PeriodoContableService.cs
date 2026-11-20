@@ -5,18 +5,15 @@ using Jaeger.Contable.Domain.Interfaces.Repositories;
 using Jaeger.Contable.Domain.Entities;
 
 namespace Jaeger.Contable.Application.Services {
-    /// <summary>Centraliza la regla de apertura/cierre definida por ADMPER.</summary>
+    /// <summary>
+    /// Centraliza la regla de apertura/cierre definida por ADMPER.
+    /// </summary>
     public sealed class PeriodoContableService : Contracts.IPeriodoContableService {
         private readonly IPeriodoContableRepository _repository;
 
         public PeriodoContableService(IPeriodoContableRepository repository) {
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         }
-
-        //public async Task<PeriodoContable> ObtenerAsync(short ejercicio, short periodo) {
-        //    ValidarParametros(ejercicio, periodo);
-        //    return await _repository.ObtenerAsync(ejercicio, periodo);
-        //}
 
         public async Task<List<PeriodoContable>> ObtenerTodosAsync(short ejercicio) {
             if (ejercicio <= 0)

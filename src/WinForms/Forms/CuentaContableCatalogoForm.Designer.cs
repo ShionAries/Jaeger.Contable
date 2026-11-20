@@ -33,12 +33,14 @@ namespace Jaeger.Contable.Forms {
             this.btnCerrar = new System.Windows.Forms.ToolStripButton();
             this.Contenedor1 = new System.Windows.Forms.SplitContainer();
             this.grdRubros = new System.Windows.Forms.DataGridView();
-            this.lblTitulo = new System.Windows.Forms.Label();
-            this.tvCuentas = new System.Windows.Forms.TreeView();
-            this.EstadoStrip = new System.Windows.Forms.StatusStrip();
-            this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.Rango = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DESCRIP = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tvCuentas = new System.Windows.Forms.TreeView();
+            this.lblTitulo = new System.Windows.Forms.Label();
+            this.EstadoStrip = new System.Windows.Forms.StatusStrip();
+            this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblEjercicio = new System.Windows.Forms.ToolStripLabel();
+            this.cmbEjercicio = new System.Windows.Forms.ToolStripComboBox();
             this.ToolBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Contenedor1)).BeginInit();
             this.Contenedor1.Panel1.SuspendLayout();
@@ -51,6 +53,8 @@ namespace Jaeger.Contable.Forms {
             // ToolBar
             // 
             this.ToolBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lblEjercicio,
+            this.cmbEjercicio,
             this.Agregar,
             this.Editar,
             this.Desactivar,
@@ -147,45 +151,6 @@ namespace Jaeger.Contable.Forms {
             this.grdRubros.TabIndex = 0;
             this.grdRubros.SelectionChanged += new System.EventHandler(this.PolizaGrid_SelectionChanged);
             // 
-            // lblTitulo
-            // 
-            this.lblTitulo.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblTitulo.Location = new System.Drawing.Point(0, 0);
-            this.lblTitulo.Margin = new System.Windows.Forms.Padding(3);
-            this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Padding = new System.Windows.Forms.Padding(3);
-            this.lblTitulo.Size = new System.Drawing.Size(692, 30);
-            this.lblTitulo.TabIndex = 1;
-            this.lblTitulo.Text = "   Cuenta  |  Descripción de la cuenta";
-            this.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // tvCuentas
-            // 
-            this.tvCuentas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tvCuentas.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tvCuentas.ItemHeight = 19;
-            this.tvCuentas.Location = new System.Drawing.Point(0, 30);
-            this.tvCuentas.Name = "tvCuentas";
-            this.tvCuentas.Size = new System.Drawing.Size(692, 494);
-            this.tvCuentas.TabIndex = 0;
-            // 
-            // EstadoStrip
-            // 
-            this.EstadoStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.statusLabel});
-            this.EstadoStrip.Location = new System.Drawing.Point(0, 549);
-            this.EstadoStrip.Name = "EstadoStrip";
-            this.EstadoStrip.Size = new System.Drawing.Size(925, 22);
-            this.EstadoStrip.SizingGrip = false;
-            this.EstadoStrip.TabIndex = 2;
-            this.EstadoStrip.Text = "statusStrip1";
-            // 
-            // statusLabel
-            // 
-            this.statusLabel.Name = "statusLabel";
-            this.statusLabel.Size = new System.Drawing.Size(15, 17);
-            this.statusLabel.Text = "[]";
-            // 
             // Rango
             // 
             this.Rango.DataPropertyName = "Rango";
@@ -208,6 +173,56 @@ namespace Jaeger.Contable.Forms {
             this.DESCRIP.HeaderText = "Descripción";
             this.DESCRIP.Name = "DESCRIP";
             this.DESCRIP.ReadOnly = true;
+            // 
+            // tvCuentas
+            // 
+            this.tvCuentas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tvCuentas.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tvCuentas.ItemHeight = 19;
+            this.tvCuentas.Location = new System.Drawing.Point(0, 30);
+            this.tvCuentas.Name = "tvCuentas";
+            this.tvCuentas.Size = new System.Drawing.Size(692, 494);
+            this.tvCuentas.TabIndex = 0;
+            // 
+            // lblTitulo
+            // 
+            this.lblTitulo.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblTitulo.Location = new System.Drawing.Point(0, 0);
+            this.lblTitulo.Margin = new System.Windows.Forms.Padding(3);
+            this.lblTitulo.Name = "lblTitulo";
+            this.lblTitulo.Padding = new System.Windows.Forms.Padding(3);
+            this.lblTitulo.Size = new System.Drawing.Size(692, 30);
+            this.lblTitulo.TabIndex = 1;
+            this.lblTitulo.Text = "   Cuenta  |  Descripción de la cuenta";
+            this.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // EstadoStrip
+            // 
+            this.EstadoStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statusLabel});
+            this.EstadoStrip.Location = new System.Drawing.Point(0, 549);
+            this.EstadoStrip.Name = "EstadoStrip";
+            this.EstadoStrip.Size = new System.Drawing.Size(925, 22);
+            this.EstadoStrip.SizingGrip = false;
+            this.EstadoStrip.TabIndex = 2;
+            this.EstadoStrip.Text = "statusStrip1";
+            // 
+            // statusLabel
+            // 
+            this.statusLabel.Name = "statusLabel";
+            this.statusLabel.Size = new System.Drawing.Size(15, 17);
+            this.statusLabel.Text = "[]";
+            // 
+            // lblEjercicio
+            // 
+            this.lblEjercicio.Name = "lblEjercicio";
+            this.lblEjercicio.Size = new System.Drawing.Size(54, 22);
+            this.lblEjercicio.Text = "Ejercicio:";
+            // 
+            // cmbEjercicio
+            // 
+            this.cmbEjercicio.Name = "cmbEjercicio";
+            this.cmbEjercicio.Size = new System.Drawing.Size(75, 25);
             // 
             // CuentaContableCatalogoForm
             // 
@@ -251,5 +266,7 @@ namespace Jaeger.Contable.Forms {
         private System.Windows.Forms.ToolStripButton btnCerrar;
         private System.Windows.Forms.DataGridViewTextBoxColumn Rango;
         private System.Windows.Forms.DataGridViewTextBoxColumn DESCRIP;
+        private System.Windows.Forms.ToolStripLabel lblEjercicio;
+        private System.Windows.Forms.ToolStripComboBox cmbEjercicio;
     }
 }

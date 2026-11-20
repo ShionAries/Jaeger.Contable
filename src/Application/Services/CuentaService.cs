@@ -16,7 +16,8 @@ namespace Jaeger.Contable.Application.Services {
         private readonly IMotorContableService _motor;
         private readonly IHistorialCuentaRepository _historialCuentaRepository;
         private readonly IEstadoContableCuentaRepository _estadoContableCuentaRepository;
-        
+        private readonly IPeriodoContableRepository _periodoContableRepository;
+
         private readonly int _idEmpresa;
 
         public CuentaService(
@@ -25,7 +26,7 @@ namespace Jaeger.Contable.Application.Services {
             IMotorContableService motorContableService,
             IHistorialCuentaRepository historialCuentaRepository,
             IEstadoContableCuentaRepository estadoContableCuentaRepository,
-            
+            IPeriodoContableRepository periodoContableRepository,
             int idEmpresa) {
 
             _cuentaRepository = cuentaRepository ?? throw new ArgumentNullException(nameof(cuentaRepository));
@@ -33,7 +34,7 @@ namespace Jaeger.Contable.Application.Services {
             _motor = motorContableService ?? throw new ArgumentNullException(nameof(motorContableService));
             _historialCuentaRepository = historialCuentaRepository ?? throw new ArgumentNullException(nameof(historialCuentaRepository));
             _estadoContableCuentaRepository = estadoContableCuentaRepository ?? throw new ArgumentNullException(nameof(estadoContableCuentaRepository));
-            
+            _periodoContableRepository = periodoContableRepository ?? throw new ArgumentNullException(nameof(periodoContableRepository));
 
             if (idEmpresa <= 0)
                 throw new ArgumentOutOfRangeException(nameof(idEmpresa));
@@ -129,10 +130,7 @@ namespace Jaeger.Contable.Application.Services {
             return await _cuentaRepository.ActualizarAsync(cuenta);
         }
 
-        private async Task ValidarCambiosEstructuralesAsync(
-            CuentaContable nueva,
-            CuentaContable actual,
-            List<CuentaContable> hijos) {
+        private async Task ValidarCambiosEstructuralesAsync(CuentaContable nueva, CuentaContable actual, List<CuentaContable> hijos) {
 
             var cambioTipo = !string.Equals(
                 NormalizarMayusculas(nueva.Tipo),
@@ -162,10 +160,7 @@ namespace Jaeger.Contable.Application.Services {
                     "No se puede cambiar la naturaleza de una cuenta que tiene movimientos o saldos contables.");
         }
 
-        private static async Task NormalizarYValidarContrapartidaAsync(
-            CuentaContable cuenta,
-            EstructuraCuenta estructura,
-            ICuentaRepository repository) {
+        private static async Task NormalizarYValidarContrapartidaAsync(CuentaContable cuenta, EstructuraCuenta estructura, ICuentaRepository repository) {
 
             if (string.IsNullOrWhiteSpace(cuenta.CtaComp))
                 return;
@@ -379,10 +374,7 @@ namespace Jaeger.Contable.Application.Services {
                 cuenta.DeptoSiNo = "N";
         }
 
-        private static void ValidarPadre(
-            CuentaContable padre,
-            short nivel,
-            EstructuraCuenta estructura) {
+        private static void ValidarPadre(CuentaContable padre, short nivel, EstructuraCuenta estructura) {
 
             if (padre == null)
                 throw new InvalidOperationException("La cuenta padre no existe.");
@@ -489,9 +481,7 @@ namespace Jaeger.Contable.Application.Services {
         /// <param name="estructura">Estructura configurada en PARAMEMP.</param>
         /// <param name="numeroCuenta">NUM_CTA físico de la cuenta.</param>
         /// <returns>Cuenta lógica correspondiente a SEGPAPA.</returns>
-        private static string CalcularSegPapa(
-            EstructuraCuenta estructura,
-            string numeroCuenta) {
+        private static string CalcularSegPapa(EstructuraCuenta estructura, string numeroCuenta) {
 
             if (estructura == null)
                 throw new ArgumentNullException(nameof(estructura));
@@ -531,6 +521,11 @@ namespace Jaeger.Contable.Application.Services {
 
         public async Task<CuentaContable> ObtenerPorNumeroAsync(string numeroCuenta) {
             return await _cuentaRepository.ObtenerPorNumeroAsync(numeroCuenta);
+        }
+
+        public async Task<List<short>> ObtenerEjercicioTodosAsync() {
+            var ejercicio = await _periodoContableRepository.ObtenerEjerciciosAsync();
+            return ejercicio;
         }
     }
 }

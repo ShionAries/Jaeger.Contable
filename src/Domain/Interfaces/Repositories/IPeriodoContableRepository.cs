@@ -3,7 +3,9 @@ using System.Threading.Tasks;
 using Jaeger.Contable.Domain.Entities;
 
 namespace Jaeger.Contable.Domain.Interfaces.Repositories {
-    /// <summary>Acceso al estado administrativo de los periodos de ADMPER.</summary>
+    /// <summary>
+    /// Acceso al estado administrativo de los periodos de ADMPER.
+    /// </summary>
     public interface IPeriodoContableRepository {
         Task<PeriodoContable> ObtenerAsync(short ejercicio, short periodo);
         Task<List<PeriodoContable>> ObtenerTodosAsync(short ejercicio);
@@ -11,5 +13,6 @@ namespace Jaeger.Contable.Domain.Interfaces.Repositories {
         Task<int> CrearEjercicioAsync(short ejercicio);
         Task ActualizarOrdenAsync(short ejercicio, IList<short> periodosOrdenados);
         Task ActualizarCierreAsync(short ejercicio, short periodo, bool cerrado);
+        Task<List<EjercicioContable>> ObtenerEjerciciosTodosAsync();
     }
 }
